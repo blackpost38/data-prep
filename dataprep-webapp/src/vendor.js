@@ -29,6 +29,7 @@ import 'angular-translate';
 import 'angular-translate-loader-static-files';
 import 'angular-translate-once';
 import 'angular-ui-router';
+import 'angular-ui-bootstrap';
 
 // Datetimepicker https://github.com/xdan/datetimepicker
 import 'jquery-datetimepicker';
