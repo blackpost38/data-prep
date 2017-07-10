@@ -23,7 +23,7 @@ import IconsProvider from 'react-talend-components/lib/IconsProvider';
 import SidePanel from 'react-talend-components/lib/SidePanel';
 import List from 'react-talend-components/lib/List';
 import Progress from 'react-talend-components/lib/Progress';
-import TranslateWrapper from 'react-talend-components/lib/TranslateWrapper';
+import getTranslated from 'react-talend-components/lib/TranslateWrapper';
 import Form from 'react-talend-forms';
 
 import AppHeaderBarContainer from './app-header-bar/app-header-bar-container';
@@ -52,7 +52,7 @@ angular.module(MODULE_NAME,
 		STEP_PROGRESS_MODULE,
 	])
 	.directive('pureAppHeaderBar', ['reactDirective', reactDirective => reactDirective(
-		TranslateWrapper(AppHeaderBar, { i18n }),
+		getTranslated(AppHeaderBar, { i18n }),
 		[
 			'logo',
 			'brand',
