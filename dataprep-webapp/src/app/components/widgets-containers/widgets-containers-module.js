@@ -23,6 +23,7 @@ import IconsProvider from 'react-talend-components/lib/IconsProvider';
 import SidePanel from 'react-talend-components/lib/SidePanel';
 import List from 'react-talend-components/lib/List';
 import Progress from 'react-talend-components/lib/Progress';
+import TranslateWrapper from 'react-talend-components/lib/TranslateWrapper';
 import Form from 'react-talend-forms';
 
 import AppHeaderBarContainer from './app-header-bar/app-header-bar-container';
@@ -37,6 +38,8 @@ import STATE_MODULE from '../../services/state/state-module';
 import DATASET_UPLOAD_STATUS_MODULE from '../dataset/upload-status/dataset-upload-status-module';
 import STEP_PROGRESS_MODULE from '../step-progress/step-progress-module';
 
+import i18n from './i18n';
+
 const MODULE_NAME = 'react-talend-components.containers';
 
 angular.module(MODULE_NAME,
@@ -48,7 +51,20 @@ angular.module(MODULE_NAME,
 		DATASET_UPLOAD_STATUS_MODULE,
 		STEP_PROGRESS_MODULE,
 	])
-	.directive('pureAppHeaderBar', ['reactDirective', reactDirective => reactDirective(AppHeaderBar)])
+	.directive('pureAppHeaderBar', ['reactDirective', reactDirective => reactDirective(
+		TranslateWrapper(AppHeaderBar, { i18n }),
+		[
+			'logo',
+			'brand',
+			'env',
+			'search',
+			'help',
+			'user',
+			'products',
+			'renderers',
+			't',
+		]
+	)])
 	.directive('pureBreadcrumb', ['reactDirective', reactDirective => reactDirective(Breadcrumbs)])
 	.directive('pureCircularProgress', ['reactDirective', reactDirective => reactDirective(CircularProgress)])
 	.directive('pureCollapsiblePanel', ['reactDirective', reactDirective => reactDirective(CollapsiblePanel)])
