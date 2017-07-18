@@ -62,7 +62,7 @@ angular.module(MODULE_NAME,
 			'user',
 			'products',
 			'renderers',
-			't',
+			'i18n',
 		]
 	)])
 	.directive('pureBreadcrumb', ['reactDirective', reactDirective => reactDirective(Breadcrumbs)])
