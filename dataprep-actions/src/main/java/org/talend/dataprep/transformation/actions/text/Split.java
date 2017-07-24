@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -35,7 +34,7 @@ import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.SelectParameter;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ColumnAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 /**
  * Split a cell value on a separator.

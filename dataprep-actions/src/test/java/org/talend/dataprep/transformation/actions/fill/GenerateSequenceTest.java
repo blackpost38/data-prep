@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -12,24 +11,19 @@
 // ============================================================================
 package org.talend.dataprep.transformation.actions.fill;
 
-import org.junit.Test;
-import org.talend.dataprep.api.action.ActionDefinition;
-import org.talend.dataprep.api.dataset.row.DataSetRow;
-import org.talend.dataprep.parameters.Parameter;
-import org.talend.dataprep.parameters.SelectParameter;
-import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
-import org.talend.dataprep.transformation.actions.category.ActionCategory;
-import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
-import org.talend.dataprep.transformation.actions.common.OtherColumnParameters;
-import org.talend.dataprep.transformation.actions.phonenumber.FormatPhoneNumber;
-import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 import java.util.*;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.talend.dataprep.api.dataset.row.DataSetRow;
+import org.talend.dataprep.parameters.Parameter;
+import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
+import org.talend.dataprep.transformation.actions.category.ActionCategory;
+import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
+import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 
 /**
  * Test to generate a sequence function.

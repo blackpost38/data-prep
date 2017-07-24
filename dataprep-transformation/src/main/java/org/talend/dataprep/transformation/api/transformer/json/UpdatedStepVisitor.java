@@ -15,22 +15,23 @@ package org.talend.dataprep.transformation.api.transformer.json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.talend.dataprep.api.preparation.Step;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 import org.talend.dataprep.transformation.pipeline.Visitor;
 import org.talend.dataprep.transformation.pipeline.node.ActionNode;
+import org.talend.dataprep.transformation.pipeline.node.Pipeline;
 import org.talend.dataprep.transformation.pipeline.node.StepNode;
 import org.talend.dataprep.transformation.service.StepMetadataRepository;
 
 /**
  * <p>
  * A {@link Visitor} to get {@link Step steps} out of {@link StepNode step nodes} in transformation
- * {@link org.talend.dataprep.transformation.pipeline.Pipeline}.
+ * {@link Pipeline}.
  * </p>
  * <p>
  * This visitor takes into account action's status so steps don't get accidentally updated with wrong row metadata.
  * </p>
  */
-class UpdatedStepVisitor extends Visitor {
+class UpdatedStepVisitor extends Visitor<Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdatedStepVisitor.class);
 
@@ -41,11 +42,11 @@ class UpdatedStepVisitor extends Visitor {
     }
 
     @Override
-    public void visitStepNode(StepNode stepNode) {
-        stepNode.getEntryNode().accept(new Visitor() {
+    public Void visitStep(StepNode stepNode) {
+        stepNode.getEntryNode().accept(new Visitor<Void>() {
 
             @Override
-            public void visitAction(ActionNode actionNode) {
+            public Void visitAction(ActionNode actionNode) {
                 final ActionContext.ActionStatus status = actionNode.getActionContext().getActionStatus();
                 final Step step = stepNode.getStep();
                 switch (status) {
@@ -61,8 +62,9 @@ class UpdatedStepVisitor extends Visitor {
                 }
 
                 preparationUpdater.update(step.id(), stepNode.getRowMetadata());
+                return null;
             }
         });
-        super.visitStepNode(stepNode);
+        return super.visitStep(stepNode);
     }
 }

@@ -15,7 +15,7 @@ package org.talend.dataprep.transformation.actions.delete;
 import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 @Action(AbstractActionMetadata.ACTION_BEAN_PREFIX + KeepOnly.KEEP_ONLY_ACTION_NAME)
 public class KeepOnly extends AbstractFilteringAction {

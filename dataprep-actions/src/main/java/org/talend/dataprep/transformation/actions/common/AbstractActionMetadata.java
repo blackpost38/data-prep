@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -20,16 +19,16 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.apache.avro.generic.GenericRecord;
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.i18n.MessagesBundle;
 import org.talend.dataprep.parameters.Parameter;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.category.ActionScope;
 import org.talend.dataprep.transformation.actions.category.ScopeCategory;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

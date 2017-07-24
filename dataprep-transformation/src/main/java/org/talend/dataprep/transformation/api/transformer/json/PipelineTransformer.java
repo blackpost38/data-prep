@@ -24,24 +24,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.talend.dataprep.api.dataset.DataSet;
 import org.talend.dataprep.api.dataset.RowMetadata;
+import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.preparation.PreparationMessage;
 import org.talend.dataprep.api.preparation.Step;
 import org.talend.dataprep.cache.ContentCache;
 import org.talend.dataprep.dataset.StatisticsAdapter;
 import org.talend.dataprep.quality.AnalyzerService;
-import org.talend.dataprep.transformation.api.action.ActionParser;
+import org.talend.dataprep.transformation.actions.ActionParser;
+import org.talend.dataprep.transformation.actions.ActionRegistry;
 import org.talend.dataprep.transformation.api.transformer.ConfiguredCacheWriter;
 import org.talend.dataprep.transformation.api.transformer.ExecutableTransformer;
 import org.talend.dataprep.transformation.api.transformer.Transformer;
-import org.talend.dataprep.transformation.api.transformer.TransformerWriter;
 import org.talend.dataprep.transformation.api.transformer.configuration.Configuration;
 import org.talend.dataprep.transformation.cache.CacheKeyGenerator;
 import org.talend.dataprep.transformation.cache.TransformationMetadataCacheKey;
 import org.talend.dataprep.transformation.format.WriterRegistrationService;
-import org.talend.dataprep.transformation.pipeline.ActionRegistry;
-import org.talend.dataprep.transformation.pipeline.Pipeline;
 import org.talend.dataprep.transformation.pipeline.Signal;
-import org.talend.dataprep.transformation.pipeline.model.WriterNode;
+import org.talend.dataprep.transformation.pipeline.node.Pipeline;
+import org.talend.dataprep.transformation.pipeline.node.TransformerWriter;
+import org.talend.dataprep.transformation.pipeline.node.WriterNode;
+import org.talend.dataprep.transformation.pipeline.runtime.RuntimeNodeVisitor;
 import org.talend.dataprep.transformation.service.StepMetadataRepository;
 import org.talend.dataprep.transformation.service.TransformationRowMetadataUtils;
 
@@ -103,7 +105,7 @@ public class PipelineTransformer implements Transformer {
                 .withFilter(configuration.getFilter()) //
                 .withLimit(configuration.getLimit()) //
                 .withFilterOut(configuration.getOutFilter()) //
-                .withOutput(() -> new WriterNode(writer, metadataWriter, metadataKey, fallBackRowMetadata)) //
+                .withOutput(() -> new WriterNode(() -> writer)) //
                 .withStatisticsAdapter(adapter) //
                 .withStepMetadataSupplier(rowMetadataSupplier) //
                 .withGlobalStatistics(configuration.isGlobalStatistics()) //
@@ -117,7 +119,8 @@ public class PipelineTransformer implements Transformer {
             public void execute() {
                 try {
                     LOGGER.debug("Before transformation: {}", pipeline);
-                    pipeline.execute(input);
+                    pipeline.accept(new RuntimeNodeVisitor()).receive(((DataSetRow[]) input.getRecords().toArray()),
+                            new RowMetadata[] { rowMetadata });
                 } finally {
                     LOGGER.debug("After transformation: {}", pipeline);
                 }
@@ -130,7 +133,7 @@ public class PipelineTransformer implements Transformer {
 
             @Override
             public void signal(Signal signal) {
-                pipeline.signal(signal);
+                pipeline.accept(new RuntimeNodeVisitor()).signal(signal);
             }
         };
     }

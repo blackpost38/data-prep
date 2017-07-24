@@ -27,12 +27,12 @@ import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.dataset.statistics.PatternFrequency;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.parameters.Parameter;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;

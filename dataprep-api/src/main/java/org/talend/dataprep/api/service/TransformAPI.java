@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.service.api.DynamicParamsInput;
 import org.talend.dataprep.api.service.command.preparation.PreparationGetContent;
 import org.talend.dataprep.api.service.command.transformation.*;
@@ -36,6 +35,7 @@ import org.talend.dataprep.command.CommandHelper;
 import org.talend.dataprep.command.GenericCommand;
 import org.talend.dataprep.command.dataset.DataSetGet;
 import org.talend.dataprep.metrics.Timed;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 
 import com.netflix.hystrix.HystrixCommand;
 

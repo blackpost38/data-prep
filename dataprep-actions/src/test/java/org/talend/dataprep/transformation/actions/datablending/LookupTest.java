@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -30,7 +29,6 @@ import org.apache.commons.lang.StringUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.DataSetMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
@@ -39,6 +37,7 @@ import org.talend.dataprep.api.dataset.row.LightweightExportableDataSet;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 

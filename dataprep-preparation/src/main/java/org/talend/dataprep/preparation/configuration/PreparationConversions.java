@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.preparation.*;
 import org.talend.dataprep.api.share.Owner;
 import org.talend.dataprep.conversions.BeanConversionService;
@@ -33,7 +32,8 @@ import org.talend.dataprep.preparation.store.PersistentPreparation;
 import org.talend.dataprep.preparation.store.PreparationRepository;
 import org.talend.dataprep.processor.BeanConversionServiceWrapper;
 import org.talend.dataprep.security.Security;
-import org.talend.dataprep.transformation.pipeline.ActionRegistry;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
+import org.talend.dataprep.transformation.actions.ActionRegistry;
 
 /**
  * A configuration for {@link Preparation} conversions. It adds all transient information (e.g. owner, action

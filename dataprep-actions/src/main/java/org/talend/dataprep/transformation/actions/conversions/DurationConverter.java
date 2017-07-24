@@ -12,6 +12,10 @@
 
 package org.talend.dataprep.transformation.actions.conversions;
 
+import static org.talend.dataprep.parameters.ParameterType.INTEGER;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.temporal.ChronoUnit;
 import java.util.EnumSet;
 import java.util.List;
@@ -30,12 +34,7 @@ import org.talend.dataprep.parameters.SelectParameter.Builder;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ColumnAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
-import static org.talend.dataprep.parameters.ParameterType.INTEGER;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 @Action(AbstractActionMetadata.ACTION_BEAN_PREFIX + DurationConverter.ACTION_NAME)
 public class DurationConverter extends AbstractActionMetadata implements ColumnAction {
@@ -88,12 +87,12 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
 
         parameters.add(builder
                 .name(FROM_UNIT_PARAMETER)
-                .defaultValue(ChronoUnit.DAYS.name()) 
+                .defaultValue(ChronoUnit.DAYS.name())
                 .build());
-        
+
         parameters.add(builder
                 .name(TO_UNIT_PARAMETER)
-                .defaultValue(ChronoUnit.HOURS.name()) 
+                .defaultValue(ChronoUnit.HOURS.name())
                 .build());
 
          parameters.add(new Parameter(TARGET_PRECISION, INTEGER, "1", false, true, "precision"));
@@ -148,7 +147,7 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.talend.dataprep.transformation.actions.common.AbstractActionMetadata#acceptField(org.talend.dataprep.api.dataset.
      * ColumnMetadata)
      */

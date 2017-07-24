@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -20,7 +19,7 @@ import org.apache.commons.math3.util.FastMath;
 import org.talend.daikon.number.BigDecimalParser;
 import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 /**
  * Create a new column with Cos

@@ -20,10 +20,11 @@ import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.dataset.StatisticsAdapter;
 import org.talend.dataprep.quality.AnalyzerService;
+import org.talend.dataprep.transformation.actions.ActionRegistry;
 import org.talend.dataprep.transformation.actions.common.RunnableAction;
-import org.talend.dataprep.transformation.pipeline.ActionRegistry;
-import org.talend.dataprep.transformation.pipeline.Pipeline;
 import org.talend.dataprep.transformation.pipeline.node.BasicNode;
+import org.talend.dataprep.transformation.pipeline.node.NodeUtils;
+import org.talend.dataprep.transformation.pipeline.node.Pipeline;
 
 public class ActionTestWorkbench {
 
@@ -64,7 +65,7 @@ public class ActionTestWorkbench {
                 .withStatisticsAdapter(new StatisticsAdapter(40)) //
                 .withOutput(() -> outputNode) //
                 .build();
-        pipeline.execute(dataSet);
+        NodeUtils.receive(pipeline, (DataSetRow[]) dataSet.getRecords().toArray());
 
         // Some tests rely on the metadata changes in the provided metadata so set back modified columns in row metadata
         // (although this should be avoided in tests).
@@ -87,22 +88,6 @@ public class ActionTestWorkbench {
 
         public RowMetadata getMetadata() {
             return metadata;
-        }
-
-        @Override
-        public void receive(DataSetRow row, RowMetadata metadata) {
-            if (input.hasNext()) {
-                final DataSetRow next = input.next();
-                next.values().clear();
-                next.values().putAll(row.values());
-                for (Map.Entry<String, String> entry : row.getInternalValues().entrySet()) {
-                    next.set(entry.getKey(), entry.getValue());
-                }
-            }
-            if (!row.isDeleted() || this.metadata == null) {
-                this.metadata = metadata;
-                row.setRowMetadata(this.metadata);
-            }
         }
 
     }

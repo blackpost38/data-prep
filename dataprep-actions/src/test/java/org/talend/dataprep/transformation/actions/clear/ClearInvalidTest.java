@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -24,16 +23,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.RunnableAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
-import org.talend.dataprep.transformation.api.action.context.TransformationContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.TransformationContext;
 
 /**
  * Test class for ClearInvalid action. Creates one consumer, and test it.

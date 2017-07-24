@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -15,13 +14,7 @@ package org.talend.dataprep.quality;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
@@ -34,7 +27,6 @@ import org.talend.dataprep.api.dataset.statistics.date.StreamDateHistogramStatis
 import org.talend.dataprep.api.dataset.statistics.number.StreamNumberHistogramAnalyzer;
 import org.talend.dataprep.api.type.TypeUtils;
 import org.talend.dataprep.transformation.actions.date.DateParser;
-import org.talend.dataprep.transformation.api.transformer.json.NullAnalyzer;
 import org.talend.dataquality.common.inference.Analyzer;
 import org.talend.dataquality.common.inference.Analyzers;
 import org.talend.dataquality.common.inference.Metadata;

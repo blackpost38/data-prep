@@ -13,8 +13,8 @@
 package org.talend.dataprep.transformation.actions.common;
 
 import org.talend.dataprep.api.dataset.row.DataSetRow;
-import org.talend.dataprep.transformation.api.action.DataSetRowAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.DataSetRowAction;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 class DataSetRowActionImpl implements DataSetRowAction {
 

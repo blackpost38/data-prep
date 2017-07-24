@@ -1,31 +1,22 @@
-//  ============================================================================
+// ============================================================================
+// Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
-//  Copyright (C) 2006-2016 Talend Inc. - www.talend.com
+// This source code is available under agreement available at
+// https://github.com/Talend/data-prep/blob/master/LICENSE
 //
-//  This source code is available under agreement available at
-//  https://github.com/Talend/data-prep/blob/master/LICENSE
+// You should have received a copy of the agreement
+// along with this program; if not, write to Talend SA
+// 9 rue Pages 92150 Suresnes, France
 //
-//  You should have received a copy of the agreement
-//  along with this program; if not, write to Talend SA
-//  9 rue Pages 92150 Suresnes, France
-//
-//  ============================================================================
+// ============================================================================
 
 package org.talend.dataprep.transformation.actions.text;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.talend.dataprep.api.action.ActionDefinition;
-import org.talend.dataprep.api.dataset.ColumnMetadata;
-import org.talend.dataprep.api.dataset.RowMetadata;
-import org.talend.dataprep.api.dataset.row.DataSetRow;
-import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.parameters.Parameter;
-import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
-import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
-import org.talend.dataprep.transformation.actions.category.ActionCategory;
-import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
-import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
+import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getColumn;
+import static org.talend.dataprep.transformation.actions.text.Substring.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,11 +24,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
-import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getColumn;
-import static org.talend.dataprep.transformation.actions.text.Substring.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.talend.dataprep.api.dataset.ColumnMetadata;
+import org.talend.dataprep.api.dataset.RowMetadata;
+import org.talend.dataprep.api.dataset.row.DataSetRow;
+import org.talend.dataprep.api.type.Type;
+import org.talend.dataprep.parameters.Parameter;
+import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
+import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
+import org.talend.dataprep.transformation.actions.category.ActionCategory;
+import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
+import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 
 /**
  * Test class for Split action. Creates one consumer, and test it.

@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -13,27 +12,24 @@
 
 package org.talend.dataprep.transformation.actions.text;
 
-import org.junit.Test;
-import org.talend.dataprep.api.action.ActionDefinition;
-import org.talend.dataprep.api.dataset.ColumnMetadata;
-import org.talend.dataprep.api.dataset.row.DataSetRow;
-import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.parameters.Parameter;
-import org.talend.dataprep.parameters.SelectParameter;
-import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
-import org.talend.dataprep.transformation.actions.category.ActionCategory;
-import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
-import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getColumn;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
-import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getColumn;
+import org.junit.Test;
+import org.talend.dataprep.api.dataset.row.DataSetRow;
+import org.talend.dataprep.api.type.Type;
+import org.talend.dataprep.parameters.Parameter;
+import org.talend.dataprep.parameters.SelectParameter;
+import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
+import org.talend.dataprep.transformation.actions.category.ActionCategory;
+import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
+import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 
 /**
  * Test class for RemoveRepeatedChars action. Creates one consumer, and test it.

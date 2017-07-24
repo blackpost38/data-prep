@@ -14,7 +14,7 @@ package org.talend.dataprep.api.preparation;
 
 import java.util.List;
 
-import org.talend.dataprep.api.action.ActionDefinition;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

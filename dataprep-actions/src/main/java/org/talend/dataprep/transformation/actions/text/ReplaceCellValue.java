@@ -18,7 +18,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 import static org.talend.dataprep.parameters.ParameterType.STRING;
 import static org.talend.dataprep.transformation.actions.common.ImplicitParameters.ROW_ID;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.talend.dataprep.api.action.Action;
@@ -30,7 +33,7 @@ import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.CellAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 /**
  * Replace the content or part of a cell by a value.

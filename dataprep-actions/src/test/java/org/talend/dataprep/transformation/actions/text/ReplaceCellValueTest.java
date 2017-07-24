@@ -18,13 +18,13 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.talend.dataprep.api.action.ActionDefinition.Behavior.FORBID_DISTRIBUTED;
-import static org.talend.dataprep.api.action.ActionDefinition.Behavior.VALUES_COLUMN;
 import static org.talend.dataprep.api.type.Type.STRING;
+import static org.talend.dataprep.transformation.actions.ActionDefinition.Behavior.FORBID_DISTRIBUTED;
+import static org.talend.dataprep.transformation.actions.ActionDefinition.Behavior.VALUES_COLUMN;
 import static org.talend.dataprep.transformation.actions.common.ImplicitParameters.*;
+import static org.talend.dataprep.transformation.actions.context.ActionContext.ActionStatus.CANCELED;
 import static org.talend.dataprep.transformation.actions.text.ReplaceCellValue.NEW_VALUE_PARAMETER;
 import static org.talend.dataprep.transformation.actions.text.ReplaceCellValue.ORIGINAL_VALUE_PARAMETER;
-import static org.talend.dataprep.transformation.api.action.context.ActionContext.ActionStatus.CANCELED;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Collections;
@@ -42,9 +42,9 @@ import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.quality.AnalyzerService;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.TransformationContext;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
-import org.talend.dataprep.transformation.api.action.context.TransformationContext;
 
 /**
  * Unit test for the ReplaceCellValue class.

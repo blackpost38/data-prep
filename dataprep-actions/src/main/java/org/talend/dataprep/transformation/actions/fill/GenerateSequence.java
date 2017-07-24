@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -12,6 +11,11 @@
 // ============================================================================
 package org.talend.dataprep.transformation.actions.fill;
 
+import java.math.BigInteger;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+
 import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
@@ -21,12 +25,7 @@ import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ColumnAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
-
-import java.math.BigInteger;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 /**
  * Generate a sequence on a column based on start value and step value.

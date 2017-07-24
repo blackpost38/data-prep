@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -16,6 +15,7 @@ package org.talend.dataprep.transformation.api.transformer;
 import java.io.IOException;
 
 import org.talend.dataprep.api.dataset.row.DataSetRow;
+import org.talend.dataprep.transformation.pipeline.node.TransformerWriter;
 
 public abstract class AbstractTransformerWriter implements TransformerWriter {
 

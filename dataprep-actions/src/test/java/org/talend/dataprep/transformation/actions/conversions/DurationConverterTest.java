@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -12,9 +11,9 @@
 // ============================================================================
 package org.talend.dataprep.transformation.actions.conversions;
 
-import static org.hamcrest.core.Is.*;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
-import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.*;
+import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getColumn;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
@@ -26,10 +25,10 @@ import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.parameters.Parameter;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
 import org.talend.dataprep.transformation.actions.date.BaseDateTest;

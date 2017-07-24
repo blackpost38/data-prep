@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -14,7 +13,7 @@
 package org.talend.dataprep.transformation.actions.common;
 
 import org.talend.dataprep.api.dataset.row.DataSetRow;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 /**
  * Interface used to apply an action on a cell.
@@ -23,7 +22,7 @@ public interface CellAction {
 
     /**
      * Apply action on a cell.
-     * 
+     *
      * @param row the dataset row.
      * @param context the transformation context.
      */

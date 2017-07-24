@@ -18,7 +18,7 @@ import java.util.List;
 
 import org.talend.daikon.exception.TalendRuntimeException;
 import org.talend.daikon.exception.error.CommonErrorCodes;
-import org.talend.dataprep.api.action.ActionDefinition;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 import org.talend.dataprep.transformation.actions.Providers;
 
 import com.fasterxml.jackson.core.JsonParser;

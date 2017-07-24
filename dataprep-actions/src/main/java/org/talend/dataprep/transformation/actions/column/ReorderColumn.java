@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -13,7 +12,7 @@
 
 package org.talend.dataprep.transformation.actions.column;
 
-import static org.talend.dataprep.api.action.ActionDefinition.Behavior.VALUES_COLUMN;
+import static org.talend.dataprep.transformation.actions.ActionDefinition.Behavior.VALUES_COLUMN;
 
 import java.util.*;
 
@@ -38,7 +37,7 @@ import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.DataSetAction;
 import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
 import org.talend.dataprep.transformation.actions.common.OtherColumnParameters;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 
 /**
  * This action reorder columns. The column will be move to the selected column. All other columns will be moved as well.

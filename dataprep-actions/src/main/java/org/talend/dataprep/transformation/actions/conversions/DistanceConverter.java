@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -11,6 +10,14 @@
 //
 // ============================================================================
 package org.talend.dataprep.transformation.actions.conversions;
+
+import static org.talend.dataprep.parameters.ParameterType.INTEGER;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -25,16 +32,8 @@ import org.talend.dataprep.parameters.SelectParameter;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ColumnAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 import org.talend.dataquality.converters.DistanceEnum;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-
-import static org.talend.dataprep.parameters.ParameterType.INTEGER;
 
 /**
  * Convert distance from one unit to another.

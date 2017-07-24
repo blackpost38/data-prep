@@ -42,7 +42,7 @@ import org.talend.dataprep.transformation.actions.Providers;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ColumnAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
 import org.talend.dataquality.converters.JulianDayConverter;
 import org.talend.dataquality.semantic.classifier.SemanticCategoryEnum;
 

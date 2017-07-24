@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -15,7 +14,7 @@ package org.talend.dataprep.transformation.actions.common;
 
 import java.util.List;
 
-import org.talend.dataprep.api.action.ActionDefinition;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 import org.talend.dataprep.transformation.actions.category.ActionScope;
 
 /**

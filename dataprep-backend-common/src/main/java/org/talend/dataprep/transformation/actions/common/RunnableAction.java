@@ -15,7 +15,7 @@ package org.talend.dataprep.transformation.actions.common;
 import java.util.Map;
 
 import org.talend.dataprep.api.preparation.Action;
-import org.talend.dataprep.transformation.api.action.DataSetRowAction;
+import org.talend.dataprep.transformation.actions.DataSetRowAction;
 
 public class RunnableAction extends Action {
 

@@ -16,13 +16,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.DataSetMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.folder.Folder;
 import org.talend.dataprep.api.preparation.Action;
 import org.talend.dataprep.api.preparation.StepDiff;
 import org.talend.dataprep.api.share.Owner;
+import org.talend.dataprep.transformation.actions.ActionDefinition;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

@@ -1,5 +1,4 @@
 // ============================================================================
-//
 // Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
 // This source code is available under agreement available at
@@ -26,20 +25,21 @@ import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.dataset.StatisticsAdapter;
 import org.talend.dataprep.quality.AnalyzerService;
-import org.talend.dataprep.transformation.api.action.ActionParser;
+import org.talend.dataprep.transformation.actions.ActionParser;
+import org.talend.dataprep.transformation.actions.ActionRegistry;
 import org.talend.dataprep.transformation.api.transformer.ExecutableTransformer;
 import org.talend.dataprep.transformation.api.transformer.Transformer;
-import org.talend.dataprep.transformation.api.transformer.TransformerWriter;
 import org.talend.dataprep.transformation.api.transformer.configuration.Configuration;
 import org.talend.dataprep.transformation.api.transformer.configuration.PreviewConfiguration;
 import org.talend.dataprep.transformation.format.WriterRegistrationService;
-import org.talend.dataprep.transformation.pipeline.ActionRegistry;
 import org.talend.dataprep.transformation.pipeline.Node;
-import org.talend.dataprep.transformation.pipeline.Pipeline;
 import org.talend.dataprep.transformation.pipeline.Signal;
 import org.talend.dataprep.transformation.pipeline.builder.NodeBuilder;
-import org.talend.dataprep.transformation.pipeline.model.DiffWriterNode;
 import org.talend.dataprep.transformation.pipeline.node.BasicNode;
+import org.talend.dataprep.transformation.pipeline.node.DiffWriterNode;
+import org.talend.dataprep.transformation.pipeline.node.Pipeline;
+import org.talend.dataprep.transformation.pipeline.node.TransformerWriter;
+import org.talend.dataprep.transformation.pipeline.runtime.RuntimeNodeVisitor;
 
 /**
  * Transformer that preview the transformation (puts additional json content so that the front can display the
@@ -97,7 +97,7 @@ class PipelineDiffTransformer implements Transformer {
         final Predicate<DataSetRow> filter = isWithinWantedIndexes(minIndex, maxIndex);
 
         // Build diff pipeline
-        final Node diffPipeline = NodeBuilder.filteredSource(filter) //
+        final Node diffPipeline = NodeBuilder.filteredSource(filter, input.getRecords()) //
                 .dispatchTo(referencePipeline, previewPipeline) //
                 .zipTo(diffWriterNode) //
                 .build();
@@ -111,8 +111,8 @@ class PipelineDiffTransformer implements Transformer {
                 try {
                     // Print pipeline before execution (for debug purposes).
                     diffPipeline.logStatus(LOGGER, "Before execution: {}");
-                    input.getRecords().forEach(r -> diffPipeline.exec().receive(r, rowMetadata));
-                    diffPipeline.exec().signal(Signal.END_OF_STREAM);
+                    input.getRecords().forEach(r -> diffPipeline.accept(new RuntimeNodeVisitor()).receive(r, rowMetadata));
+                    diffPipeline.accept(new RuntimeNodeVisitor()).signal(Signal.END_OF_STREAM);
                 } finally {
                     // Print pipeline after execution (for debug purposes).
                     diffPipeline.logStatus(LOGGER, "After execution: {}");
@@ -121,7 +121,7 @@ class PipelineDiffTransformer implements Transformer {
 
             @Override
             public void signal(Signal signal) {
-                diffPipeline.exec().signal(signal);
+                diffPipeline.accept(new RuntimeNodeVisitor()).signal(signal);
             }
         };
     }

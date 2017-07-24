@@ -28,13 +28,14 @@ import org.talend.dataprep.api.preparation.PreparationActions;
 import org.talend.dataprep.api.preparation.Step;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.transformation.actions.common.RunnableAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
-import org.talend.dataprep.transformation.api.action.context.TransformationContext;
+import org.talend.dataprep.transformation.actions.context.ActionContext;
+import org.talend.dataprep.transformation.actions.context.TransformationContext;
 import org.talend.dataprep.transformation.pipeline.Node;
 import org.talend.dataprep.transformation.pipeline.builder.NodeBuilder;
 import org.talend.dataprep.transformation.pipeline.node.ActionNode;
 import org.talend.dataprep.transformation.pipeline.node.BasicNode;
 import org.talend.dataprep.transformation.pipeline.node.StepNode;
+import org.talend.dataprep.transformation.pipeline.runtime.RuntimeNodeVisitor;
 import org.talend.dataprep.transformation.service.StepMetadataRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -65,7 +66,7 @@ public class UpdatedStepVisitorTest {
         actionContext.setActionStatus(ActionContext.ActionStatus.OK); // OK action!
 
         // When
-        stepNode.exec().receive(new DataSetRow(metadata), metadata);
+        stepNode.accept(new RuntimeNodeVisitor()).receive(new DataSetRow(metadata), metadata);
 
         // Then
         stepNode.accept(visitor);
@@ -82,7 +83,7 @@ public class UpdatedStepVisitorTest {
         actionContext.setActionStatus(ActionContext.ActionStatus.CANCELED); // Canceled action!
 
         // When
-        stepNode.exec().receive(new DataSetRow(metadata), metadata);
+        stepNode.accept(new RuntimeNodeVisitor()).receive(new DataSetRow(metadata), metadata);
 
         // Then
         stepNode.accept(visitor);
