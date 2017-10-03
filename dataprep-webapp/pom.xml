@@ -162,7 +162,7 @@
                             </execution>
                             <!-- generate the dist application (it is not used for the tests) but during the docker packaging it is and it a good test to know the build passes. -->
                             <execution>
-                                <id>yarn run build:ci</id>
+                                <id>yarn run build:dist</id>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
