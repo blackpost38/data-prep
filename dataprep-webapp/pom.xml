@@ -157,6 +157,7 @@
                                     <executable>yarn</executable>
                                     <arguments>
                                         <argument>install</argument>
+                                        <argument>--check-files</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
