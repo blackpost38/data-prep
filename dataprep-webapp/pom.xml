@@ -44,51 +44,53 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
+                            <execution>
+                                <id>install node and yarn</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <nodeVersion>${node.version}</nodeVersion>
+                                    <yarnVersion>${yarn.version}</yarnVersion>
+                                </configuration>
+                            </execution>
                             <execution>
                                 <id>yarn install</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
                                 <phase>initialize</phase>
                                 <configuration>
                                     <executable>yarn</executable>
-                                    <arguments>
-                                        <argument>
-                                            install
-                                        </argument>
-                                    </arguments>
+                                    <arguments>install</arguments>
                                 </configuration>
                             </execution>
                             <!-- generate the dist application (it is not used for the tests) but during the docker packaging it is and it a good test to know the build passes. -->
                             <execution>
                                 <id>yarn run build</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
                                 <phase>compile</phase>
                                 <configuration>
                                     <executable>yarn</executable>
-                                    <arguments>
-                                        <argument>run</argument>
-                                        <argument>build:dist</argument>
-                                    </arguments>
+                                    <arguments>run build:dist</arguments>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>yarn test</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
                                 <phase>test</phase>
                                 <configuration>
                                     <skip>${skipTests}</skip>
                                     <executable>yarn</executable>
-                                    <arguments>
-                                        <argument>test</argument>
-                                    </arguments>
+                                    <arguments>test</arguments>
                                 </configuration>
                             </execution>
                         </executions>
@@ -144,51 +146,53 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
+                            <execution>
+                                <id>install node and yarn</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <nodeVersion>${node.version}</nodeVersion>
+                                    <yarnVersion>${yarn.version}</yarnVersion>
+                                </configuration>
+                            </execution>
                             <execution>
                                 <id>yarn install</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
                                 <phase>initialize</phase>
                                 <configuration>
                                     <executable>yarn</executable>
-                                    <arguments>
-                                        <argument>install</argument>
-                                        <argument>--check-files</argument>
-                                    </arguments>
+                                    <arguments>install --check-files</arguments>
                                 </configuration>
                             </execution>
                             <!-- generate the dist application (it is not used for the tests) but during the docker packaging it is and it a good test to know the build passes. -->
                             <execution>
                                 <id>yarn run build:dist</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
                                 <phase>compile</phase>
                                 <configuration>
                                     <executable>yarn</executable>
-                                    <arguments>
-                                        <argument>run</argument>
-                                        <argument>build:dist</argument>
-                                    </arguments>
+                                    <arguments>run build:dist</arguments>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>yarn test:ci</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
                                 <phase>test</phase>
                                 <configuration>
                                     <skip>${skipTests}</skip>
                                     <executable>yarn</executable>
-                                    <arguments>
-                                        <argument>run</argument>
-                                        <argument>test:ci</argument>
-                                    </arguments>
+                                    <arguments>run test:ci</arguments>
                                 </configuration>
                             </execution>
                         </executions>
