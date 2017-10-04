@@ -63,33 +63,28 @@
                                 <goals>
                                     <goal>yarn</goal>
                                 </goals>
-                                <phase>initialize</phase>
                                 <configuration>
-                                    <executable>yarn</executable>
-                                    <arguments>install</arguments>
+                                    <arguments>install --force --prefer-offline</arguments>
                                 </configuration>
                             </execution>
-                            <!-- generate the dist application (it is not used for the tests) but during the docker packaging it is and it a good test to know the build passes. -->
                             <execution>
-                                <id>yarn run build</id>
+                                <id>yarn run build:dist</id>
+                                <phase>generate-resources</phase>
                                 <goals>
                                     <goal>yarn</goal>
                                 </goals>
-                                <phase>compile</phase>
                                 <configuration>
-                                    <executable>yarn</executable>
                                     <arguments>run build:dist</arguments>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>yarn test</id>
+                                <phase>test</phase>
                                 <goals>
                                     <goal>yarn</goal>
                                 </goals>
-                                <phase>test</phase>
                                 <configuration>
                                     <skip>${skipTests}</skip>
-                                    <executable>yarn</executable>
                                     <arguments>test</arguments>
                                 </configuration>
                             </execution>
@@ -165,33 +160,28 @@
                                 <goals>
                                     <goal>yarn</goal>
                                 </goals>
-                                <phase>initialize</phase>
                                 <configuration>
-                                    <executable>yarn</executable>
-                                    <arguments>install --check-files</arguments>
+                                    <arguments>install --force --prefer-offline</arguments>
                                 </configuration>
                             </execution>
-                            <!-- generate the dist application (it is not used for the tests) but during the docker packaging it is and it a good test to know the build passes. -->
                             <execution>
                                 <id>yarn run build:dist</id>
+                                <phase>generate-resources</phase>
                                 <goals>
                                     <goal>yarn</goal>
                                 </goals>
-                                <phase>compile</phase>
                                 <configuration>
-                                    <executable>yarn</executable>
                                     <arguments>run build:dist</arguments>
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>yarn test:ci</id>
+                                <id>yarn run test:ci</id>
+                                <phase>test</phase>
                                 <goals>
                                     <goal>yarn</goal>
                                 </goals>
-                                <phase>test</phase>
                                 <configuration>
                                     <skip>${skipTests}</skip>
-                                    <executable>yarn</executable>
                                     <arguments>run test:ci</arguments>
                                 </configuration>
                             </execution>
