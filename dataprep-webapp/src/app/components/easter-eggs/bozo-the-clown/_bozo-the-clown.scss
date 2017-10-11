@@ -1,0 +1,38 @@
+/*  ============================================================================
+
+  Copyright (C) 2006-2017 Talend Inc. - www.talend.com
+
+  This source code is available under agreement available at
+  https://github.com/Talend/data-prep/blob/master/LICENSE
+
+  You should have received a copy of the agreement
+  along with this program; if not, write to Talend SA
+  9 rue Pages 92150 Suresnes, France
+
+  ============================================================================*/
+
+.bozo {
+
+	background-color: #000;
+	overflow: hidden;
+
+	width: 100%;
+	height: 100%;
+
+    .spinning
+     {
+        -webkit-animation:spin 3s linear infinite;
+        -moz-animation:spin 3s linear infinite;
+        animation:spin 3s linear infinite;
+    }
+    @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+    img {
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+}
+
