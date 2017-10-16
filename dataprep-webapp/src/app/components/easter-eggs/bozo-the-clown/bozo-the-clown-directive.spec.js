@@ -35,6 +35,6 @@ describe('Bozo the clown directive', function () {
         createElement();
 
         //then
-        expect(element.find('.spinning').attr('src')).toBe('assets/images/bozo-the-clown/bozo-the-clown.png');
+        expect(element.find('#bozo').attr('src')).toBe('assets/images/bozo-the-clown/bozo-the-clown.gif');
     });
 });
