@@ -36,11 +36,9 @@ export default function SearchService($q, SearchDocumentationService, EasterEggs
 	}
 
 	function searchAll(searchInput) {
-		for (let i = 0; i < EASTER_EGGS_VALUES.length; i++) {
-			if (searchInput && searchInput.toLowerCase() === EASTER_EGGS_VALUES[i]) {
-				EasterEggsService.enableEasterEgg(searchInput);
-				break;
-			}
+		if (searchInput && EASTER_EGGS_VALUES.includes(searchInput.toLowerCase())) {
+			EasterEggsService.enableEasterEgg(searchInput);
+			return;
 		}
 
 		const inventoryPromise = searchInventory(searchInput);

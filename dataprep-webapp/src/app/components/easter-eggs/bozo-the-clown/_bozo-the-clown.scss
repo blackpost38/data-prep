@@ -12,20 +12,15 @@
   ============================================================================*/
 
 .bozo {
-
-	background-color: #000;
-	overflow: hidden;
-
-	width: 100%;
-	height: calc(100vh - 25px);
-
 	display: flex;
 	align-items: center;
+	width: 100%;
+	height: calc(100vh - 25px);
+	background: $black;
+	overflow: hidden;
 
-    img {
-        display:block;
-        margin-left:auto;
-        margin-right:auto;
-    }
+	img {
+		display: block;
+		margin: 0 auto;
+	}
 }
-

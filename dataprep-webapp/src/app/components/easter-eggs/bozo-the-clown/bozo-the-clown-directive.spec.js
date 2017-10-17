@@ -11,30 +11,28 @@
 
   ============================================================================*/
 
-describe('Bozo the clown directive', function () {
-    'use strict';
+describe('Bozo the clown directive', () => {
+	let scope;
+	let createElement;
+	let element;
 
-    var scope;
-    var createElement;
-    var element;
+	beforeEach(angular.mock.module('data-prep.easter-eggs'));
 
-    beforeEach(angular.mock.module('data-prep.easter-eggs'));
+	beforeEach(inject(($rootScope, $compile) => {
+		scope = $rootScope.$new();
+		createElement = () => {
+			element = angular.element('<bozo-the-clown></bozo-the-clown>');
+			$compile(element)(scope);
+			scope.$digest();
+			return element;
+		};
+	}));
 
-    beforeEach(inject(function ($rootScope, $compile) {
-        scope = $rootScope.$new();
-        createElement = function () {
-            element = angular.element('<bozo-the-clown></bozo-the-clown>');
-            $compile(element)(scope);
-            scope.$digest();
-            return element;
-        };
-    }));
+	it('should render bozo the clown gif', () => {
+		// when
+		createElement();
 
-    it('should render bozo the clown div', function () {
-        //when
-        createElement();
-
-        //then
-        expect(element.find('#bozo').attr('src')).toBe('assets/images/bozo-the-clown/bozo-the-clown.gif');
-    });
+		// then
+		expect(element.find('#bozo').attr('src')).toBe('assets/images/bozo-the-clown/bozo-the-clown.gif');
+	});
 });
