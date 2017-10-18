@@ -28,15 +28,15 @@ import org.springframework.web.servlet.i18n.AbstractLocaleContextResolver;
 
 // This component must have the LOCALE_RESOLVER_BEAN_NAME as it is searched by this name in DispatcherServlet.initLocaleResolver:524
 @Component(LOCALE_RESOLVER_BEAN_NAME)
-public class DataprepLocale extends AbstractLocaleContextResolver {
+public class DataprepLocaleContextResolver extends AbstractLocaleContextResolver {
 
-    private static final Logger LOGGER = getLogger(DataprepLocale.class);
+    private static final Logger LOGGER = getLogger(DataprepLocaleContextResolver.class);
 
     private final Locale applicationLocale;
 
     private static final Locale DEFAULT_LOCALE = Locale.US;
 
-    public DataprepLocale(@Value("${help.facets.language:}") String configuredLocale) {
+    public DataprepLocaleContextResolver(@Value("${help.facets.language:}") String configuredLocale) {
         setDefaultLocale(Locale.US);
         this.applicationLocale = resolveApplicationLocale(configuredLocale);
     }
