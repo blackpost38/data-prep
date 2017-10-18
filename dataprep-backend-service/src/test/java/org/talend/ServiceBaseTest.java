@@ -36,7 +36,7 @@ import com.jayway.restassured.RestAssured;
 @RunWith(SpringRunner.class)
 @Import(LocalContentServiceConfiguration.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "dataset.asynchronous.analysis=false",
-        "content-service.store=local", "live.dataset.location=tac", "help.facets.language:" + TEST_LOCALE})
+        "content-service.store=local", "live.dataset.location=tac", "dataprep.locale:" + TEST_LOCALE})
 public abstract class ServiceBaseTest {
 
     public static final String TEST_LOCALE = "vi_VN";
