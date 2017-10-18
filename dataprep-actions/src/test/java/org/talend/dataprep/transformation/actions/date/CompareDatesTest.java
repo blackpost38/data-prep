@@ -24,6 +24,7 @@ import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
+import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.OtherColumnParameters;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 
@@ -167,6 +168,31 @@ public class CompareDatesTest extends BaseDateTest {
                 .containsExactly(MapEntry.entry("0000", "02/01/2012"), //
                         MapEntry.entry("0001", "false"));
 
+    }
+
+    @Test
+    public void simple_not_greater_result_with_constant_in_place() throws Exception {
+
+        // given
+        final Map<String, String> values = new HashMap<>();
+        values.put("0000", "02/01/2012");
+
+        RowMetadata rowMetadata = new RowMetadata();
+        rowMetadata.addColumn(createMetadata("0000", "last update", Type.DATE, "statistics_MM_dd_yyyy.json"));
+        final DataSetRow row = new DataSetRow(rowMetadata, values);
+        parameters.put(CompareDates.CONSTANT_VALUE, "02/02/2012");
+
+        parameters.put(CompareDates.MODE_PARAMETER, OtherColumnParameters.CONSTANT_MODE);
+        parameters.put(CompareDates.COMPARE_MODE, CompareDates.GT);
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "false");
+
+        // when
+        ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
+
+        // then
+        Assertions.assertThat(row.values()) //
+                .hasSize(1) //
+                .containsExactly(MapEntry.entry("0000", "false"));
     }
 
     @Test

@@ -44,6 +44,11 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCompareAction.class);
 
     @Override
+    public boolean getCreateNewColumnDefaultValue() {
+        return true;
+    }
+
+    @Override
     @Nonnull
     public List<Parameter> getParameters() {
         final List<Parameter> parameters = super.getParameters();
