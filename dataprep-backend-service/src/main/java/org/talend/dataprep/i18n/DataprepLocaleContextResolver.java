@@ -9,7 +9,6 @@
 
 package org.talend.dataprep.i18n;
 
-import static java.util.Locale.US;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.servlet.DispatcherServlet.LOCALE_RESOLVER_BEAN_NAME;
 
@@ -35,8 +34,10 @@ public class DataprepLocaleContextResolver extends AbstractLocaleContextResolver
 
     private final Locale applicationLocale;
 
-    public DataprepLocaleContextResolver(@Value("${dataprep.locale:${help.facets.language:}}") String configuredLocale) {
-        setDefaultLocale(US);
+    private static final Locale DEFAULT_LOCALE = Locale.US;
+
+    public DataprepLocaleContextResolver(@Value("${help.facets.language:}") String configuredLocale) {
+        setDefaultLocale(Locale.US);
         this.applicationLocale = resolveApplicationLocale(configuredLocale);
     }
 
@@ -50,7 +51,7 @@ public class DataprepLocaleContextResolver extends AbstractLocaleContextResolver
         throw new UnsupportedOperationException();
     }
 
-    private Locale resolveApplicationLocale(String configuredLocale) {
+    private static Locale resolveApplicationLocale(String configuredLocale) {
         Locale locale;
         if (StringUtils.isNotBlank(configuredLocale)) {
             try {
@@ -58,14 +59,14 @@ public class DataprepLocaleContextResolver extends AbstractLocaleContextResolver
                 LOGGER.info("Setting application locale to configured {}", locale);
             } catch (IllegalArgumentException e) {
                 // Illegal locale
-                locale = getDefaultLocale();
+                locale = DEFAULT_LOCALE;
                 LOGGER.warn(
                         "Error parsing configured application locale: {}. Defaulting to {}. Locale must be in the form \"en_US\" or \"fr_CA\"",
-                        configuredLocale, getDefaultLocale());
+                        configuredLocale, DEFAULT_LOCALE);
             }
         } else {
-            locale = getDefaultLocale();
-            LOGGER.info("Setting application locale to default value {}", getDefaultLocale());
+            locale = DEFAULT_LOCALE;
+            LOGGER.info("Setting application locale to default value {}", DEFAULT_LOCALE);
         }
         return locale;
     }
