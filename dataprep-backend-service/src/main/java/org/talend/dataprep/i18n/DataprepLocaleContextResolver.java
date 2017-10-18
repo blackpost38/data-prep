@@ -9,6 +9,7 @@
 
 package org.talend.dataprep.i18n;
 
+import static java.util.Locale.US;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.servlet.DispatcherServlet.LOCALE_RESOLVER_BEAN_NAME;
 
@@ -34,10 +35,8 @@ public class DataprepLocaleContextResolver extends AbstractLocaleContextResolver
 
     private final Locale applicationLocale;
 
-    private static final Locale DEFAULT_LOCALE = Locale.US;
-
     public DataprepLocaleContextResolver(@Value("${help.facets.language:}") String configuredLocale) {
-        setDefaultLocale(Locale.US);
+        setDefaultLocale(US);
         this.applicationLocale = resolveApplicationLocale(configuredLocale);
     }
 
@@ -51,7 +50,7 @@ public class DataprepLocaleContextResolver extends AbstractLocaleContextResolver
         throw new UnsupportedOperationException();
     }
 
-    private static Locale resolveApplicationLocale(String configuredLocale) {
+    private Locale resolveApplicationLocale(String configuredLocale) {
         Locale locale;
         if (StringUtils.isNotBlank(configuredLocale)) {
             try {
@@ -59,14 +58,14 @@ public class DataprepLocaleContextResolver extends AbstractLocaleContextResolver
                 LOGGER.info("Setting application locale to configured {}", locale);
             } catch (IllegalArgumentException e) {
                 // Illegal locale
-                locale = DEFAULT_LOCALE;
+                locale = getDefaultLocale();
                 LOGGER.warn(
                         "Error parsing configured application locale: {}. Defaulting to {}. Locale must be in the form \"en_US\" or \"fr_CA\"",
-                        configuredLocale, DEFAULT_LOCALE);
+                        configuredLocale, getDefaultLocale());
             }
         } else {
-            locale = DEFAULT_LOCALE;
-            LOGGER.info("Setting application locale to default value {}", DEFAULT_LOCALE);
+            locale = getDefaultLocale();
+            LOGGER.info("Setting application locale to default value {}", getDefaultLocale());
         }
         return locale;
     }
