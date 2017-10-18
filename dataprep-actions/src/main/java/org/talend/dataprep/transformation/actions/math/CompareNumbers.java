@@ -38,6 +38,11 @@ public class CompareNumbers extends AbstractCompareAction implements ColumnActio
     }
 
     @Override
+    public boolean getCreateNewColumnDefaultValue() {
+        return true;
+    }
+
+    @Override
     public boolean acceptField(ColumnMetadata column) {
         Type columnType = Type.get(column.getType());
         return Type.NUMERIC.isAssignableFrom(columnType);

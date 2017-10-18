@@ -41,6 +41,8 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
 
     public static final String ACTION_BEAN_PREFIX = "action#"; //$NON-NLS-1$
 
+    public static final String CREATE_NEW_COLUMN = "create_new_column";
+
     @Override
     public ActionDefinition adapt(ColumnMetadata column) {
         return this;
@@ -211,4 +213,16 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
     public Function<GenericRecord, GenericRecord> action(List<Parameter> parameters) {
         return r -> r;
     }
+
+    protected boolean createNewColumn(ActionContext context) {
+        if (context.getParameters().containsKey(CREATE_NEW_COLUMN)) {
+            return Boolean.parseBoolean(context.getParameters().get(CREATE_NEW_COLUMN));
+        }
+        return getCreateNewColumnDefaultValue();
+    }
+
+    public boolean getCreateNewColumnDefaultValue() {
+        return false;
+    }
+
 }

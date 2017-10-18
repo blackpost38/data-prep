@@ -36,6 +36,7 @@ import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
+import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.AbstractCompareAction;
 import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
@@ -114,6 +115,20 @@ public class CompareNumbersTest extends AbstractMetadataBaseTest {
 
         // then
         DataSetRow expected = getRow("5", "3", "Done !", "false");
+        assertEquals(expected, row);
+    }
+
+    @Test
+    public void should_apply_on_column_not_equals_in_place() {
+        // given
+        DataSetRow row = getRow("5", "3", "Done !");
+
+        // when
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "false");
+        ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
+
+        // then
+        DataSetRow expected = getRow("false", "3", "Done !");
         assertEquals(expected, row);
     }
 

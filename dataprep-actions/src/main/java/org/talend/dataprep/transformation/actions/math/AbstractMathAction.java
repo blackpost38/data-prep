@@ -44,13 +44,6 @@ public abstract class AbstractMathAction extends AbstractActionMetadata implemen
 
     protected abstract String getColumnNameSuffix(Map<String, String> parameters);
 
-    protected boolean createNewColumn(ActionContext context) {
-        if (context.getParameters().containsKey("create_new_column")) {
-            return Boolean.parseBoolean(context.getParameters().get("create_new_column"));
-        }
-        return false;
-    }
-
     @Override
     public void compile(ActionContext context) {
         super.compile(context);

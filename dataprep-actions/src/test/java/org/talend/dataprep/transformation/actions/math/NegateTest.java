@@ -29,6 +29,7 @@ import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
+import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 
 /**
@@ -56,7 +57,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
         DataSetRow row = getRow("5", "3", "Done !");
 
         // when
-        parameters.put("create_new_column", "true");
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
 
         // then
@@ -83,7 +84,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
         DataSetRow row = getRow("-5", "3", "Done !");
 
         // when
-        parameters.put("create_new_column", "true");
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
 
         // then
@@ -98,7 +99,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
         DataSetRow row = getRow("beer", "3", "Done !");
 
         // when
-        parameters.put("create_new_column", "true");
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
 
         // then
