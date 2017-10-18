@@ -148,7 +148,7 @@ function patternOccurrenceWorker(parameters) {
 		patternFrequency.filteredOccurrences = !filteredRecords ?
 			patternFrequency.occurrences :
 			_.chain(filteredRecords)
-				.pluck(columnId)
+				.map(columnId)
 				.filter(matchingFn)
 				.groupBy(value => value)
 				.mapValues('length')
