@@ -36,7 +36,7 @@ public abstract class AbstractMathNoParameterAction extends AbstractMathAction i
         }
 
         String newColumnId = columnId;
-        if (!applyInPlace(context)) {
+        if (createNewColumn(context)) {
             newColumnId = context.column("result");
         }
         row.set(newColumnId, result);

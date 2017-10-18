@@ -56,7 +56,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
         DataSetRow row = getRow("5", "3", "Done !");
 
         // when
-        parameters.put("in_place", "false");
+        parameters.put("create_new_column", "true");
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
 
         // then
@@ -83,7 +83,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
         DataSetRow row = getRow("-5", "3", "Done !");
 
         // when
-        parameters.put("in_place", "false");
+        parameters.put("create_new_column", "true");
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
 
         // then
@@ -98,7 +98,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
         DataSetRow row = getRow("beer", "3", "Done !");
 
         // when
-        parameters.put("in_place", "false");
+        parameters.put("create_new_column", "true");
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
 
         // then

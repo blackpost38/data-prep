@@ -44,18 +44,18 @@ public abstract class AbstractMathAction extends AbstractActionMetadata implemen
 
     protected abstract String getColumnNameSuffix(Map<String, String> parameters);
 
-    protected boolean applyInPlace(ActionContext context) {
-        if (context.getParameters().containsKey("in_place")) {
-            return Boolean.parseBoolean(context.getParameters().get("in_place"));
+    protected boolean createNewColumn(ActionContext context) {
+        if (context.getParameters().containsKey("create_new_column")) {
+            return Boolean.parseBoolean(context.getParameters().get("create_new_column"));
         }
-        return true;
+        return false;
     }
 
     @Override
     public void compile(ActionContext context) {
         super.compile(context);
         if (context.getActionStatus() == ActionContext.ActionStatus.OK) {
-            if (!applyInPlace(context)) {
+            if (createNewColumn(context)) {
                 String columnId = context.getColumnId();
                 RowMetadata rowMetadata = context.getRowMetadata();
                 ColumnMetadata column = rowMetadata.getById(columnId);
