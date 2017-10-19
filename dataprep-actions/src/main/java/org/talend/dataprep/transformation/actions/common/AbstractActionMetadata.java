@@ -13,10 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 import org.apache.avro.generic.GenericRecord;
@@ -202,7 +199,10 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      **/
     @Override
     public List<Parameter> getParameters() {
-        return ActionsBundle.attachToAction(ImplicitParameters.getParameters(), this);
+        final List<Parameter> parameters = ActionsBundle.attachToAction(ImplicitParameters.getParameters(), this);
+
+
+        return parameters;
     }
 
     @JsonIgnore
@@ -214,15 +214,16 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
         return r -> r;
     }
 
-    protected boolean createNewColumn(ActionContext context) {
-        if (context.getParameters().containsKey(CREATE_NEW_COLUMN)) {
-            return Boolean.parseBoolean(context.getParameters().get(CREATE_NEW_COLUMN));
+    @Override
+    public boolean createNewColumn(Map<String, String> parameters) {
+        if (parameters.containsKey(CREATE_NEW_COLUMN)) {
+            return Boolean.parseBoolean(parameters.get(CREATE_NEW_COLUMN));
         }
         return getCreateNewColumnDefaultValue();
     }
 
     public boolean getCreateNewColumnDefaultValue() {
-        return false;
+        return true;
     }
 
 }

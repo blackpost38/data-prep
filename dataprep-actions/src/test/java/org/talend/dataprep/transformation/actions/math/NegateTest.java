@@ -18,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getRow;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -27,6 +28,7 @@ import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
+import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
@@ -49,6 +51,12 @@ public class NegateTest extends AbstractMetadataBaseTest {
     public void setUp() throws Exception {
         final InputStream parametersSource = NegateTest.class.getResourceAsStream("negateAction.json");
         parameters = ActionMetadataTestUtils.parseParameters(parametersSource);
+    }
+
+    @Test
+    public void testActionParameters() throws Exception {
+        final List<Parameter> parameters = action.getParameters();
+        assertEquals(5, parameters.size());
     }
 
     @Test

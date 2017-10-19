@@ -48,7 +48,7 @@ public abstract class AbstractMathAction extends AbstractActionMetadata implemen
     public void compile(ActionContext context) {
         super.compile(context);
         if (context.getActionStatus() == ActionContext.ActionStatus.OK) {
-            if (createNewColumn(context)) {
+            if (createNewColumn(context.getParameters())) {
                 String columnId = context.getColumnId();
                 RowMetadata rowMetadata = context.getRowMetadata();
                 ColumnMetadata column = rowMetadata.getById(columnId);
