@@ -23,6 +23,7 @@ import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.i18n.MessagesBundle;
 import org.talend.dataprep.parameters.Parameter;
+import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.category.ActionScope;
 import org.talend.dataprep.transformation.actions.category.ScopeCategory;
@@ -47,8 +48,8 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
 
     /**
      * <p>
-     * Adapts the current action metadata to the scope. This method may return <code>this</code> if no action specific
-     * change should be done. It may return a different instance with information from scope (like a different label).
+     * Adapts the current action metadata to the scope. This method may return <code>this</code> if no action specific change
+     * should be done. It may return a different instance with information from scope (like a different label).
      * </p>
      *
      * @param scope A {@link ScopeCategory scope}.
@@ -154,11 +155,10 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
     /**
      * Called by transformation process <b>before</b> the first transformation occurs. This method allows action
      * implementation to compute reusable objects in actual transformation execution. Implementations may also indicate
-     * that action is not applicable and should be discarded (
-     * {@link ActionContext.ActionStatus#CANCELED}.
+     * that action is not applicable and should be discarded ( {@link ActionContext.ActionStatus#CANCELED}.
      *
      * @param actionContext The action context that contains the parameters and allows compile step to change action
-     *                      status.
+     * status.
      * @see ActionContext#setActionStatus(ActionContext.ActionStatus)
      */
     @Override
@@ -201,6 +201,9 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
     public List<Parameter> getParameters() {
         final List<Parameter> parameters = ActionsBundle.attachToAction(ImplicitParameters.getParameters(), this);
 
+        if (createNewColumnParamVisible()) {
+            parameters.add(new Parameter(CREATE_NEW_COLUMN, ParameterType.BOOLEAN, "" + getCreateNewColumnDefaultValue()));
+        }
 
         return parameters;
     }
@@ -214,8 +217,11 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
         return r -> r;
     }
 
-    @Override
-    public boolean createNewColumn(Map<String, String> parameters) {
+    protected boolean createNewColumnParamVisible() {
+        return true;
+    }
+
+    protected boolean createNewColumn(Map<String, String> parameters) {
         if (parameters.containsKey(CREATE_NEW_COLUMN)) {
             return Boolean.parseBoolean(parameters.get(CREATE_NEW_COLUMN));
         }
@@ -223,7 +229,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
     }
 
     public boolean getCreateNewColumnDefaultValue() {
-        return true;
+        return false;
     }
 
 }
