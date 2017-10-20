@@ -201,6 +201,8 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
     public List<Parameter> getParameters() {
         final List<Parameter> parameters = ActionsBundle.attachToAction(ImplicitParameters.getParameters(), this);
 
+        // For TDP-TDP-3798, add a checkbox for most actions to allow the user to choose if action is applied in place or if it
+        // creates a new column:
         if (createNewColumnParamVisible()) {
             parameters.add(new Parameter(CREATE_NEW_COLUMN, ParameterType.BOOLEAN, "" + getCreateNewColumnDefaultValue()));
         }
@@ -217,19 +219,51 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
         return r -> r;
     }
 
+    /**
+     * For TDP-TDP-3798, add a checkbox for most actions to allow the user to choose if action is applied in place or if it
+     * creates a new column.
+     * This method will be use by framework to define if the parameter is visible for this action or not.
+     * For most actions, checkbox is visible, but other actions (like 'mask data' that is always 'in place' or 'split' that
+     * always creates new columns) the checkbox will not be visible. In this case, these actions should override this method.
+     *
+     * @return true if the 'create new column' checkbox is visible, false otherwise
+     */
     protected boolean createNewColumnParamVisible() {
         return true;
     }
 
+    /**
+     * For TDP-TDP-3798, add a checkbox for most actions to allow the user to choose if action is applied in place or if it
+     * creates a new column.
+     * This method will be use by framework to define:
+     * - the default value of the checkbox, if it's visible
+     * - the value of the parameter if the checkbox is not visible
+     *
+     * For most actions, default will be 'false', but for some actions (like 'compare numbers') it will be 'true'. In this case,
+     * these actions should override this method.
+     *
+     * @return true if the 'create new column' checkbox is visible, false otherwise
+     */
+    public boolean getCreateNewColumnDefaultValue() {
+        return false;
+    }
+
+    /**
+     * For TDP-TDP-3798, add a checkbox for most actions to allow the user to choose if action is applied in place or if it
+     * creates a new column.
+     * This method is used by framework to evaluate if this step (action+parameters) creates a new column or is applied in place.
+     *
+     * For most actions, the default implementation is ok, but some actions (like 'split' that always creates new column) may
+     * override it. In this case, no need to override createNewColumnParamVisible() and getCreateNewColumnDefaultValue().
+     *
+     * @param parameters
+     * @return
+     */
     protected boolean createNewColumn(Map<String, String> parameters) {
         if (parameters.containsKey(CREATE_NEW_COLUMN)) {
             return Boolean.parseBoolean(parameters.get(CREATE_NEW_COLUMN));
         }
         return getCreateNewColumnDefaultValue();
-    }
-
-    public boolean getCreateNewColumnDefaultValue() {
-        return false;
     }
 
 }
