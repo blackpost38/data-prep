@@ -146,6 +146,15 @@ public class ActionContext implements Serializable {
         }
     }
 
+    public String getTargetColumnId() {
+        String key = getColumnKey("target");
+        if (getContext().containsKey(key)) {
+            return this.column("target");
+        } else {
+            return this.getColumnId();
+        }
+    }
+
     /**
      * Return the context key for the column.
      *

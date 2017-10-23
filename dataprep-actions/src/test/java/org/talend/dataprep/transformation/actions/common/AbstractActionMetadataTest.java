@@ -58,7 +58,7 @@ public class AbstractActionMetadataTest {
 
         // then
         // test that action will not create a new column:
-        assertThat(doNothingAction.createNewColumn(emptyMap), is(false));
+        assertThat(doNothingAction.doesCreateNewColumn(emptyMap), is(false));
 
         // test that 'create_new_column' parameter is present and set to false by default:
         final List<Parameter> parameters = action.getParameters();
@@ -77,7 +77,7 @@ public class AbstractActionMetadataTest {
 
         // then
         // test that action will not create a new column:
-        assertThat(doNothingAction.createNewColumn(emptyMap), is(false));
+        assertThat(doNothingAction.doesCreateNewColumn(emptyMap), is(false));
 
         // test that 'create_new_column' parameter is present and set to false by default:
         final List<Parameter> parameters = action.getParameters();
@@ -121,7 +121,7 @@ public class AbstractActionMetadataTest {
 
         // then
         // test that action will create a new column:
-        assertThat(action.createNewColumn(emptyMap), is(true));
+        assertThat(action.doesCreateNewColumn(emptyMap), is(true));
 
         // test that 'create_new_column' parameter is present and set to false by default:
         final List<Parameter> parameters = action.getParameters();
@@ -165,7 +165,7 @@ public class AbstractActionMetadataTest {
 
         // then
         // test that action will not create a new column:
-        assertThat(action.createNewColumn(emptyMap), is(false));
+        assertThat(action.doesCreateNewColumn(emptyMap), is(false));
 
         // test that 'create_new_column' parameter is not present:
         final List<Parameter> parameters = action.getParameters();
@@ -215,7 +215,7 @@ public class AbstractActionMetadataTest {
 
         // then
         // test that action will not create a new column:
-        assertThat(action.createNewColumn(emptyMap), is(false));
+        assertThat(action.doesCreateNewColumn(emptyMap), is(false));
 
         // test that 'create_new_column' parameter is not present:
         final List<Parameter> parameters = action.getParameters();

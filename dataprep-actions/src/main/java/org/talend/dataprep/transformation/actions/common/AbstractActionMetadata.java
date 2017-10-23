@@ -250,6 +250,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
         return false;
     }
 
+
     /**
      * For TDP-TDP-3798, add a checkbox for most actions to allow the user to choose if action is applied in place or if it
      * creates a new column.
@@ -261,15 +262,15 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      * @param parameters
      * @return 'true' if this step (action+parameters) creates a new column, 'false' if it's applied in-place.
      */
-    protected boolean createNewColumn(Map<String, String> parameters) {
-        if (parameters.containsKey(CREATE_NEW_COLUMN)) {
+    protected boolean doesCreateNewColumn(Map<String, String> parameters) {
+        if (parameters.containsKey(AbstractActionMetadata.CREATE_NEW_COLUMN)) {
             return Boolean.parseBoolean(parameters.get(CREATE_NEW_COLUMN));
         }
         return getCreateNewColumnDefaultValue();
     }
 
-    public void createNewColumn(ActionContext context){
-        if (createNewColumn(context.getParameters())) {
+    private void createNewColumn(ActionContext context){
+        if (doesCreateNewColumn(context.getParameters())) {
             String columnId = context.getColumnId();
             RowMetadata rowMetadata = context.getRowMetadata();
             ColumnMetadata column = rowMetadata.getById(columnId);
@@ -293,14 +294,6 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
 
     public String getColumnNameSuffix(ActionContext context){
         return null;
-    }
-
-    public String getTargetColumnId(ActionContext context) {
-        if (createNewColumn(context.getParameters())) {
-            return context.column("target");
-        } else {
-            return context.getColumnId();
-        }
     }
 
 }

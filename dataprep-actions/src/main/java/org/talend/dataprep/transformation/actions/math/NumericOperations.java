@@ -169,7 +169,7 @@ public class NumericOperations extends AbstractActionMetadata implements ColumnA
         }
 
         // column creation
-        final String newColumnId = getTargetColumnId(context);
+        final String newColumnId = context.getTargetColumnId();
 
         // set new column value
         final String sourceValue = row.get(columnId);

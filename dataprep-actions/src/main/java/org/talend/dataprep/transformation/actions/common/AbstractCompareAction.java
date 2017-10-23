@@ -131,8 +131,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
         final Map<String, String> parameters = context.getParameters();
         final String compareMode = getCompareMode(parameters);
 
-        // create new column and append it after current column
-        final String newColumnId = getTargetColumnId(context);
+        final String newColumnId = context.getTargetColumnId();
 
         ComparisonRequest comparisonRequest = new ComparisonRequest() //
                 .setMode(compareMode) //

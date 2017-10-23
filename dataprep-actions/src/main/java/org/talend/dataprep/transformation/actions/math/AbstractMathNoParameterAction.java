@@ -35,7 +35,7 @@ public abstract class AbstractMathNoParameterAction extends AbstractMathAction i
             result = calculateResult(colValue, context);
         }
 
-        String targetColumnId = getTargetColumnId(context);
+        String targetColumnId = context.getTargetColumnId();
         row.set(targetColumnId, result);
     }
 

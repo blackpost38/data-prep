@@ -110,8 +110,7 @@ public class Padding extends AbstractActionMetadata implements ColumnAction {
         final char paddingChar = parameters.get(PADDING_CHAR_PARAMETER).charAt(0);
         final String paddingPosition = parameters.get(PADDING_POSITION_PARAMETER);
 
-        String targetColumnId = getTargetColumnId(context);
-        row.set(targetColumnId, apply(original, size, paddingChar, paddingPosition));
+        row.set(context.getTargetColumnId(), apply(original, size, paddingChar, paddingPosition));
     }
 
     protected String apply(String from, int size, char paddingChar, String position) {
