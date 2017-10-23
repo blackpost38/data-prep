@@ -44,9 +44,12 @@ public class NegateTest extends AbstractMetadataBaseTest<Negate> {
     /** The action parameters. */
     private Map<String, String> parameters;
 
+    public NegateTest() {
+        super(new Negate());
+    }
+
     @Before
     public void setUp() throws Exception {
-        action = new Negate();
         final InputStream parametersSource = NegateTest.class.getResourceAsStream("negateAction.json");
         parameters = ActionMetadataTestUtils.parseParameters(parametersSource);
     }

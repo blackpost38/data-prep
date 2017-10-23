@@ -49,9 +49,12 @@ public class CompareDatesTest extends BaseDateTest<CompareDates> {
 
     private Map<String, String> parameters;
 
+    public CompareDatesTest() {
+        super(new CompareDates());
+    }
+
     @Before
     public void init() throws IOException {
-        action = new CompareDates();
         final InputStream json = ComputeTimeSince.class.getResourceAsStream("compareDatesAction.json");
         parameters = ActionMetadataTestUtils.parseParameters(json);
     }

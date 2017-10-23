@@ -42,9 +42,12 @@ public class PaddingTest extends AbstractMetadataBaseTest<Padding> {
 
     private Map<String, String> parameters;
 
+    public PaddingTest() {
+        super(new Padding());
+    }
+
     @Before
     public void init() throws IOException {
-        action = new Padding();
         parameters = ActionMetadataTestUtils.parseParameters(PaddingTest.class.getResourceAsStream("paddingAction.json"));
     }
 

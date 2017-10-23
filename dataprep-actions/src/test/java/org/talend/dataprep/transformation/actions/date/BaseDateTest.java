@@ -22,11 +22,20 @@ import java.io.InputStream;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
+import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 
 /**
  * Base class for all date related unit tests.
  */
 public abstract class BaseDateTest<T> extends AbstractMetadataBaseTest {
+
+    protected <T extends AbstractActionMetadata> BaseDateTest(T action) {
+        super(action);
+    }
+
+    public BaseDateTest() {
+        // To remove before merge, just here to prevent compilation error in every TU
+    }
 
     /**
      * @param statisticsFileName the statistics file name to use.

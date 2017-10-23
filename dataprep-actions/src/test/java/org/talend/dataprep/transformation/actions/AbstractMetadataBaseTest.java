@@ -57,6 +57,14 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
 
     protected T action;
 
+    public AbstractMetadataBaseTest() {
+        // To remove before merge, just here to prevent compilation error in every TU
+    }
+
+    public AbstractMetadataBaseTest(T action){
+        this.action = action;
+    }
+
     /**
      * For TDP-TDP-3798, add a checkbox for most actions to allow the user to choose if action is applied in place or if it
      * creates a new column.

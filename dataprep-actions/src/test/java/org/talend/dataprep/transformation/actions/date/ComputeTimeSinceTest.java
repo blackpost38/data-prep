@@ -56,10 +56,11 @@ import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
  */
 public class ComputeTimeSinceTest extends BaseDateTest {
 
-    /** The action to test. */
-    private ComputeTimeSince action = new ComputeTimeSince();
-
     private Map<String, String> parameters;
+
+    ComputeTimeSinceTest() {
+        super(new ComputeTimeSince());
+    }
 
     @Before
     public void init() throws IOException {
