@@ -41,7 +41,7 @@ public class Logarithm extends AbstractMathNoParameterAction {
 
     @Override
     public String getColumnNameSuffix(ActionContext context) {
-        return "logarithm";
+        return "_logarithm";
     }
 
     @Override
