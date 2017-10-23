@@ -33,7 +33,7 @@ public class ExternalHelpActionsProvider {
     public ActionSettings getExternalHelpAction() {
         return builder()
                 .id("external:help")
-                .name("Help")
+                .name("external.help")
                 .icon("talend-question-circle")
                 .type("@@external/OPEN_WINDOW")
                 .payload(PAYLOAD_METHOD_KEY, "open")
@@ -44,7 +44,7 @@ public class ExternalHelpActionsProvider {
     public ActionSettings getExternalCommunityAction() {
         return builder()
                 .id("external:community")
-                .name("Community")
+                .name("external.community")
                 .type("@@external/OPEN_WINDOW")
                 .payload(PAYLOAD_METHOD_KEY, "open")
                 .payload(PAYLOAD_ARGS_KEY, new String[]{communityLinksManager.getCommunityUrl()})
