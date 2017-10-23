@@ -261,7 +261,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      * @param parameters
      * @return 'true' if this step (action+parameters) creates a new column, 'false' if it's applied in-place.
      */
-    public boolean createNewColumn(Map<String, String> parameters) {
+    protected boolean createNewColumn(Map<String, String> parameters) {
         if (parameters.containsKey(CREATE_NEW_COLUMN)) {
             return Boolean.parseBoolean(parameters.get(CREATE_NEW_COLUMN));
         }

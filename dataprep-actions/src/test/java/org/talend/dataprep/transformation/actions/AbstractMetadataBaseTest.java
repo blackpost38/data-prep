@@ -92,9 +92,6 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
     public void test_TDP_3798_visible_enabled() {
         Map<String, String> emptyMap = new HashMap<>();
 
-        // test that action will create a new column:
-        assertThat(action.createNewColumn(emptyMap), is(true));
-
         // test that 'create_new_column' parameter is present and set to 'true' by default:
         final List<Parameter> parameters = action.getParameters();
 
@@ -113,9 +110,6 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
 
     public void test_TDP_3798_visible_disabled() {
         Map<String, String> emptyMap = new HashMap<>();
-
-        // test that action will create a new column:
-        assertThat(action.createNewColumn(emptyMap), is(false));
 
         // test that 'create_new_column' parameter is present and set to 'false' by default:
         final List<Parameter> parameters = action.getParameters();
