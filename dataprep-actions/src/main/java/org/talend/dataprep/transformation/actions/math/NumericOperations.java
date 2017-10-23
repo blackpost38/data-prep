@@ -124,34 +124,30 @@ public class NumericOperations extends AbstractActionMetadata implements ColumnA
         return Type.NUMERIC.isAssignableFrom(columnType);
     }
 
+    public Type getColumnType(ActionContext context){
+        return Type.DOUBLE;
+    }
+
+    @Override
+    public String getColumnNameSuffix(ActionContext context){
+        final Map<String, String> parameters = context.getParameters();
+        final RowMetadata rowMetadata = context.getRowMetadata();
+        final String operator = parameters.get(OPERATOR_PARAMETER);
+        String operandName;
+        if (parameters.get(MODE_PARAMETER).equals(CONSTANT_MODE)) {
+            operandName = parameters.get(OPERAND_PARAMETER);
+        } else {
+            final ColumnMetadata selectedColumn = rowMetadata.getById(parameters.get(SELECTED_COLUMN_PARAMETER));
+            operandName = selectedColumn.getName();
+        }
+        return " " + operator + " " + operandName;
+    }
+
     @Override
     public void compile(ActionContext context) {
         super.compile(context);
         if (context.getActionStatus() == ActionContext.ActionStatus.OK) {
             checkParameters(context.getParameters(), context.getRowMetadata());
-            // Create column
-            final Map<String, String> parameters = context.getParameters();
-            final String columnId = context.getColumnId();
-            final RowMetadata rowMetadata = context.getRowMetadata();
-            final ColumnMetadata sourceColumn = rowMetadata.getById(columnId);
-            final String operator = parameters.get(OPERATOR_PARAMETER);
-            String operandName;
-            if (parameters.get(MODE_PARAMETER).equals(CONSTANT_MODE)) {
-                operandName = parameters.get(OPERAND_PARAMETER);
-            } else {
-                final ColumnMetadata selectedColumn = rowMetadata.getById(parameters.get(SELECTED_COLUMN_PARAMETER));
-                operandName = selectedColumn.getName();
-            }
-            context.column("result", r -> {
-                final ColumnMetadata c = ColumnMetadata.Builder //
-                        .column() //
-                        .name(sourceColumn.getName() + " " + operator + " " + operandName) //
-                        .type(Type.DOUBLE) //
-                        .build();
-                rowMetadata.insertAfter(columnId, c);
-                return c;
-            });
-
         }
     }
 
@@ -173,7 +169,7 @@ public class NumericOperations extends AbstractActionMetadata implements ColumnA
         }
 
         // column creation
-        final String newColumnId = context.column("result");
+        final String newColumnId = getTargetColumnId(context);
 
         // set new column value
         final String sourceValue = row.get(columnId);

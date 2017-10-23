@@ -101,6 +101,10 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
         return new Parameter(CONSTANT_VALUE, ParameterType.STRING, "2");
     }
 
+    public Type getColumnType(ActionContext context){
+        return Type.BOOLEAN;
+    }
+
     @Override
     public String getColumnNameSuffix(ActionContext context) {
         final RowMetadata rowMetadata = context.getRowMetadata();
@@ -115,7 +119,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
             compareToLabel = selectedColumn.getName();
         }
 
-        return compareMode + "_" + compareToLabel + "?";
+        return "_" + compareMode + "_" + compareToLabel + "?";
     }
 
     /**

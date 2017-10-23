@@ -118,6 +118,9 @@ public class CompareDatesTest extends BaseDateTest<CompareDates> {
                 .containsExactly(MapEntry.entry("0000", "02/01/2012"), //
                         MapEntry.entry("0001", "true"));
 
+        final ColumnMetadata expected = ColumnMetadata.Builder.column().id(1).name("last update_gt_02/21/2008?").type(Type.BOOLEAN).build();
+        ColumnMetadata actual = row.getRowMetadata().getById("0001");
+        assertEquals(expected, actual);
     }
 
     @Test

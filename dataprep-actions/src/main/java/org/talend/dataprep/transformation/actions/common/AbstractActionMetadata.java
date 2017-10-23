@@ -278,14 +278,19 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
             context.column("target", r -> {
                 ColumnMetadata c = ColumnMetadata.Builder //
                         .column() //
-                        .name(column.getName() + "_" + getColumnNameSuffix(context)) //
-                        .type(Type.STRING) // Leave actual type detection to transformation
+                        .name(column.getName() + getColumnNameSuffix(context)) //
+                        .type(getColumnType(context)) // Leave actual type detection to transformation
                         .build();
                 rowMetadata.insertAfter(columnId, c);
                 return c;
             });
         }
     }
+
+    public Type getColumnType(ActionContext context){
+        return Type.STRING;
+    }
+
     public String getColumnNameSuffix(ActionContext context){
         return null;
     }
