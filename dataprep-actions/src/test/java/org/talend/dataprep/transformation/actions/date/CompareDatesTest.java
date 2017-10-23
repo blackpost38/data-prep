@@ -45,15 +45,13 @@ import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils
  *
  * @see ComputeTimeSince
  */
-public class CompareDatesTest extends BaseDateTest {
-
-    /** The action to test. */
-    private CompareDates action = new CompareDates();
+public class CompareDatesTest extends BaseDateTest<CompareDates> {
 
     private Map<String, String> parameters;
 
     @Before
     public void init() throws IOException {
+        action = new CompareDates();
         final InputStream json = ComputeTimeSince.class.getResourceAsStream("compareDatesAction.json");
         parameters = ActionMetadataTestUtils.parseParameters(json);
     }
@@ -76,7 +74,7 @@ public class CompareDatesTest extends BaseDateTest {
         final List<Parameter> actionParameters = action.getParameters();
 
         // then
-        assertEquals(6, actionParameters.size());
+        assertEquals(7, actionParameters.size());
     }
 
     @Test
@@ -90,6 +88,10 @@ public class CompareDatesTest extends BaseDateTest {
         assertFalse(action.acceptField(getColumn(Type.FLOAT)));
         assertFalse(action.acceptField(getColumn(Type.STRING)));
         assertFalse(action.acceptField(getColumn(Type.BOOLEAN)));
+    }
+
+    public CreateNewColumnPolicy getCreateNewColumnPolicy() {
+        return CreateNewColumnPolicy.VISIBLE_ENABLED;
     }
 
     @Test
@@ -171,7 +173,7 @@ public class CompareDatesTest extends BaseDateTest {
     }
 
     @Test
-    public void simple_not_greater_result_with_constant_in_place() throws Exception {
+    public void test_apply_inplace() throws Exception {
 
         // given
         final Map<String, String> values = new HashMap<>();
@@ -196,7 +198,7 @@ public class CompareDatesTest extends BaseDateTest {
     }
 
     @Test
-    public void simple_greater_result_with_column() throws Exception {
+    public void test_apply_in_newcolumn() throws Exception {
 
         // given
         final Map<String, String> values = new HashMap<>();

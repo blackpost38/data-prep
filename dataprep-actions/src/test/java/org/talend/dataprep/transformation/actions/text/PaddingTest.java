@@ -31,22 +31,25 @@ import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
+import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 
 /**
  * Test class for Padding action. Creates one consumer, and test it.
  *
  */
-public class PaddingTest extends AbstractMetadataBaseTest {
-
-    /** The action to test. */
-    private Padding action = new Padding();
+public class PaddingTest extends AbstractMetadataBaseTest<Padding> {
 
     private Map<String, String> parameters;
 
     @Before
     public void init() throws IOException {
+        action = new Padding();
         parameters = ActionMetadataTestUtils.parseParameters(PaddingTest.class.getResourceAsStream("paddingAction.json"));
+    }
+
+    public CreateNewColumnPolicy getCreateNewColumnPolicy() {
+        return CreateNewColumnPolicy.VISIBLE_DISABLED;
     }
 
     @Test
@@ -62,7 +65,31 @@ public class PaddingTest extends AbstractMetadataBaseTest {
     }
 
     @Test
-    public void test_basic() {
+    public void test_apply_in_newcolumn() {
+        // given
+        final Map<String, String> values = new HashMap<>();
+        values.put("0000", "Vincent");
+        values.put("0001", "10");
+        values.put("0002", "May 20th 2015");
+        final DataSetRow row = new DataSetRow(values);
+
+        final Map<String, Object> expectedValues = new HashMap<>();
+        expectedValues.put("0000", "Vincent");
+        expectedValues.put("0001", "10");
+        expectedValues.put("0002", "May 20th 2015");
+        expectedValues.put("0003", "0010");
+
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
+
+        // when
+        ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
+
+        // then
+        assertEquals(expectedValues, row.values());
+    }
+
+    @Test
+    public void test_apply_inplace() {
         // given
         final Map<String, String> values = new HashMap<>();
         values.put("0000", "Vincent");

@@ -38,7 +38,7 @@ public class SquareRoot extends AbstractMathNoParameterAction {
     }
 
     @Override
-    protected String getColumnNameSuffix(Map<String, String> parameters) {
+    public String getColumnNameSuffix(ActionContext context) {
         return "square_root";
     }
 

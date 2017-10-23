@@ -103,7 +103,8 @@ public class TemperaturesConverter extends AbstractMathNoParameterAction {
     }
 
     @Override
-    protected String getColumnNameSuffix(Map<String, String> parameters) {
+    public String getColumnNameSuffix(ActionContext context) {
+        Map<String, String> parameters = context.getParameters();
         String name = parameters.get(TO_UNIT_PARAMETER);
         TemperatureUnit temperatureUnit = TemperatureUnit.valueOf(name);
         return "in " + temperatureUnit.toString();

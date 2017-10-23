@@ -16,30 +16,35 @@ package org.talend.dataprep.transformation.actions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Test;
 import org.talend.dataprep.ClassPathActionRegistry;
+import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.dataset.statistics.Statistics;
 import org.talend.dataprep.api.type.Type;
+import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.quality.AnalyzerService;
+import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ActionFactory;
 import org.talend.dataprep.transformation.actions.common.ReplaceOnValueHelper;
+import org.talend.dataprep.transformation.actions.math.Negate;
 import org.talend.dataprep.transformation.pipeline.ActionRegistry;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
+
 /**
  * Base class for all related unit tests that deal with metadata
  */
-public abstract class AbstractMetadataBaseTest {
+public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata> {
 
     /** The dataprep ready jackson builder. */
     protected final ObjectMapper mapper = new ObjectMapper();
@@ -49,6 +54,94 @@ public abstract class AbstractMetadataBaseTest {
     protected final ActionRegistry actionRegistry = new ClassPathActionRegistry("org.talend.dataprep.transformation.actions");
 
     protected final AnalyzerService analyzerService = new AnalyzerService();
+
+    protected T action;
+
+    /**
+     * For TDP-TDP-3798, add a checkbox for most actions to allow the user to choose if action is applied in place or if it
+     * creates a new column.
+     * This enum declares the possible policy for an action.
+     * This is used to ensure that every action test classes declare their policy, and that they are tested.
+     */
+    public enum CreateNewColumnPolicy {
+        VISIBLE_DISABLED, // checkbox param is visible, default to 'false' (like 'Negate')
+        VISIBLE_ENABLED, // checkbox param is visible, default to 'true' (like 'Compare dates')
+        INVISIBLE_DISABLED, // no checkbox, always in-place (like 'Mask data')
+        INVISIBLE_ENABLED; // no checkbox, always creates new column (like 'Extract email parts')
+    }
+
+    protected  CreateNewColumnPolicy getCreateNewColumnPolicy(){
+        return null; // temp solution to not fail at compilation, but when running tests, change to an abstract method later
+    }
+
+    @Test
+    public void test_TDP_3798_createNewColumnPolicy(){
+        switch (getCreateNewColumnPolicy()){
+            case VISIBLE_DISABLED:
+                test_TDP_3798_visible_disabled();
+                break;
+            case VISIBLE_ENABLED:
+                test_TDP_3798_visible_enabled();
+                break;
+            case INVISIBLE_DISABLED:
+            case INVISIBLE_ENABLED:
+                fail("tagada");
+        }
+    }
+
+    public void test_TDP_3798_visible_enabled() {
+        Map<String, String> emptyMap = new HashMap<>();
+
+        // test that action will create a new column:
+        assertThat(action.createNewColumn(emptyMap), is(true));
+
+        // test that 'create_new_column' parameter is present and set to 'true' by default:
+        final List<Parameter> parameters = action.getParameters();
+
+        boolean found = false;
+        for (Parameter parameter : parameters) {
+            if (parameter.getName().equals(AbstractActionMetadata.CREATE_NEW_COLUMN)) {
+                found = true;
+                assertEquals("Create new column", parameter.getLabel());
+                assertTrue(Boolean.parseBoolean(parameter.getDefault()));
+            }
+        }
+        if (!found) {
+            fail("'Create new column' not found");
+        }
+    }
+
+    public void test_TDP_3798_visible_disabled() {
+        Map<String, String> emptyMap = new HashMap<>();
+
+        // test that action will create a new column:
+        assertThat(action.createNewColumn(emptyMap), is(false));
+
+        // test that 'create_new_column' parameter is present and set to 'false' by default:
+        final List<Parameter> parameters = action.getParameters();
+
+        boolean found = false;
+        for (Parameter parameter : parameters) {
+            if (parameter.getName().equals(AbstractActionMetadata.CREATE_NEW_COLUMN)) {
+                found = true;
+                assertEquals("Create new column", parameter.getLabel());
+                assertFalse(Boolean.parseBoolean(parameter.getDefault()));
+            }
+        }
+        if (!found) {
+            fail("'Create new column' not found");
+        }
+    }
+
+    @Test
+    public void test_apply_inplace() throws Exception {
+        fail("Not implemented");
+    }
+
+    @Test
+    public void test_apply_in_newcolumn() throws Exception {
+        fail("Not implemented");
+    }
 
     protected String generateJson(String token, String operator) {
         ReplaceOnValueHelper r = new ReplaceOnValueHelper(token, operator);

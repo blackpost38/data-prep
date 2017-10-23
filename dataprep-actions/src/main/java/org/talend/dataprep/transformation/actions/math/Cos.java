@@ -40,7 +40,7 @@ public class Cos extends AbstractMathNoParameterAction {
     }
 
     @Override
-    protected String getColumnNameSuffix(Map<String, String> parameters) {
+    public String getColumnNameSuffix(ActionContext context) {
         return "cos";
     }
 

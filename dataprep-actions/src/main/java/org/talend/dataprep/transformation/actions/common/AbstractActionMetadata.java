@@ -20,6 +20,7 @@ import org.apache.avro.generic.GenericRecord;
 import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
+import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.i18n.MessagesBundle;
 import org.talend.dataprep.parameters.Parameter;
@@ -174,6 +175,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
                     actionContext.setActionStatus(ActionContext.ActionStatus.CANCELED);
                     return;
                 }
+                createNewColumn(actionContext);
                 break;
             case LINE:
             case DATASET:
@@ -226,7 +228,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      * For most actions, checkbox is visible, but other actions (like 'mask data' that is always 'in place' or 'split' that
      * always creates new columns) the checkbox will not be visible. In this case, these actions should override this method.
      *
-     * @return true if the 'create new column' checkbox is visible, false otherwise
+     * @return 'true' if the 'create new column' checkbox is visible, 'false' otherwise
      */
     protected boolean createNewColumnParamVisible() {
         return true;
@@ -242,7 +244,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      * For most actions, default will be 'false', but for some actions (like 'compare numbers') it will be 'true'. In this case,
      * these actions should override this method.
      *
-     * @return true if the 'create new column' checkbox is visible, false otherwise
+     * @return 'true' if the 'create new column' is checked by default, 'false' otherwise
      */
     public boolean getCreateNewColumnDefaultValue() {
         return false;
@@ -257,13 +259,43 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      * override it. In this case, no need to override createNewColumnParamVisible() and getCreateNewColumnDefaultValue().
      *
      * @param parameters
-     * @return
+     * @return 'true' if this step (action+parameters) creates a new column, 'false' if it's applied in-place.
      */
-    protected boolean createNewColumn(Map<String, String> parameters) {
+    public boolean createNewColumn(Map<String, String> parameters) {
         if (parameters.containsKey(CREATE_NEW_COLUMN)) {
             return Boolean.parseBoolean(parameters.get(CREATE_NEW_COLUMN));
         }
         return getCreateNewColumnDefaultValue();
+    }
+
+    public void createNewColumn(ActionContext context){
+        if (createNewColumn(context.getParameters())) {
+            String columnId = context.getColumnId();
+            RowMetadata rowMetadata = context.getRowMetadata();
+            ColumnMetadata column = rowMetadata.getById(columnId);
+
+            // create new column and append it after current column
+            context.column("target", r -> {
+                ColumnMetadata c = ColumnMetadata.Builder //
+                        .column() //
+                        .name(column.getName() + "_" + getColumnNameSuffix(context)) //
+                        .type(Type.STRING) // Leave actual type detection to transformation
+                        .build();
+                rowMetadata.insertAfter(columnId, c);
+                return c;
+            });
+        }
+    }
+    public String getColumnNameSuffix(ActionContext context){
+        return null;
+    }
+
+    public String getTargetColumnId(ActionContext context) {
+        if (createNewColumn(context.getParameters())) {
+            return context.column("target");
+        } else {
+            return context.getColumnId();
+        }
     }
 
 }

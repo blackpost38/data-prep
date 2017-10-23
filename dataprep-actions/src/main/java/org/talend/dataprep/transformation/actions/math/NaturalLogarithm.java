@@ -40,7 +40,7 @@ public class NaturalLogarithm extends AbstractMathNoParameterAction {
     }
 
     @Override
-    protected String getColumnNameSuffix(Map<String, String> parameters) {
+    public String getColumnNameSuffix(ActionContext context) {
         return "natural_logarithm";
     }
 

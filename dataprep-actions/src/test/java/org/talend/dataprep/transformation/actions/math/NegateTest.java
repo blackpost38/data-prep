@@ -13,8 +13,8 @@
 
 package org.talend.dataprep.transformation.actions.math;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
 import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getRow;
 
 import java.io.InputStream;
@@ -39,18 +39,20 @@ import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
  *
  * @see Negate
  */
-public class NegateTest extends AbstractMetadataBaseTest {
-
-    /** The action to test. */
-    private Negate action = new Negate();
+public class NegateTest extends AbstractMetadataBaseTest<Negate> {
 
     /** The action parameters. */
     private Map<String, String> parameters;
 
     @Before
     public void setUp() throws Exception {
+        action = new Negate();
         final InputStream parametersSource = NegateTest.class.getResourceAsStream("negateAction.json");
         parameters = ActionMetadataTestUtils.parseParameters(parametersSource);
+    }
+
+    public CreateNewColumnPolicy getCreateNewColumnPolicy() {
+        return CreateNewColumnPolicy.VISIBLE_DISABLED;
     }
 
     @Test
@@ -74,7 +76,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
     }
 
     @Test
-    public void negate_with_negative_inplace() {
+    public void test_apply_inplace() {
         // given
         DataSetRow row = getRow("-5", "3", "Done !");
 
@@ -87,7 +89,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
     }
 
     @Test
-    public void negate_with_negative_newcolumn() {
+    public void test_apply_in_newcolumn() {
         // given
         DataSetRow row = getRow("-5", "3", "Done !");
 
