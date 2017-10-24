@@ -12,21 +12,21 @@
 // ============================================================================
 package org.talend.dataprep.transformation.actions.fill;
 
+import java.math.BigInteger;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
 import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ColumnAction;
 import org.talend.dataprep.transformation.api.action.context.ActionContext;
-
-import java.math.BigInteger;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Generate a sequence on a column based on start value and step value.
@@ -47,13 +47,19 @@ public class GenerateSequence extends AbstractActionMetadata implements ColumnAc
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
-        Parameter startParameter = new Parameter(START_VALUE, ParameterType.INTEGER, "1");
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
+        Parameter startParameter = new Parameter.ParameterBuilder().setName(START_VALUE)
+                .setType(ParameterType.INTEGER)
+                .setDefaultValue("1")
+                .createParameter(this, locale);
         parameters.add(startParameter);
-        Parameter stepParameter = new Parameter(STEP_VALUE, ParameterType.INTEGER, "1");
+        Parameter stepParameter = new Parameter.ParameterBuilder().setName(STEP_VALUE)
+                .setType(ParameterType.INTEGER)
+                .setDefaultValue("1")
+                .createParameter(this, locale);
         parameters.add(stepParameter);
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     @Override

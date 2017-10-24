@@ -1,5 +1,6 @@
 package org.talend.dataprep.i18n;
 
+import static java.util.Locale.ENGLISH;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
@@ -81,8 +82,8 @@ public class ActionsBundleTest {
     @Test
     public void customActionParameter() throws Exception {
         final TestAction action = new TestAction();
-        assertEquals("Nice custom parameter label", action.getParameters().get(0).getLabel());
-        assertEquals("Nice custom parameter description", action.getParameters().get(0).getDescription());
+        assertEquals("Nice custom parameter label", action.getParameters(ENGLISH).get(0).getLabel());
+        assertEquals("Nice custom parameter description", action.getParameters(ENGLISH).get(0).getDescription());
     }
 
     @Test

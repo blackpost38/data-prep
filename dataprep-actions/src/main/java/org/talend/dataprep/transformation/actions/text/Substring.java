@@ -16,17 +16,13 @@ package org.talend.dataprep.transformation.actions.text;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.talend.dataprep.transformation.actions.category.ActionCategory.STRINGS;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.parameters.SelectParameter;
@@ -75,11 +71,23 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final Parameter fromIndexParameters = new Parameter(FROM_INDEX_PARAMETER, ParameterType.INTEGER, "0");
-        final Parameter fromNBeforeEndParameters = new Parameter(FROM_N_BEFORE_END_PARAMETER, ParameterType.INTEGER, "5");
-        final Parameter toIndexParameters = new Parameter(TO_INDEX_PARAMETER, ParameterType.INTEGER, "5");
-        final Parameter toNBeforeEndParameters = new Parameter(TO_N_BEFORE_END_PARAMETER, ParameterType.INTEGER, "1");
+    public List<Parameter> getParameters(Locale locale) {
+        final Parameter fromIndexParameters = new Parameter.ParameterBuilder().setName(FROM_INDEX_PARAMETER)
+                .setType(ParameterType.INTEGER)
+                .setDefaultValue("0")
+                .createParameter(this, locale);
+        final Parameter fromNBeforeEndParameters = new Parameter.ParameterBuilder().setName(FROM_N_BEFORE_END_PARAMETER)
+                .setType(ParameterType.INTEGER)
+                .setDefaultValue("5")
+                .createParameter(this, locale);
+        final Parameter toIndexParameters = new Parameter.ParameterBuilder().setName(TO_INDEX_PARAMETER)
+                .setType(ParameterType.INTEGER)
+                .setDefaultValue("5")
+                .createParameter(this, locale);
+        final Parameter toNBeforeEndParameters = new Parameter.ParameterBuilder().setName(TO_N_BEFORE_END_PARAMETER)
+                .setType(ParameterType.INTEGER)
+                .setDefaultValue("1")
+                .createParameter(this, locale);
 
         // "to" parameter with all possible values
         final Parameter toCompleteParameters = SelectParameter.Builder.builder() //
@@ -88,7 +96,7 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                 .item(TO_INDEX_PARAMETER, TO_INDEX_PARAMETER, toIndexParameters) //
                 .item(TO_N_BEFORE_END_PARAMETER, TO_N_BEFORE_END_PARAMETER, toNBeforeEndParameters) //
                 .defaultValue(TO_INDEX_PARAMETER) //
-                .build();
+                .build(this);
 
         // "to" parameter with possible values for "From N Before End" selection
         // the "to index" option should not be available
@@ -97,7 +105,7 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                 .item(TO_END, TO_END) //
                 .item(TO_N_BEFORE_END_PARAMETER, TO_N_BEFORE_END_PARAMETER, toNBeforeEndParameters) //
                 .defaultValue(TO_END) //
-                .build();
+                .build(this);
 
         // "from" parameter
         final Parameter fromParameters = SelectParameter.Builder.builder() //
@@ -109,11 +117,11 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                                                                                                                 // "To
                                                                                                                 // index"
                 .defaultValue(FROM_BEGINNING) //
-                .build();
+                .build(this);
 
         final List<Parameter> parameters = ImplicitParameters.getParameters();
         parameters.add(fromParameters);
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     @Override

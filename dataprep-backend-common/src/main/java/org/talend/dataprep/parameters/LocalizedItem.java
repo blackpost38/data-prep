@@ -15,9 +15,6 @@ package org.talend.dataprep.parameters;
 
 import java.util.List;
 
-import org.talend.dataprep.i18n.ActionsBundle;
-import org.talend.dataprep.i18n.ActionsLocaleContextHolder;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
@@ -34,8 +31,6 @@ public class LocalizedItem implements Item {
 
     /** the item label. */
     private String label;
-
-    private Object parent;
 
     /**
      * Create a select Item. The item's label will be by default looked up with key ("choice." + value).
@@ -60,14 +55,8 @@ public class LocalizedItem implements Item {
     }
 
     @Override
-    public Item attach(Object parent) {
-        this.parent = parent;
-        return this;
-    }
-
-    @Override
     public String getLabel() {
-        return ActionsBundle.INSTANCE.choice(parent, ActionsLocaleContextHolder.getLocale(), label);
+        return label;
     }
 
 }

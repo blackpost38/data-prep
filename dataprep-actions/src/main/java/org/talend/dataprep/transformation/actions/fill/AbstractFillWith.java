@@ -17,10 +17,7 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -33,7 +30,6 @@ import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.dataset.row.RowMetadataUtils;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.exception.error.ActionErrorCodes;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.parameters.SelectParameter;
@@ -105,8 +101,8 @@ public abstract class AbstractFillWith extends AbstractActionMetadata implements
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
 
         Parameter constantParameter = null;
 
@@ -115,14 +111,16 @@ public abstract class AbstractFillWith extends AbstractActionMetadata implements
         case DOUBLE:
         case FLOAT:
         case STRING:
-            constantParameter = new Parameter(DEFAULT_VALUE_PARAMETER, //
-                    ParameterType.STRING, //
-                    StringUtils.EMPTY);
+            constantParameter = new Parameter.ParameterBuilder().setName(DEFAULT_VALUE_PARAMETER)
+                    .setType(ParameterType.STRING)
+                    .setDefaultValue(StringUtils.EMPTY)
+                    .createParameter(this, locale);
             break;
         case INTEGER:
-            constantParameter = new Parameter(DEFAULT_VALUE_PARAMETER, //
-                    ParameterType.INTEGER, //
-                    "0");
+            constantParameter = new Parameter.ParameterBuilder().setName(DEFAULT_VALUE_PARAMETER)
+                    .setType(ParameterType.INTEGER)
+                    .setDefaultValue("0")
+                    .createParameter(this, locale);
             break;
         case BOOLEAN:
             constantParameter = SelectParameter.Builder.builder() //
@@ -130,15 +128,14 @@ public abstract class AbstractFillWith extends AbstractActionMetadata implements
                     .item("True") //
                     .item("False") //
                     .defaultValue("True") //
-                    .build();
+                    .build(this);
             break;
         case DATE:
-            constantParameter = new Parameter(DEFAULT_VALUE_PARAMETER, //
-                    ParameterType.DATE, //
-                    DEFAULT_DATE_VALUE, //
-                    false, //
-                    false, //
-                    StringUtils.EMPTY);
+            constantParameter = new Parameter.ParameterBuilder().setName(DEFAULT_VALUE_PARAMETER)
+                    .setType(ParameterType.DATE)
+                    .setDefaultValue(DEFAULT_DATE_VALUE)
+                    .setCanBeBlank(false)
+                    .createParameter(this, locale);
             break;
         case ANY:
         default:
@@ -149,14 +146,13 @@ public abstract class AbstractFillWith extends AbstractActionMetadata implements
         parameters.add(SelectParameter.Builder.builder()
                         .name(MODE_PARAMETER)
                         .item(CONSTANT_MODE, CONSTANT_MODE, constantParameter)
-                        .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, new Parameter(SELECTED_COLUMN_PARAMETER, ParameterType.COLUMN, //
-                                                               StringUtils.EMPTY, false, false, StringUtils.EMPTY))
+                        .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, new Parameter.ParameterBuilder().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale))
                         .defaultValue(CONSTANT_MODE)
-                        .build()
+                        .build(this)
         );
         //@formatter:on
 
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     /**

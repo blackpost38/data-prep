@@ -18,6 +18,7 @@ import static org.talend.dataprep.transformation.actions.category.ActionCategory
 import static org.talend.dataprep.transformation.actions.category.ScopeCategory.LINE;
 
 import java.util.EnumSet;
+import java.util.Locale;
 import java.util.Set;
 
 import org.talend.dataprep.api.action.Action;
@@ -58,7 +59,7 @@ public class Delete extends AbstractActionMetadata implements RowAction {
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription(Locale locale) {
         switch (scope) {
         case LINE:
             return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), DELETE_SINGLE_LINE);
@@ -70,7 +71,7 @@ public class Delete extends AbstractActionMetadata implements RowAction {
     }
 
     @Override
-    public String getLabel() {
+    public String getLabel(Locale locale) {
         switch (scope) {
         case LINE:
             return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), DELETE_SINGLE_LINE);

@@ -15,14 +15,12 @@ package org.talend.dataprep.i18n;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.talend.daikon.exception.TalendRuntimeException;
 import org.talend.dataprep.BaseErrorCodes;
-import org.talend.dataprep.parameters.Parameter;
 
 /**
  * Non-spring accessor to actions resources bundle.
@@ -80,19 +78,6 @@ public class ActionsBundle implements MessagesBundle {
     }
 
     /**
-     * Link all <code>parameters</code> to the <code>parent</code>: when looking for parameters translation, bundle
-     * will use <code>parent</code> to find resource bundle.
-     *
-     * @param parameters The {@link Parameter parameters} to attach to <code>parent</code>.
-     * @param parent An object to be used in resource bundle search.
-     * @return A list of {@link Parameter parameters} that will use <code>parent</code> to look for message keys.
-     * @see Parameter#attach(Object)
-     */
-    public static List<Parameter> attachToAction(List<Parameter> parameters, Object parent) {
-        return parameters.stream().map(p -> p.attach(parent)).collect(Collectors.toList());
-    }
-
-    /**
      * Set global Documentation portal URL.
      *
      * <p>
@@ -113,6 +98,84 @@ public class ActionsBundle implements MessagesBundle {
      */
     public static String getGlobalDocumentationUrlBase() {
         return INSTANCE.getDocumentationUrlBase();
+    }
+
+    /**
+     * Fetches action label at {@code action.<action_name>.label} in the dataprep actions resource bundle. If message does not
+     * exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
+     */
+    public static String actionLabel(Object action, Locale locale, String actionName, Object... values) {
+        final String actionLabelKey = ACTION_PREFIX + actionName + LABEL_SUFFIX;
+        return INSTANCE.getMandatoryMessage(action, locale, actionLabelKey, values);
+    }
+
+    /**
+     * Fetches action description at {@code action.<action_name>.desc} in the dataprep actions resource bundle. If message does
+     * not exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
+     */
+    public static String actionDescription(Object action, Locale locale, String actionName, Object... values) {
+        final String actionDescriptionKey = ACTION_PREFIX + actionName + DESCRIPTION_SUFFIX;
+        return INSTANCE.getMandatoryMessage(action, locale, actionDescriptionKey, values);
+    }
+
+    /**
+     * Fetches action doc url at {@code action.<action_name>.url} in the dataprep actions resource bundle.
+     * If there is no doc for this action, an empty string is returned.
+     */
+    public static String actionDocUrl(Object action, Locale locale, String actionName) {
+        final String actionDocUrlKey = ACTION_PREFIX + actionName + URL_SUFFIX;
+        final String docUrl = INSTANCE.getOptionalMessage(action, locale, actionDocUrlKey);
+
+        if (docUrl == null) {
+            final String docParameters = INSTANCE.getOptionalMessage(action, locale, ACTION_PREFIX + actionName + URL_PARAMETERS_SUFFIX);
+            if (INSTANCE.documentationUrlBase != null && docParameters != null) {
+                return INSTANCE.documentationUrlBase + docParameters;
+            }
+            return StringUtils.EMPTY;
+        }
+        return docUrl;
+    }
+
+    /**
+     * Fetches parameter label at {@code parameter.<parameter_name>.label} in the dataprep actions resource bundle. If message
+     * does not exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
+     */
+    public static String parameterLabel(Object action, Locale locale, String parameterName, Object... values) {
+        final String parameterLabelKey = PARAMETER_PREFIX + parameterName + LABEL_SUFFIX;
+        return INSTANCE.getMandatoryMessage(action, locale, parameterLabelKey, values);
+    }
+
+    /**
+     * Fetches parameter description at {@code parameter.<parameter_name>.desc} in the dataprep actions resource bundle. If
+     * message does not exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
+     */
+    public static String parameterDescription(Object action, Locale locale, String parameterName, Object... values) {
+        final String parameterDescriptionKey = PARAMETER_PREFIX + parameterName + DESCRIPTION_SUFFIX;
+        return INSTANCE.getMandatoryMessage(action, locale, parameterDescriptionKey, values);
+    }
+
+    /**
+     * Fetches choice at {@code choice.<choice_name>} in the dataprep actions resource bundle. If message does not exist, code
+     * will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
+     */
+    public static String choice(Object action, Locale locale, String choiceName, Object... values) {
+        final String choiceKey = CHOICE_PREFIX + choiceName;
+        return INSTANCE.getMandatoryMessage(action, locale, choiceKey, values);
+    }
+
+    @Override
+    public String getString(Locale locale, String code) {
+        return getMandatoryMessage(null, locale, code);
+    }
+
+    @Override
+    public String getString(Locale locale, String code, String defaultMessage) {
+        return getMandatoryMessage(null, locale, code);
+    }
+
+    @Override
+    public String getString(Locale locale, String code, Object... args) {
+        return getMandatoryMessage(fallBackKey, locale, code, args);
     }
 
     /**
@@ -187,84 +250,6 @@ public class ActionsBundle implements MessagesBundle {
         }
         actionToResourceBundle.putIfAbsent(actionBundleKey, bundle);
         return bundle;
-    }
-
-    /**
-     * Fetches action label at {@code action.<action_name>.label} in the dataprep actions resource bundle. If message does not
-     * exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
-     */
-    public String actionLabel(Object action, Locale locale, String actionName, Object... values) {
-        final String actionLabelKey = ACTION_PREFIX + actionName + LABEL_SUFFIX;
-        return getMandatoryMessage(action, locale, actionLabelKey, values);
-    }
-
-    /**
-     * Fetches action description at {@code action.<action_name>.desc} in the dataprep actions resource bundle. If message does
-     * not exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
-     */
-    public String actionDescription(Object action, Locale locale, String actionName, Object... values) {
-        final String actionDescriptionKey = ACTION_PREFIX + actionName + DESCRIPTION_SUFFIX;
-        return getMandatoryMessage(action, locale, actionDescriptionKey, values);
-    }
-
-    /**
-     * Fetches action doc url at {@code action.<action_name>.url} in the dataprep actions resource bundle.
-     * If there is no doc for this action, an empty string is returned.
-     */
-    public String actionDocUrl(Object action, Locale locale, String actionName) {
-        final String actionDocUrlKey = ACTION_PREFIX + actionName + URL_SUFFIX;
-        final String docUrl = getOptionalMessage(action, locale, actionDocUrlKey);
-
-        if (docUrl == null) {
-            final String docParameters = getOptionalMessage(action, locale, ACTION_PREFIX + actionName + URL_PARAMETERS_SUFFIX);
-            if (documentationUrlBase != null && docParameters != null) {
-                return documentationUrlBase + docParameters;
-            }
-            return StringUtils.EMPTY;
-        }
-        return docUrl;
-    }
-
-    /**
-     * Fetches parameter label at {@code parameter.<parameter_name>.label} in the dataprep actions resource bundle. If message
-     * does not exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
-     */
-    public String parameterLabel(Object action, Locale locale, String parameterName, Object... values) {
-        final String parameterLabelKey = PARAMETER_PREFIX + parameterName + LABEL_SUFFIX;
-        return getMandatoryMessage(action, locale, parameterLabelKey, values);
-    }
-
-    /**
-     * Fetches parameter description at {@code parameter.<parameter_name>.desc} in the dataprep actions resource bundle. If
-     * message does not exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
-     */
-    public String parameterDescription(Object action, Locale locale, String parameterName, Object... values) {
-        final String parameterDescriptionKey = PARAMETER_PREFIX + parameterName + DESCRIPTION_SUFFIX;
-        return getMandatoryMessage(action, locale, parameterDescriptionKey, values);
-    }
-
-    /**
-     * Fetches choice at {@code choice.<choice_name>} in the dataprep actions resource bundle. If message does not exist, code
-     * will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
-     */
-    public String choice(Object action, Locale locale, String choiceName, Object... values) {
-        final String choiceKey = CHOICE_PREFIX + choiceName;
-        return getMandatoryMessage(action, locale, choiceKey, values);
-    }
-
-    @Override
-    public String getString(Locale locale, String code) {
-        return getMandatoryMessage(null, locale, code);
-    }
-
-    @Override
-    public String getString(Locale locale, String code, String defaultMessage) {
-        return getMandatoryMessage(null, locale, code);
-    }
-
-    @Override
-    public String getString(Locale locale, String code, Object... args) {
-        return getMandatoryMessage(fallBackKey, locale, code, args);
     }
 
     private void setDocumentationUrlBase(String documentationUrlBase) {

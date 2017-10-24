@@ -12,6 +12,7 @@
 
 package org.talend.dataprep.transformation.actions.text;
 
+import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -68,7 +69,7 @@ public class ReplaceCellValueTest extends AbstractMetadataBaseTest {
     @Test
     public void test_parameters() {
         // when
-        final List<Parameter> actionParams = action.getParameters();
+        final List<Parameter> actionParams = action.getParameters(ENGLISH);
 
         // then
         assertThat(actionParams, hasSize(6));

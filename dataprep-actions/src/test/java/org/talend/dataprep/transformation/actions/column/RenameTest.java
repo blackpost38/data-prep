@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.column;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
@@ -60,7 +61,7 @@ public class RenameTest extends AbstractMetadataBaseTest {
         ColumnMetadata column = column().name("myColumn").id(0).type(Type.STRING).build();
         assertThat(action.adapt(column), not(is(action)));
         boolean hasMetExpectedParameter = false;
-        for (Parameter parameter : action.adapt(column).getParameters()) {
+        for (Parameter parameter : action.adapt(column).getParameters(ENGLISH)) {
             if (Rename.NEW_COLUMN_NAME_PARAMETER_NAME.equals(parameter.getName())) {
                 assertThat(parameter.getDefault(), is(column.getName()));
                 hasMetExpectedParameter = true;

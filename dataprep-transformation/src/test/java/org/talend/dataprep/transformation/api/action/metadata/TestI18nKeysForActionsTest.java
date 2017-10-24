@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.api.action.metadata;
 
+import static java.util.Locale.ENGLISH;
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -45,14 +46,15 @@ public class TestI18nKeysForActionsTest extends TransformationBaseTest {
             assertNotNull(name);
             assertNotEquals("", name);
 
-            actionMetadata.getLabel();
-            actionMetadata.getDescription();
+            actionMetadata.getLabel(ENGLISH);
+            actionMetadata.getDescription(ENGLISH);
 
-            String toString = actionMetadata.getName() + "," + actionMetadata.getCategory() + "," + actionMetadata.getLabel()
-                    + "," + actionMetadata.getDescription();
+            String toString = actionMetadata.getName() + "," + actionMetadata.getCategory() + "," + actionMetadata.getLabel(
+                    ENGLISH)
+                    + "," + actionMetadata.getDescription(ENGLISH);
             LOGGER.info(toString);
 
-            for (Parameter param : actionMetadata.getParameters()) {
+            for (Parameter param : actionMetadata.getParameters(ENGLISH)) {
                 assertParameter(param);
             }
         }

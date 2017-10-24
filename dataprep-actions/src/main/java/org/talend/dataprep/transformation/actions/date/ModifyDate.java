@@ -18,10 +18,7 @@ import static org.talend.dataprep.transformation.actions.common.OtherColumnParam
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -33,7 +30,6 @@ import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.dataset.row.RowMetadataUtils;
 import org.talend.dataprep.exception.error.ActionErrorCodes;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.parameters.SelectParameter;
@@ -72,8 +68,8 @@ public class ModifyDate extends AbstractDate implements ColumnAction {
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        List<Parameter> parameters = super.getParameters();
+    public List<Parameter> getParameters(Locale locale) {
+        List<Parameter> parameters = super.getParameters(locale);
 
         parameters.add(SelectParameter.Builder.builder() //
                 .name(TIME_UNIT_PARAMETER) //
@@ -82,19 +78,23 @@ public class ModifyDate extends AbstractDate implements ColumnAction {
                 .item(DAYS.name(), DAYS.name()) //
                 .item(HOURS.name(), HOURS.name()) //
                 .defaultValue(YEARS.name()) //
-                .build());
+                .build(this));
 
         parameters.add(SelectParameter.Builder.builder() //
                 .name(MODE_PARAMETER) //
-                .item(CONSTANT_MODE, CONSTANT_MODE, new Parameter(CONSTANT_VALUE, ParameterType.INTEGER, "1")) //
-                .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE,
-                        new Parameter(SELECTED_COLUMN_PARAMETER, ParameterType.COLUMN, //
-                                StringUtils.EMPTY, false, false, //
-                                StringUtils.EMPTY)) //
+                .item(CONSTANT_MODE, CONSTANT_MODE, new Parameter.ParameterBuilder().setName(CONSTANT_VALUE)
+                        .setType(ParameterType.INTEGER)
+                        .setDefaultValue("1")
+                        .createParameter(this, locale)) //
+                .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, new Parameter.ParameterBuilder().setName(SELECTED_COLUMN_PARAMETER)
+                        .setType(ParameterType.COLUMN)
+                        .setDefaultValue(StringUtils.EMPTY)
+                        .setCanBeBlank(false)
+                        .createParameter(this, locale)) //
                 .defaultValue(CONSTANT_MODE) //
-                .build());
+                .build(this));
 
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     @Override

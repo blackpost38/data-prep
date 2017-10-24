@@ -14,6 +14,7 @@
 package org.talend.dataprep.transformation.actions.date;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -76,7 +77,10 @@ public class CompareDates extends AbstractCompareAction implements ColumnAction,
     @Override
     protected Parameter getDefaultConstantValue() {
         // olamy the javascript will tranform to now if empty
-        return new Parameter(CONSTANT_VALUE, ParameterType.DATE, StringUtils.EMPTY);
+        return new Parameter.ParameterBuilder().setName(CONSTANT_VALUE)
+                .setType(ParameterType.DATE)
+                .setDefaultValue(StringUtils.EMPTY)
+                .createParameter(this, Locale.ENGLISH);
     }
 
     @Override
@@ -92,7 +96,7 @@ public class CompareDates extends AbstractCompareAction implements ColumnAction,
             .item(LT, LT) //
             .item(LE, LE) //
             .defaultValue(EQ) //
-            .build();
+            .build(this);
         //@formatter:on
 
     }

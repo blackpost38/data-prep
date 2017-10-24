@@ -19,6 +19,7 @@ import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -33,7 +34,12 @@ public class ParameterTest extends ParameterBaseTest {
     @Test
     public void shouldSerializeToJsonWithoutEmptyConfiguration() throws IOException {
         // given
-        Parameter expected = new Parameter("column_id", ParameterType.STRING, "0001", true, false);
+        Parameter expected = new Parameter.ParameterBuilder().setName("column_id")
+                .setType(ParameterType.STRING)
+                .setDefaultValue("0001")
+                .setImplicit(true)
+                .setCanBeBlank(false)
+                .createParameter(this, Locale.ENGLISH);
 
         // when
         StringWriter out = new StringWriter();

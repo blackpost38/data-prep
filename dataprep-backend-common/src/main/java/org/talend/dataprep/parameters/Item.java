@@ -14,8 +14,10 @@
 package org.talend.dataprep.parameters;
 
 import static java.util.Collections.emptyList;
+import static org.talend.dataprep.i18n.ActionsBundle.choice;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Models a select item.
@@ -27,8 +29,6 @@ public interface Item {
     String getLabel();
 
     List<Parameter> getParameters();
-
-    Item attach(Object parent);
 
     class Builder {
 
@@ -73,7 +73,7 @@ public interface Item {
                     return new TextItem(value, text, parameters);
                 }
             } else {
-                return new LocalizedItem(value, label, parameters);
+                return new LocalizedItem(value, choice(null, Locale.ENGLISH, label), parameters);
             }
         }
 

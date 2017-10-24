@@ -13,6 +13,7 @@
 package org.talend.dataprep.transformation.format;
 
 import java.util.Collections;
+import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -37,11 +38,7 @@ public class XlsFormat extends ExportFormat {
     public XlsFormat() {
         super(XLSX, "application/vnd.ms-excel", ".xlsx", true, true,
                 Collections.singletonList(
-                        new Parameter( "fileName", //
-                                ParameterType.STRING,  //
-                                StringUtils.EMPTY,
-                                false,
-                                false)));
+                        new Parameter.ParameterBuilder().setName("fileName").setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(null, Locale.ENGLISH)));
     }
     //@formatter:on
 
