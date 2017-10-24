@@ -19,6 +19,14 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.talend.daikon.exception.ExceptionContext;
+import org.talend.dataprep.api.service.settings.actions.api.ActionDropdownSettings;
+import org.talend.dataprep.api.service.settings.actions.api.ActionSettings;
+import org.talend.dataprep.api.service.settings.actions.api.ActionSplitDropdownSettings;
+import org.talend.dataprep.api.service.settings.views.api.ViewSettings;
+import org.talend.dataprep.api.service.settings.views.api.appheaderbar.AppHeaderBarSettings;
+import org.talend.dataprep.api.service.settings.views.api.breadcrumb.BreadcrumbSettings;
+import org.talend.dataprep.api.service.settings.views.api.list.ListSettings;
+import org.talend.dataprep.api.service.settings.views.api.sidepanel.SidePanelSettings;
 import org.talend.dataprep.exception.TDPException;
 import org.talend.dataprep.exception.error.APIErrorCodes;
 import org.talend.dataprep.security.Security;
@@ -66,6 +74,8 @@ public abstract class AppSettingsConfigurer<T> {
         return security.isTDPUser();
     }
 
+    public abstract T translate(final T settings);
+
     /**
      * Get hystrix command
      */
@@ -76,5 +86,64 @@ public abstract class AppSettingsConfigurer<T> {
             throw new TDPException(APIErrorCodes.UNABLE_TO_FIND_COMMAND, e,
                     ExceptionContext.build().put("class", clazz).put("args", args));
         }
+    }
+
+    /**
+     * Translate ViewSettings object. We must test each class because each configurer will deal with multuiple
+     * ViewSettings implementation
+     *
+     * @param viewSettings the current viewSettings to translate
+     */
+    protected static ViewSettings translateViewSettings(ViewSettings viewSettings) {
+        if (viewSettings instanceof AppHeaderBarSettings) {
+            return AppHeaderBarSettings //
+                    .from((AppHeaderBarSettings) viewSettings)
+                    .translate()
+                    .build();
+        }
+        if (viewSettings instanceof ListSettings) {
+            return ListSettings
+                    .from((ListSettings) viewSettings) //
+                    .translate() //
+                    .build();
+        }
+
+        if (viewSettings instanceof BreadcrumbSettings) {
+            return BreadcrumbSettings
+                    .from((BreadcrumbSettings) viewSettings) //
+                    .translate() //
+                    .build();
+        }
+
+        if (viewSettings instanceof SidePanelSettings) {
+            return SidePanelSettings
+                    .from((SidePanelSettings) viewSettings) //
+                    .translate() //
+                    .build();
+        }
+
+        return viewSettings;
+    }
+
+    protected static ActionSettings translateActionSettings(ActionSettings actionSettings) {
+        if (actionSettings instanceof ActionSplitDropdownSettings) {
+            return ActionSplitDropdownSettings //
+                    .from((ActionSplitDropdownSettings) actionSettings) //
+                    .items(((ActionSplitDropdownSettings) actionSettings).getItems()) //
+                    .translate() //
+                    .build();
+        }
+        if (actionSettings instanceof ActionDropdownSettings) {
+            return ActionDropdownSettings
+                    .from((ActionDropdownSettings) actionSettings) //
+                    .translate() //
+                    .build();
+        }
+
+        return ActionSettings
+                .from(actionSettings) //
+                .translate() //
+                .build();
+
     }
 }

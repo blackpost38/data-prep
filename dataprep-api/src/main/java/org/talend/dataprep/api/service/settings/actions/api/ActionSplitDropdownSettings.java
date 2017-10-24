@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.apache.commons.lang.StringUtils;
+import org.talend.dataprep.i18n.DataprepBundle;
 
 /**
  * An action split dropdown is a mix of simple button and a dropdown.
@@ -137,6 +139,13 @@ public class ActionSplitDropdownSettings extends ActionSettings {
             return this;
         }
 
+        public Builder translate() {
+            if(StringUtils.isNotEmpty(this.name)) {
+                this.name = DataprepBundle.message(this.name);
+            }
+            return this;
+        }
+
         public ActionSplitDropdownSettings build() {
             final ActionSplitDropdownSettings action = new ActionSplitDropdownSettings();
             action.setId(this.id);
@@ -149,5 +158,6 @@ public class ActionSplitDropdownSettings extends ActionSettings {
             action.setEnabled(this.enabled);
             return action;
         }
+
     }
 }
