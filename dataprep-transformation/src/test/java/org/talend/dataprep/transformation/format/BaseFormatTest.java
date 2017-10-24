@@ -17,9 +17,11 @@ import static org.talend.dataprep.test.SameJSONFile.sameJSONAsFile;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.talend.dataprep.conversions.BeanConversionService;
 import org.talend.dataprep.format.export.ExportFormat;
 import org.talend.dataprep.format.export.ExportFormatMessage;
@@ -38,6 +40,8 @@ public abstract class BaseFormatTest extends TransformationBaseTest {
     protected BeanConversionService beanConversionService;
 
     protected void testFormat(ExportFormat format, String expectedJson) throws IOException {
+        LocaleContextHolder.setLocale(Locale.ENGLISH);
+
         StringWriter writer = new StringWriter();
         final ExportFormatMessage exportFormatMessage = beanConversionService.convert(format, ExportFormatMessage.class);
         mapper.writer().writeValue(writer, exportFormatMessage);
