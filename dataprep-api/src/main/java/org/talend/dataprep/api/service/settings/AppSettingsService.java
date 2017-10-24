@@ -19,12 +19,14 @@ import java.util.Collection;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.talend.dataprep.api.service.settings.actions.api.ActionSettings;
 import org.talend.dataprep.api.service.settings.help.api.HelpSettings;
 import org.talend.dataprep.api.service.settings.uris.api.UriSettings;
 import org.talend.dataprep.api.service.settings.views.api.ViewSettings;
+import org.talend.dataprep.i18n.DataprepBundle;
 
 /**
  * App settings service
@@ -73,6 +75,7 @@ public class AppSettingsService {
         // populate appSettings actions dictionary (key: actionId, value: action)
         getSettingsStream(actionsProviders, actionsConfigurers) //
                 .filter(ActionSettings::isEnabled)
+                .map(this::translateAction)
                 .forEach(action -> appSettings.getActions().put(action.getId(), action));
 
         // populate appSettings views dictionary (key: viewId, value: view)
@@ -88,6 +91,13 @@ public class AppSettingsService {
                 .forEach(help -> appSettings.getHelp().put(help.getId(), help.getValue()));
 
         return appSettings;
+    }
+
+    private ActionSettings translateAction(ActionSettings action) {
+        if (action != null && StringUtils.isNoneEmpty(action.getName())) {
+            action.setName(DataprepBundle.message(action.getName()));
+        }
+        return action;
     }
 
     /**
@@ -112,13 +122,13 @@ public class AppSettingsService {
     /**
      * Get all the configured settings as a stream
      *
-     * @param providers   The array of settings providers
+     * @param providers The array of settings providers
      * @param configurers The array of settings configurers
      * @param <T> ActionSettings | ViewSettings
      * @return The stream of configured settings
      */
     private <T> Stream<T> getSettingsStream(final AppSettingsProvider<T>[] providers,
-                                            final AppSettingsConfigurer<T>[] configurers) {
+            final AppSettingsConfigurer<T>[] configurers) {
         // build a stream
         // * from static actions
         // * each action goes through all the actions configurers
