@@ -54,6 +54,10 @@ public class ComputeLength extends AbstractActionMetadata implements ColumnActio
         return ActionCategory.STRINGS.getDisplayName();
     }
 
+    protected boolean createNewColumnParamVisible() {
+        return false;
+    }
+
     @Override
     public void compile(ActionContext context) {
         super.compile(context);
@@ -74,7 +78,6 @@ public class ComputeLength extends AbstractActionMetadata implements ColumnActio
                 rowMetadata.insertAfter(columnId, c);
                 return c;
             });
-
         }
     }
 

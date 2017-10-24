@@ -92,8 +92,9 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
                 test_TDP_3798_visible_enabled();
                 break;
             case INVISIBLE_DISABLED:
-            case INVISIBLE_ENABLED:
                 fail("tagada");
+            case INVISIBLE_ENABLED:
+                test_TDP_3798_invisible_enabled();
         }
     }
 
@@ -132,6 +133,19 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
         }
         if (!found) {
             fail("'Create new column' not found");
+        }
+    }
+
+    public void test_TDP_3798_invisible_enabled() {
+        Map<String, String> emptyMap = new HashMap<>();
+
+        // test that 'create_new_column' parameter is not present:
+        final List<Parameter> parameters = action.getParameters();
+
+        for (Parameter parameter : parameters) {
+            if (parameter.getName().equals(AbstractActionMetadata.CREATE_NEW_COLUMN)) {
+                fail("'Create new column' found, while it should not");
+            }
         }
     }
 
