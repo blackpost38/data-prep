@@ -15,8 +15,7 @@ package org.talend.dataprep.api.service.settings.views.api.appheaderbar;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import org.talend.dataprep.api.service.settings.views.api.ViewSettings;
 
@@ -25,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * An app header bar is a static bar placed on the top of the window
- * see https://talend.github.io/react-talend-components/?selectedKind=App%20Header%20Bar&selectedStory=default&full=0&down=1&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel
+ * see
+ * https://talend.github.io/react-talend-components/?selectedKind=App%20Header%20Bar&selectedStory=default&full=0&down=1&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel
  */
 @JsonInclude(NON_NULL)
 public class AppHeaderBarSettings implements ViewSettings {
@@ -193,6 +193,19 @@ public class AppHeaderBarSettings implements ViewSettings {
 
         public Builder products(final String products) {
             this.products = products;
+            return this;
+        }
+
+        public Builder translate() {
+            if (Objects.nonNull(this.logo)) {
+                this.logo = LinkSettings.from(this.logo).translate().build();
+            }
+            if (Objects.nonNull(this.brand)) {
+                this.brand = LinkSettings.from(this.brand).translate().build();
+            }
+            if (Objects.nonNull(this.search)) {
+                this.search = SearchSettings.from(this.search).translate().build();
+            }
             return this;
         }
 
