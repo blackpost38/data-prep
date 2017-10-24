@@ -12,24 +12,20 @@
 // ============================================================================
 package org.talend.dataprep.transformation.actions.fill;
 
+import static java.util.Locale.ENGLISH;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+
+import java.util.*;
+
 import org.junit.Test;
 import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.parameters.Parameter;
-import org.talend.dataprep.parameters.SelectParameter;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.ImplicitParameters;
-import org.talend.dataprep.transformation.actions.common.OtherColumnParameters;
-import org.talend.dataprep.transformation.actions.phonenumber.FormatPhoneNumber;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
-
-import java.util.*;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Test to generate a sequence function.
@@ -50,7 +46,7 @@ public class GenerateSequenceTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testGetParameters() throws Exception {
-        final List<Parameter> parameters = action.getParameters();
+        final List<Parameter> parameters = action.getParameters(ENGLISH);
         assertEquals(6, parameters.size());
     }
 

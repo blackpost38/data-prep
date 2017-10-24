@@ -13,6 +13,7 @@
 package org.talend.dataprep.transformation.actions.date;
 
 import static java.time.temporal.ChronoUnit.*;
+import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -82,7 +83,7 @@ public class ComputeTimeSinceTest extends BaseDateTest {
 
     @Test
     public void testParameters() throws Exception {
-        final List<Parameter> parameters = action.getParameters();
+        final List<Parameter> parameters = action.getParameters(ENGLISH);
         Assert.assertThat(parameters.size(), is(6));
 
         // Test on items label for TDP-2943:

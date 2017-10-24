@@ -12,9 +12,10 @@
 // ============================================================================
 package org.talend.dataprep.transformation.actions.conversions;
 
-import static org.hamcrest.core.Is.*;
+import static java.util.Locale.ENGLISH;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
-import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.*;
+import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getColumn;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
@@ -71,7 +72,7 @@ public class DurationConverterTest extends BaseDateTest {
         List<String> parameterNames = Arrays.asList("from_unit", "to_unit", "precision","column_id", "row_id", "scope", "filter");
 
         // when
-        final List<Parameter> parameters = action.getParameters();
+        final List<Parameter> parameters = action.getParameters(ENGLISH);
 
         // then
         assertNotNull(parameters);

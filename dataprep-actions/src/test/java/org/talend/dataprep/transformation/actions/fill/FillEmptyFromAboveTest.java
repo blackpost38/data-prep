@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.fill;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
@@ -64,7 +65,7 @@ public class FillEmptyFromAboveTest extends AbstractMetadataBaseTest {
         List<String> parameterNames = Arrays.asList("column_id", "row_id", "scope", "filter");
 
         // when
-        final List<Parameter> parameters = action.getParameters();
+        final List<Parameter> parameters = action.getParameters(ENGLISH);
 
         // then
         assertNotNull(parameters);

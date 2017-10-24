@@ -13,17 +13,13 @@
 
 package org.talend.dataprep.transformation.actions.text;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.parameters.SelectParameter;
@@ -75,10 +71,16 @@ public class Padding extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
-        parameters.add(new Parameter(SIZE_PARAMETER, ParameterType.INTEGER, "5"));
-        parameters.add(new Parameter(PADDING_CHAR_PARAMETER, ParameterType.STRING, "0"));
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
+        parameters.add(new Parameter.ParameterBuilder().setName(SIZE_PARAMETER)
+                .setType(ParameterType.INTEGER)
+                .setDefaultValue("5")
+                .createParameter(this, locale));
+        parameters.add(new Parameter.ParameterBuilder().setName(PADDING_CHAR_PARAMETER)
+                .setType(ParameterType.STRING)
+                .setDefaultValue("0")
+                .createParameter(this, locale));
 
         //@formatter:off
         parameters.add(SelectParameter.Builder.builder()
@@ -86,11 +88,11 @@ public class Padding extends AbstractActionMetadata implements ColumnAction {
                         .item(LEFT_POSITION)
                         .item(RIGHT_POSITION)
                         .defaultValue(LEFT_POSITION)
-                        .build()
+                        .build(this)
         );
         //@formatter:on
 
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     @Override

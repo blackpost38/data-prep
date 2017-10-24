@@ -16,6 +16,7 @@ package org.talend.dataprep.transformation.actions.fill;
 import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
 import static org.talend.dataprep.transformation.actions.category.ActionCategory.DATA_CLEANSING;
 
+import java.util.Locale;
 import java.util.Set;
 
 import org.talend.dataprep.api.action.Action;
@@ -52,7 +53,7 @@ public class FillInvalid extends AbstractFillWith implements ColumnAction {
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription(Locale locale) {
         if (Type.BOOLEAN.isAssignableFrom(type)) {
             return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_INVALID_BOOLEAN);
         } else if (Type.DATE.isAssignableFrom(type)) {
@@ -65,7 +66,7 @@ public class FillInvalid extends AbstractFillWith implements ColumnAction {
     }
 
     @Override
-    public String getLabel() {
+    public String getLabel(Locale locale) {
         if (Type.BOOLEAN.isAssignableFrom(type)) {
             return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_INVALID_BOOLEAN);
         } else if (Type.DATE.isAssignableFrom(type)) {

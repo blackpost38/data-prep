@@ -18,13 +18,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.talend.daikon.number.BigDecimalParser;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
@@ -46,10 +46,11 @@ public abstract class AbstractRound extends AbstractActionMetadata implements Co
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
-        parameters.add(new Parameter(PRECISION, INTEGER, "0"));
-        return ActionsBundle.attachToAction(parameters, this);
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
+        parameters.add(new Parameter.ParameterBuilder().setName(PRECISION).setType(INTEGER).setDefaultValue("0").createParameter(
+                this, locale));
+        return parameters;
     }
 
     @Override

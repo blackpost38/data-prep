@@ -34,11 +34,6 @@ public class TextItem implements Item {
     }
 
     @Override
-    public Item attach(Object parent) {
-        return this;
-    }
-
-    @Override
     public String getLabel() {
         // Returns constant text if specified, value otherwise.
         return text == null ? value : text;

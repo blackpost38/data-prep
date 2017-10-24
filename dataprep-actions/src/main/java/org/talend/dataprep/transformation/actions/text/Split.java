@@ -30,7 +30,6 @@ import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.SelectParameter;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
@@ -78,9 +77,10 @@ public class Split extends AbstractActionMetadata implements ColumnAction {
 
     @Override
     @Nonnull
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
-        parameters.add(new Parameter(LIMIT, INTEGER, "2"));
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
+        parameters.add(new Parameter.ParameterBuilder().setName(LIMIT).setType(INTEGER).setDefaultValue("2").createParameter(
+                this, locale));
         //@formatter:off
         parameters.add(SelectParameter.Builder.builder()
                         .name(SEPARATOR_PARAMETER)
@@ -93,13 +93,13 @@ public class Split extends AbstractActionMetadata implements ColumnAction {
                         .item("_")
                         .item(" ", "space")
                         .item("\t", "tab")
-                        .item("other (string)", new Parameter(MANUAL_SEPARATOR_PARAMETER_STRING, STRING, EMPTY))
-                        .item("other (regex)", new Parameter(MANUAL_SEPARATOR_PARAMETER_REGEX, STRING, EMPTY))
+                        .item("other (string)", new Parameter.ParameterBuilder().setName(MANUAL_SEPARATOR_PARAMETER_STRING).setType(STRING).setDefaultValue(EMPTY).createParameter(this, locale))
+                        .item("other (regex)", new Parameter.ParameterBuilder().setName(MANUAL_SEPARATOR_PARAMETER_REGEX).setType(STRING).setDefaultValue(EMPTY).createParameter(this, locale))
                         .defaultValue(":")
-                        .build()
+                        .build(this)
         );
         //@formatter:on
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     @Override

@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.datablending;
 
+import static java.util.Locale.ENGLISH;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.transformation.actions.common.ImplicitParameters.COLUMN_ID;
 import static org.talend.dataprep.transformation.actions.datablending.Lookup.Parameters.*;
@@ -80,7 +81,7 @@ public class LookupTest extends AbstractMetadataBaseTest {
                 "lookup_selected_cols");
 
         // when
-        final List<Parameter> parameters = action.getParameters();
+        final List<Parameter> parameters = action.getParameters(ENGLISH);
 
         // then
         Assertions.assertThat(parameters) //
@@ -99,7 +100,7 @@ public class LookupTest extends AbstractMetadataBaseTest {
         final Lookup actual = action.adapt(ds);
 
         // when
-        final List<Parameter> parameters = actual.getParameters();
+        final List<Parameter> parameters = actual.getParameters(ENGLISH);
         assertEquals("great dataset", getParamValue(parameters, "lookup_ds_name"));
         assertEquals("ds#123", getParamValue(parameters, "lookup_ds_id"));
     }

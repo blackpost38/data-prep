@@ -12,18 +12,22 @@
 
 package org.talend.dataprep.api.action;
 
+import static java.util.Locale.ENGLISH;
+
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.function.Function;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.category.ScopeCategory;
 import org.talend.dataprep.transformation.api.action.context.ActionContext;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Model a Data Prep action.
@@ -43,23 +47,43 @@ public interface ActionDefinition extends Serializable {
 
     /**
      * @return The label of the action, translated in the user locale.
+     * @param locale
      */
-    String getLabel();
+    String getLabel(Locale locale);
+
+    default String getLabel() {
+        return getLabel(ENGLISH);
+    }
 
     /**
      * @return The description of the action, translated in the user locale.
+     * @param locale
      */
-    String getDescription();
+    String getDescription(Locale locale);
+
+    default String getDescription() {
+        return getDescription(ENGLISH);
+    }
 
     /**
      * @return The action documentation url.
+     * @param locale
      */
-    String getDocUrl();
+    String getDocUrl(Locale locale);
+
+    default String getDocUrl() {
+        return getDocUrl(ENGLISH);
+    }
 
     /**
      * @return The list of parameters required for this Action to be executed.
-     **/
-    List<Parameter> getParameters();
+     *
+     * @param locale*/
+    List<Parameter> getParameters(Locale locale);
+
+    default List<Parameter> getParameters() {
+        return getParameters(ENGLISH);
+    }
 
     /**
      * @return A set of {@link Behavior} that describes the expected behavior of the action. It helps Data Prep runtime to
@@ -71,7 +95,7 @@ public interface ActionDefinition extends Serializable {
      * Builds up a {@link Function} that takes an input {@link GenericRecord record} and returns the <i>eventually modified</i>
      * record. The action can take as input the <code>parameters</code>.
      *
-     * @param parameters The action parameters for construction, should be the expected ones from {@link #getParameters()}.
+     * @param parameters The action parameters for construction, should be the expected ones from {@link #getParameters(Locale)}.
      * @return A {@link Function} that performs operations on a record.
      */
     Function<GenericRecord, GenericRecord> action(List<Parameter> parameters);
@@ -204,5 +228,17 @@ public interface ActionDefinition extends Serializable {
          */
         FORBID_DISTRIBUTED
     }
+
+//    default ActionForm getActionForm(Locale locale) {
+//        ActionForm form = new ActionForm();
+//        form.setName(getName());
+//        form.setCategory(getCategory());
+//
+//        form.setDescription(getDescription(locale));
+//        form.setDocUrl(getDocUrl(locale));
+//        form.setLabel(getLabel(locale));
+//        form.setParameters(getParameters(locale));
+//        return form;
+//    }
 
 }
