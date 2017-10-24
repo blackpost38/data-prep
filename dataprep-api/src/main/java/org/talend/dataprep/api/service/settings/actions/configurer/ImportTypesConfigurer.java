@@ -51,11 +51,6 @@ public class ImportTypesConfigurer extends AppSettingsConfigurer<ActionSettings>
                 .build();
     }
 
-    @Override
-    public ActionSettings translate(ActionSettings actionSettings) {
-        return AppSettingsConfigurer.translateActionSettings(actionSettings);
-    }
-
     private Stream<Import> getImportTypes() {
         try {
             return toStream(Import.class, mapper, getCommand(DataSetGetImports.class));
