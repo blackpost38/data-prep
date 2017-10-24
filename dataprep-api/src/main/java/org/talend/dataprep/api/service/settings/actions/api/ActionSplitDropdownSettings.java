@@ -18,9 +18,10 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.apache.commons.lang.StringUtils;
 import org.talend.dataprep.i18n.DataprepBundle;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * An action split dropdown is a mix of simple button and a dropdown.
@@ -63,6 +64,14 @@ public class ActionSplitDropdownSettings extends ActionSettings {
 
     public void setItems(final List<Object> items) {
         this.items = items;
+    }
+
+    @Override
+    public ActionSettings translate() {
+        return ActionSplitDropdownSettings //
+                .from(this) //
+                .translate() //
+                .build();
     }
 
     public static Builder from(final ActionSplitDropdownSettings actionSettings) {
@@ -140,7 +149,7 @@ public class ActionSplitDropdownSettings extends ActionSettings {
         }
 
         public Builder translate() {
-            if(StringUtils.isNotEmpty(this.name)) {
+            if (StringUtils.isNotEmpty(this.name)) {
                 this.name = DataprepBundle.message(this.name);
             }
             return this;

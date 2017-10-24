@@ -82,6 +82,14 @@ public class ActionDropdownSettings extends ActionSettings {
         this.staticActions = staticActions;
     }
 
+    @Override
+    public ActionSettings translate() {
+        return ActionDropdownSettings //
+                .from(this) //
+                .translate() //
+                .build();
+    }
+
     public static Builder from(final ActionDropdownSettings actionSettings) {
         return dropdownBuilder() //
                 .id(actionSettings.getId()) //

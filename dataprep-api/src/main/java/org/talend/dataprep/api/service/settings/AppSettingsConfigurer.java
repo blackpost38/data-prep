@@ -74,8 +74,6 @@ public abstract class AppSettingsConfigurer<T> {
         return security.isTDPUser();
     }
 
-    public abstract T translate(final T settings);
-
     /**
      * Get hystrix command
      */
@@ -88,62 +86,4 @@ public abstract class AppSettingsConfigurer<T> {
         }
     }
 
-    /**
-     * Translate ViewSettings object. We must test each class because each configurer will deal with multuiple
-     * ViewSettings implementation
-     *
-     * @param viewSettings the current viewSettings to translate
-     */
-    protected static ViewSettings translateViewSettings(ViewSettings viewSettings) {
-        if (viewSettings instanceof AppHeaderBarSettings) {
-            return AppHeaderBarSettings //
-                    .from((AppHeaderBarSettings) viewSettings)
-                    .translate()
-                    .build();
-        }
-        if (viewSettings instanceof ListSettings) {
-            return ListSettings
-                    .from((ListSettings) viewSettings) //
-                    .translate() //
-                    .build();
-        }
-
-        if (viewSettings instanceof BreadcrumbSettings) {
-            return BreadcrumbSettings
-                    .from((BreadcrumbSettings) viewSettings) //
-                    .translate() //
-                    .build();
-        }
-
-        if (viewSettings instanceof SidePanelSettings) {
-            return SidePanelSettings
-                    .from((SidePanelSettings) viewSettings) //
-                    .translate() //
-                    .build();
-        }
-
-        return viewSettings;
-    }
-
-    protected static ActionSettings translateActionSettings(ActionSettings actionSettings) {
-        if (actionSettings instanceof ActionSplitDropdownSettings) {
-            return ActionSplitDropdownSettings //
-                    .from((ActionSplitDropdownSettings) actionSettings) //
-                    .items(((ActionSplitDropdownSettings) actionSettings).getItems()) //
-                    .translate() //
-                    .build();
-        }
-        if (actionSettings instanceof ActionDropdownSettings) {
-            return ActionDropdownSettings
-                    .from((ActionDropdownSettings) actionSettings) //
-                    .translate() //
-                    .build();
-        }
-
-        return ActionSettings
-                .from(actionSettings) //
-                .translate() //
-                .build();
-
-    }
 }

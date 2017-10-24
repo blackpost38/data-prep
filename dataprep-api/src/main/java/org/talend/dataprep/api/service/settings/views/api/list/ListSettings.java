@@ -60,6 +60,14 @@ public class ListSettings implements ViewSettings {
         return id;
     }
 
+    @Override
+    public ViewSettings translate() {
+        return ListSettings
+                .from(this) //
+                .translate() //
+                .build();
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -95,7 +103,7 @@ public class ListSettings implements ViewSettings {
     public static Builder from(final ListSettings viewSettings) {
         return builder() //
                 .id(viewSettings.getId()) //
-                .didMountActionCreator(viewSettings.getDidMountActionCreator()) // //TODO: voir pk la constante ?
+                .didMountActionCreator(viewSettings.getDidMountActionCreator()) //
                 .list(viewSettings.getList()) //
                 .toolbar(viewSettings.getToolbar());
     }

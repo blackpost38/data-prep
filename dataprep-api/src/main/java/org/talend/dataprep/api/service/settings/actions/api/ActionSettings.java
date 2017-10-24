@@ -188,6 +188,13 @@ public class ActionSettings {
         return this.enabled;
     }
 
+    public ActionSettings translate() {
+        return ActionSettings
+                .from(this) //
+                .translate() //
+                .build();
+    }
+
     public static Builder from(final ActionSettings actionSettings) {
         return builder() //
                 .id(actionSettings.getId()) //

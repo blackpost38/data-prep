@@ -43,4 +43,6 @@ public interface ViewSettings {
 
     String getId();
 
+    ViewSettings translate();
+
 }

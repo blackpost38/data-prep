@@ -57,6 +57,14 @@ public class SidePanelSettings implements ViewSettings {
         return id;
     }
 
+    @Override
+    public ViewSettings translate() {
+        return SidePanelSettings
+                .from(this) //
+                .translate() //
+                .build();
+    }
+
     public void setId(String id) {
         this.id = id;
     }
