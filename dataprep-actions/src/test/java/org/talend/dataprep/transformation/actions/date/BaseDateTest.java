@@ -27,9 +27,9 @@ import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 /**
  * Base class for all date related unit tests.
  */
-public abstract class BaseDateTest<T> extends AbstractMetadataBaseTest {
+public abstract class BaseDateTest<T extends  AbstractActionMetadata> extends AbstractMetadataBaseTest<T> {
 
-    protected <T extends AbstractActionMetadata> BaseDateTest(T action) {
+    protected BaseDateTest(T action) {
         super(action);
     }
 
