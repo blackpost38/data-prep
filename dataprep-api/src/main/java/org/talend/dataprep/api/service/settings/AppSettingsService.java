@@ -73,10 +73,12 @@ public class AppSettingsService {
         // populate appSettings actions dictionary (key: actionId, value: action)
         getSettingsStream(actionsProviders, actionsConfigurers) //
                 .filter(ActionSettings::isEnabled)
+                .map(ActionSettings::translate)
                 .forEach(action -> appSettings.getActions().put(action.getId(), action));
 
         // populate appSettings views dictionary (key: viewId, value: view)
         getSettingsStream(viewsProviders, viewsConfigurers) //
+                .map(ViewSettings::translate)
                 .forEach(view -> appSettings.getViews().put(view.getId(), view));
 
         // populate appSettings uris (key: uriName, value: uriValue)
@@ -126,8 +128,7 @@ public class AppSettingsService {
         if (configurers != null) {
             for (final AppSettingsConfigurer<T> configurer : configurers) {
                 settingsStream = settingsStream //
-                        .map(configure(configurer)) //
-                        .map(configurer::translate);
+                        .map(configure(configurer)); //
             }
         }
         return settingsStream;

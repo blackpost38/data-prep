@@ -51,8 +51,4 @@ public class PlaygroundHeaderbarHelpConfigurer extends AppSettingsConfigurer<Act
                 .build();
     }
 
-    @Override
-    public ActionSettings translate(ActionSettings actionSettings) {
-        return AppSettingsConfigurer.translateActionSettings(actionSettings);
-    }
 }

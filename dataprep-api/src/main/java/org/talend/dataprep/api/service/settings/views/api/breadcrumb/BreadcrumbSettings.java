@@ -51,6 +51,14 @@ public class BreadcrumbSettings implements ViewSettings {
         return id;
     }
 
+    @Override
+    public ViewSettings translate() {
+        return BreadcrumbSettings
+                .from(this) //
+                .translate() //
+                .build();
+    }
+
     public void setId(String id) {
         this.id = id;
     }

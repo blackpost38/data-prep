@@ -73,6 +73,14 @@ public class AppHeaderBarSettings implements ViewSettings {
         return id;
     }
 
+    @Override
+    public ViewSettings translate() {
+        return AppHeaderBarSettings //
+                .from(this) //
+                .translate() //
+                .build();
+    }
+
     public void setId(String id) {
         this.id = id;
     }

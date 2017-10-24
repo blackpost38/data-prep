@@ -50,8 +50,4 @@ public class HeaderbarHelpConfigurer extends AppSettingsConfigurer<ActionSetting
                 .build();
     }
 
-    @Override
-    public ActionSettings translate(ActionSettings actionSettings) {
-        return AppSettingsConfigurer.translateActionSettings(actionSettings);
-    }
 }
