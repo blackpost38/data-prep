@@ -13,13 +13,17 @@
 
 package org.talend.dataprep.parameters;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.talend.dataprep.i18n.ActionsBundle.parameterDescription;
+import static org.talend.dataprep.i18n.ActionsBundle.parameterLabel;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.lang.StringUtils;
 import org.talend.dataprep.i18n.ActionsBundle;
-import org.talend.dataprep.i18n.ActionsLocaleContextHolder;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -51,9 +55,11 @@ public class Parameter implements Serializable {
 
     /** The configuration. */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Map<String, Object> configuration;
+    private Map<String, Object> configuration = new HashMap<>();
 
-    private Object parent;
+    private String label;
+
+    private String description;
 
     public Parameter() {
     }
@@ -65,30 +71,7 @@ public class Parameter implements Serializable {
      * @param type The parameter type.
      */
     public Parameter(String name, ParameterType type) {
-        this(name, type, null, false);
-    }
-
-    /**
-     * Constructor with a default value.
-     *
-     * @param name The parameter name.
-     * @param type The parameter type.
-     * @param defaultValue the parameter default value.
-     */
-    public Parameter(String name, ParameterType type, String defaultValue) {
-        this(name, type, defaultValue, false);
-    }
-
-    /**
-     * Constructor with a default value and the implicit flag.
-     *
-     * @param name The parameter name.
-     * @param type The parameter type.
-     * @param defaultValue the parameter default value.
-     * @param implicit true if the parameter is implicit.
-     */
-    public Parameter(final String name, final ParameterType type, final String defaultValue, final boolean implicit) {
-        this(name, type, defaultValue, implicit, true);
+        this(name, type, null, false, true);
     }
 
     /**
@@ -102,18 +85,21 @@ public class Parameter implements Serializable {
      */
     public Parameter(final String name, final ParameterType type, final String defaultValue, final boolean implicit,
             final boolean canBeBlank) {
-        this(name, type, defaultValue, implicit, canBeBlank, StringUtils.EMPTY);
+        this(name, type, defaultValue, implicit, canBeBlank,
+                StringUtils.EMPTY, ActionsBundle.parameterLabel(null, Locale.ENGLISH, name), ActionsBundle.parameterDescription(null, Locale.ENGLISH,
+                        name));
     }
 
     public Parameter(final String name, final ParameterType type, final String defaultValue, final boolean implicit,
-            final boolean canBeBlank, String placeHolder) {
+            final boolean canBeBlank, String placeHolder, String label, String description) {
         this.name = name;
         this.placeHolder = placeHolder;
-        this.type = type.asString();
+        this.type = type == null ? null : type.asString();
         this.defaultValue = defaultValue;
         this.implicit = implicit;
         this.canBeBlank = canBeBlank;
-        this.configuration = new HashMap<>();
+        this.label = label;
+        this.description = description;
     }
 
     void addConfiguration(String name, Object configuration) {
@@ -125,11 +111,11 @@ public class Parameter implements Serializable {
     }
 
     public String getLabel() {
-        return ActionsBundle.INSTANCE.parameterLabel(parent, ActionsLocaleContextHolder.getLocale(), getName());
+        return label;
     }
 
     public String getDescription() {
-        return ActionsBundle.INSTANCE.parameterDescription(parent, ActionsLocaleContextHolder.getLocale(), getName());
+        return description;
     }
 
     public String getType() {
@@ -156,8 +142,96 @@ public class Parameter implements Serializable {
         return configuration;
     }
 
-    public Parameter attach(Object parent) {
-        this.parent = parent;
-        return this;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parameter parameter = (Parameter) o;
+        return implicit == parameter.implicit && canBeBlank == parameter.canBeBlank && Objects.equals(name, parameter.name)
+                && Objects.equals(type, parameter.type) && Objects.equals(defaultValue, parameter.defaultValue) && Objects.equals(
+                placeHolder, parameter.placeHolder) && Objects.equals(configuration, parameter.configuration) && Objects.equals(
+                label, parameter.label) && Objects.equals(description, parameter.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type, defaultValue, implicit, canBeBlank, placeHolder, configuration, label, description);
+    }
+
+    public static class ParameterBuilder {
+
+        private String name;
+
+        private ParameterType type;
+
+        private String defaultValue = null;
+
+        private boolean implicit = false;
+
+        private boolean canBeBlank = true;
+
+        private String placeHolder = EMPTY;
+
+        private String label;
+
+        private String description;
+
+        public ParameterBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ParameterBuilder setType(ParameterType type) {
+            this.type = type;
+            return this;
+        }
+
+        public ParameterBuilder setDefaultValue(String defaultValue) {
+            this.defaultValue = defaultValue;
+            return this;
+        }
+
+        public ParameterBuilder setImplicit(boolean implicit) {
+            this.implicit = implicit;
+            return this;
+        }
+
+        public ParameterBuilder setCanBeBlank(boolean canBeBlank) {
+            this.canBeBlank = canBeBlank;
+            return this;
+        }
+
+        public ParameterBuilder setPlaceHolder(String placeHolder) {
+            this.placeHolder = placeHolder;
+            return this;
+        }
+
+        public ParameterBuilder setLabel(String label) {
+            this.label = label;
+            return this;
+        }
+
+        public ParameterBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Parameter createParameter(Object action, Locale locale) {
+            // TODO this forces to have i18n for theses 2 fields
+            if (label == null) {
+                try {
+                    label = parameterLabel(action, locale, name);
+                } catch (Exception e) {
+                }
+            }
+            if (description == null) {
+                try {
+                    description = parameterDescription(action, locale, name);
+                } catch (Exception e) {
+                }
+            }
+            return new Parameter(name, type, defaultValue, implicit, canBeBlank, placeHolder, label, description);
+        }
+
     }
 }

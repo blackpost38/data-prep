@@ -18,10 +18,7 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.talend.dataprep.api.type.Type.BOOLEAN;
 import static org.talend.dataprep.parameters.ParameterType.INTEGER;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -30,7 +27,6 @@ import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.parameters.SelectParameter;
@@ -76,21 +72,30 @@ public class FuzzyMatching extends AbstractActionMetadata implements ColumnActio
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
 
         parameters.add(SelectParameter.Builder.builder() //
                 .name(OtherColumnParameters.MODE_PARAMETER) //
                 .item(OtherColumnParameters.CONSTANT_MODE, OtherColumnParameters.CONSTANT_MODE,//
-                        new Parameter(VALUE_PARAMETER, ParameterType.STRING, EMPTY, false, true, StringUtils.EMPTY)) //
+                        new Parameter.ParameterBuilder().setName(VALUE_PARAMETER)
+                                .setType(ParameterType.STRING)
+                                .setDefaultValue(EMPTY)
+                                .createParameter(this, locale)) //
                 .item(OtherColumnParameters.OTHER_COLUMN_MODE, OtherColumnParameters.OTHER_COLUMN_MODE,//
-                        new Parameter(OtherColumnParameters.SELECTED_COLUMN_PARAMETER, //
-                                ParameterType.COLUMN, //
-                                StringUtils.EMPTY, false, false, StringUtils.EMPTY)) //
-                .defaultValue(OtherColumnParameters.CONSTANT_MODE).build());
+                        new Parameter.ParameterBuilder().setName(OtherColumnParameters.SELECTED_COLUMN_PARAMETER)
+                                .setType(ParameterType.COLUMN)
+                                .setDefaultValue(StringUtils.EMPTY)
+                                .setCanBeBlank(false)
+                                .createParameter(this, locale)) //
+                .defaultValue(OtherColumnParameters.CONSTANT_MODE).build(this));
 
-        parameters.add(new Parameter(SENSITIVITY, INTEGER, "1", false, false, StringUtils.EMPTY));
-        return ActionsBundle.attachToAction(parameters, this);
+        parameters.add(new Parameter.ParameterBuilder().setName(SENSITIVITY)
+                .setType(INTEGER)
+                .setDefaultValue("1")
+                .setCanBeBlank(false)
+                .createParameter(this, locale));
+        return parameters;
     }
 
     @Override

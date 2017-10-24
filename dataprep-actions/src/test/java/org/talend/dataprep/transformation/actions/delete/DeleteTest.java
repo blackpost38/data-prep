@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.delete;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -67,8 +68,8 @@ public class DeleteTest extends AbstractMetadataBaseTest {
         final ActionDefinition adaptedAction = action.adapt(LINE);
 
         //then
-        assertThat(adaptedAction.getDescription(), is("Delete this row"));
-        assertThat(adaptedAction.getLabel(), is("Delete row"));
+        assertThat(adaptedAction.getDescription(ENGLISH), is("Delete this row"));
+        assertThat(adaptedAction.getLabel(ENGLISH), is("Delete row"));
 
         assertThat( adaptedAction, not(is(action)) );
     }
@@ -79,8 +80,8 @@ public class DeleteTest extends AbstractMetadataBaseTest {
         final ActionDefinition adaptedAction = action.adapt(COLUMN);
 
         //then
-        assertThat(adaptedAction.getDescription(), is("Delete this column"));
-        assertThat(adaptedAction.getLabel(), is("Delete column"));
+        assertThat(adaptedAction.getDescription(ENGLISH), is("Delete this column"));
+        assertThat(adaptedAction.getLabel(ENGLISH), is("Delete column"));
     }
 
     @Test

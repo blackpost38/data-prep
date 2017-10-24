@@ -13,6 +13,7 @@
 package org.talend.dataprep.transformation.format;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -40,7 +41,7 @@ public class CSVFormat extends ExportFormat {
             .defaultValue(";") //
             .canBeBlank(true) //
             .radio(true) //
-            .build();
+            .build(null);
 
     /**
      * Default constructor.
@@ -49,7 +50,7 @@ public class CSVFormat extends ExportFormat {
         //@formatter:off
         super("CSV", "text/csv", ".csv", true, false,
                 Arrays.asList(CSV_DELIMITERS,
-                new Parameter("fileName", ParameterType.STRING, StringUtils.EMPTY, false, false) //
+                new Parameter.ParameterBuilder().setName("fileName").setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(null, Locale.ENGLISH) //
         ));
         //@formatter:on
     }

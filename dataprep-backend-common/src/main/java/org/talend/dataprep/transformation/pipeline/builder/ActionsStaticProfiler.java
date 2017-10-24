@@ -1,5 +1,6 @@
 package org.talend.dataprep.transformation.pipeline.builder;
 
+import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
 import static org.talend.dataprep.transformation.actions.common.ImplicitParameters.COLUMN_ID;
 
@@ -72,7 +73,7 @@ class ActionsStaticProfiler {
                     // Add the action's source column
                     valueModifiedColumns.add(action.getParameters().get(COLUMN_ID.getKey()));
                     // ... then add all column parameter (COLUMN_ID is string, not column)
-                    final List<Parameter> parameters = actionMetadata.getParameters();
+                    final List<Parameter> parameters = actionMetadata.getParameters(ENGLISH);
                     valueModifiedColumns.addAll(parameters.stream() //
                             .filter(parameter -> ParameterType.valueOf(parameter.getType().toUpperCase()) == ParameterType.COLUMN) //
                             .map(parameter -> action.getParameters().get(parameter.getName())) //

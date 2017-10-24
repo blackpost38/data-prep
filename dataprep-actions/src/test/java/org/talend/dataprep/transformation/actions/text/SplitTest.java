@@ -12,6 +12,7 @@
 //  ============================================================================
 package org.talend.dataprep.transformation.actions.text;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
@@ -67,7 +68,7 @@ public class SplitTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testParameters() throws Exception {
-        final List<Parameter> parameters = action.getParameters();
+        final List<Parameter> parameters = action.getParameters(ENGLISH);
         assertEquals(6, parameters.size());
         assertEquals(1L, parameters.stream().filter(p -> StringUtils.equals(Split.LIMIT, p.getName())).count());
         final Optional<Parameter> separatorParameter = parameters.stream() //
@@ -496,7 +497,7 @@ public class SplitTest extends AbstractMetadataBaseTest {
 
     @Test
     public void should_have_separator_that_could_be_blank() {
-        Optional<Parameter> parameter = new Split().getParameters().stream()
+        Optional<Parameter> parameter = new Split().getParameters(ENGLISH).stream()
                 .filter(p -> StringUtils.equals(p.getName(), Split.SEPARATOR_PARAMETER)).findFirst();
         if (parameter.isPresent()) {
             assertTrue(parameter.get().isCanBeBlank());

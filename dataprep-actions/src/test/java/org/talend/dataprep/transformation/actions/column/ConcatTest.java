@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.column;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
@@ -75,7 +76,7 @@ public class ConcatTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testParameters() throws Exception {
-        final List<Parameter> parameters = action.getParameters();
+        final List<Parameter> parameters = action.getParameters(ENGLISH);
         assertThat(parameters.size(), is(7));
 
         // Test on items label for TDP-2943:

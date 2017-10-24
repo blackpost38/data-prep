@@ -13,10 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.common;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 
@@ -28,7 +25,6 @@ import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.ParameterType;
 import org.talend.dataprep.parameters.SelectParameter;
@@ -45,8 +41,8 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
 
     @Override
     @Nonnull
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
 
         parameters.add(getCompareModeSelectParameter());
 
@@ -54,15 +50,13 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
         parameters.add(SelectParameter.Builder.builder() //
                         .name(MODE_PARAMETER) //
                         .item(CONSTANT_MODE, CONSTANT_MODE, getDefaultConstantValue()) //
-                        .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, new Parameter(SELECTED_COLUMN_PARAMETER, ParameterType.COLUMN, //
-                                                               StringUtils.EMPTY, false, false, //
-                                                               StringUtils.EMPTY)) //
+                        .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, new Parameter.ParameterBuilder().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale)) //
                         .defaultValue(CONSTANT_MODE)
-                        .build()
+                        .build(this)
         );
         //@formatter:on
 
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     /**
@@ -82,7 +76,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
                            .item(LT, LT) //
                            .item(LE, LE) //
                            .defaultValue(EQ) //
-                           .build();
+                           .build(this);
         //@formatter:on
 
     }
@@ -93,7 +87,10 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
      */
     protected Parameter getDefaultConstantValue() {
         // olamy no idea why this 2 but was here before so just keep backward compat :-)
-        return new Parameter(CONSTANT_VALUE, ParameterType.STRING, "2");
+        return new Parameter.ParameterBuilder().setName(CONSTANT_VALUE)
+                .setType(ParameterType.STRING)
+                .setDefaultValue("2")
+                .createParameter(this, Locale.ENGLISH);
     }
 
     @Override

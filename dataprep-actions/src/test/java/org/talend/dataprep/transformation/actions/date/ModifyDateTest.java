@@ -15,6 +15,7 @@ package org.talend.dataprep.transformation.actions.date;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.time.temporal.ChronoUnit.MONTHS;
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
@@ -60,7 +61,7 @@ public class ModifyDateTest extends BaseDateTest {
     @Test
     public void testParameters() throws Exception {
         // 4 predefined patterns + custom = 5
-        assertThat(action.getParameters().size(), is(6));
+        assertThat(action.getParameters(ENGLISH).size(), is(6));
     }
 
     @Test

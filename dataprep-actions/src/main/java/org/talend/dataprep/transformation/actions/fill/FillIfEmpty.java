@@ -16,6 +16,8 @@ package org.talend.dataprep.transformation.actions.fill;
 import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
 import static org.talend.dataprep.transformation.actions.category.ActionCategory.DATA_CLEANSING;
 
+import java.util.Locale;
+
 import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.action.ActionDefinition;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
@@ -52,7 +54,7 @@ public class FillIfEmpty extends AbstractFillWith implements ColumnAction {
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription(Locale locale) {
         switch (type) {
         case STRING:
             return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_EMPTY_STRING);
@@ -71,7 +73,7 @@ public class FillIfEmpty extends AbstractFillWith implements ColumnAction {
     }
 
     @Override
-    public String getLabel() {
+    public String getLabel(Locale locale) {
         switch (type) {
         case STRING:
             return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_EMPTY_STRING);

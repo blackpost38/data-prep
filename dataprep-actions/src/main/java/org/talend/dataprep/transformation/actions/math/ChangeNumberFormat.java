@@ -30,7 +30,6 @@ import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.SelectParameter;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
@@ -118,8 +117,8 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
 
         // @formatter:off
         parameters.add(SelectParameter.Builder.builder()
@@ -130,7 +129,7 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
                 .item(CH_SEPARATORS, CH_SEPARATORS)
                 .item(CUSTOM, buildDecimalSeparatorParameter(FROM), buildGroupingSeparatorParameter(FROM))
                 .defaultValue(UNKNOWN_SEPARATORS)
-                .build());
+                .build(this));
         // @formatter:on
 
         // @formatter:off
@@ -140,14 +139,14 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
                 .item(EU_PATTERN, EU_PATTERN)
                 .item(CH_PATTERN, CH_PATTERN)
                 .item(SCIENTIFIC, SCIENTIFIC)
-                .item(CUSTOM, CUSTOM, new Parameter(TARGET_PATTERN + "_" + CUSTOM, STRING, US_DECIMAL_PATTERN.toPattern()),
+                .item(CUSTOM, CUSTOM, new Parameter.ParameterBuilder().setName(TARGET_PATTERN + "_" + CUSTOM).setType(STRING).setDefaultValue(US_DECIMAL_PATTERN.toPattern()).createParameter(this, locale),
                         buildDecimalSeparatorParameter(TARGET),
                         buildGroupingSeparatorParameter(TARGET))
                 .defaultValue(US_PATTERN)
-                .build());
+                .build(this));
         // @formatter:on
 
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     private Parameter buildDecimalSeparatorParameter(String prefix) {
@@ -156,9 +155,12 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
                 .name(name) //
                 .item(".") //
                 .item(",") //
-                .item(CUSTOM, CUSTOM, new Parameter(name + "_" + CUSTOM, STRING, ".")) //
+                .item(CUSTOM, CUSTOM, new Parameter.ParameterBuilder().setName(name + "_" + CUSTOM)
+                        .setType(STRING)
+                        .setDefaultValue(".")
+                        .createParameter(this, Locale.ENGLISH)) //
                 .defaultValue(".") //
-                .build();
+                .build(this);
     }
 
     private Parameter buildGroupingSeparatorParameter(String prefix) {
@@ -170,10 +172,13 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
                 .item(".", "dot") //
                 .item("'", "quote") //
                 .item("", "none") //
-                .item(CUSTOM, CUSTOM, new Parameter(name + "_" + CUSTOM, STRING, ",")) //
+                .item(CUSTOM, CUSTOM, new Parameter.ParameterBuilder().setName(name + "_" + CUSTOM)
+                        .setType(STRING)
+                        .setDefaultValue(",")
+                        .createParameter(this, Locale.ENGLISH)) //
                 .canBeBlank(true) //
                 .defaultValue(",") //
-                .build();
+                .build(this);
     }
 
     private String getCustomizableParam(String pName, Map<String, String> parameters) {

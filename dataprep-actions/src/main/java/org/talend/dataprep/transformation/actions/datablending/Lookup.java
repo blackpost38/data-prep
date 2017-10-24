@@ -22,7 +22,6 @@ import static org.talend.dataprep.transformation.actions.datablending.Lookup.Par
 import java.io.IOException;
 import java.util.*;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.talend.dataprep.api.action.Action;
@@ -30,7 +29,6 @@ import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.DataSetMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.transformation.actions.Providers;
 import org.talend.dataprep.transformation.actions.category.ActionCategory;
@@ -77,16 +75,36 @@ public class Lookup extends AbstractActionMetadata implements DataSetAction {
     }
 
     @Override
-    public List<Parameter> getParameters() {
+    public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = new ArrayList<>();
         parameters.add(ImplicitParameters.COLUMN_ID.getParameter());
         parameters.add(ImplicitParameters.FILTER.getParameter());
-        parameters.add(new Parameter(LOOKUP_DS_NAME.getKey(), STRING, adaptedNameValue, false, false, StringUtils.EMPTY));
-        parameters.add(new Parameter(LOOKUP_DS_ID.getKey(), STRING, adaptedDatasetIdValue, false, false, StringUtils.EMPTY));
-        parameters.add(new Parameter(LOOKUP_JOIN_ON.getKey(), STRING, EMPTY, false, false, StringUtils.EMPTY));
-        parameters.add(new Parameter(LOOKUP_JOIN_ON_NAME.getKey(), STRING, EMPTY, false, false, StringUtils.EMPTY));
-        parameters.add(new Parameter(LOOKUP_SELECTED_COLS.getKey(), LIST, EMPTY, false, false, StringUtils.EMPTY));
-        return ActionsBundle.attachToAction(parameters, this);
+        parameters.add(new Parameter.ParameterBuilder().setName(LOOKUP_DS_NAME.getKey())
+                .setType(STRING)
+                .setDefaultValue(adaptedNameValue)
+                .setCanBeBlank(false)
+                .createParameter(this, locale));
+        parameters.add(new Parameter.ParameterBuilder().setName(LOOKUP_DS_ID.getKey())
+                .setType(STRING)
+                .setDefaultValue(adaptedDatasetIdValue)
+                .setCanBeBlank(false)
+                .createParameter(this, locale));
+        parameters.add(new Parameter.ParameterBuilder().setName(LOOKUP_JOIN_ON.getKey())
+                .setType(STRING)
+                .setDefaultValue(EMPTY)
+                .setCanBeBlank(false)
+                .createParameter(this, locale));
+        parameters.add(new Parameter.ParameterBuilder().setName(LOOKUP_JOIN_ON_NAME.getKey())
+                .setType(STRING)
+                .setDefaultValue(EMPTY)
+                .setCanBeBlank(false)
+                .createParameter(this, locale));
+        parameters.add(new Parameter.ParameterBuilder().setName(LOOKUP_SELECTED_COLS.getKey())
+                .setType(LIST)
+                .setDefaultValue(EMPTY)
+                .setCanBeBlank(false)
+                .createParameter(this, locale));
+        return parameters;
     }
 
     @Override

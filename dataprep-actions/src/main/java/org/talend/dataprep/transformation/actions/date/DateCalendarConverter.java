@@ -34,7 +34,6 @@ import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
-import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.SelectParameter;
 import org.talend.dataprep.parameters.SelectParameter.Builder;
@@ -110,8 +109,8 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
     }
 
     @Override
-    public List<Parameter> getParameters() {
-        final List<Parameter> parameters = super.getParameters();
+    public List<Parameter> getParameters(Locale locale) {
+        final List<Parameter> parameters = super.getParameters(locale);
         final Parameter toJulianDayOrISOParameters = SelectParameter.Builder.builder()
                 .name(TO_CALENDAR_TYPE_PARAMETER)
                 .item(CalendarUnit.ISO.name(), CalendarUnit.ISO.toString())
@@ -120,7 +119,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString())
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString())
                 .defaultValue(CalendarUnit.ISO.name())
-                .build();
+                .build(this);
         final Parameter toCompleteParameters = SelectParameter.Builder.builder()
                 .name(TO_CALENDAR_TYPE_PARAMETER)
                 .item(CalendarUnit.ISO.name(), CalendarUnit.ISO.toString())
@@ -133,7 +132,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString())
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString())
                 .defaultValue(CalendarUnit.MINGUO.name())
-                .build();
+                .build(this);
         //@formatter:off
         parameters.add(Builder.builder()
                 .name(FROM_CALENDAR_TYPE_PARAMETER)
@@ -147,10 +146,10 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString(), toJulianDayOrISOParameters)
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString(), toJulianDayOrISOParameters)
                 .defaultValue(CalendarUnit.ISO.name())
-                .build());
+                .build(this));
         //@formatter:on
 
-        return ActionsBundle.attachToAction(parameters, this);
+        return parameters;
     }
 
     @Override
