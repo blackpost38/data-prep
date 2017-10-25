@@ -104,6 +104,11 @@ public class ChangeDatePattern extends AbstractDate implements ColumnAction {
             final ColumnMetadata column = rowMetadata.getById(columnId);
             final Statistics statistics = column.getStatistics();
 
+            final ColumnMetadata targetColumn = rowMetadata.getById(actionContext.getTargetColumnId());
+            if (targetColumn.getId() != columnId) {
+                targetColumn.setStatistics(statistics);
+            }
+
             actionContext.get(FROM_DATE_PATTERNS, p -> compileFromDatePattern(actionContext));
 
             final PatternFrequency newPatternFrequency = statistics.getPatternFrequencies().stream()
@@ -116,7 +121,7 @@ public class ChangeDatePattern extends AbstractDate implements ColumnAction {
 
             long mostUsedPatternCount = getMostUsedPatternCount(column);
             newPatternFrequency.setOccurrences(mostUsedPatternCount + 1);
-            rowMetadata.update(columnId, column);
+            rowMetadata.update(actionContext.getTargetColumnId(), targetColumn);
         }
     }
 
@@ -155,7 +160,7 @@ public class ChangeDatePattern extends AbstractDate implements ColumnAction {
             LocalDateTime date = Providers.get().parseDateFromPatterns(value, context.get(FROM_DATE_PATTERNS));
 
             if (date != null) {
-                row.set(columnId, newPattern.getFormatter().format(date));
+                row.set(context.getTargetColumnId(), newPattern.getFormatter().format(date));
             }
         } catch (DateTimeException e) {
             // cannot parse the date, let's leave it as is
