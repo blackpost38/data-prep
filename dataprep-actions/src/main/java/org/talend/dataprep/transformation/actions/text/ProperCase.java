@@ -31,6 +31,8 @@ public class ProperCase extends AbstractActionMetadata implements ColumnAction {
 
     public static final String PROPER_CASE_ACTION_NAME = "propercase"; //$NON-NLS-1$
 
+    protected static final String NEW_COLUMN_SUFFIX = "_title";
+
     @Override
     public String getName() {
         return PROPER_CASE_ACTION_NAME;
@@ -46,6 +48,11 @@ public class ProperCase extends AbstractActionMetadata implements ColumnAction {
         return ActionCategory.STRINGS.getDisplayName();
     }
 
+    @Override
+    public String getColumnNameSuffix(ActionContext context) {
+        return NEW_COLUMN_SUFFIX;
+    }
+
     /**
      * @see ColumnAction#applyOnColumn(DataSetRow, ActionContext)
      */
@@ -54,7 +61,7 @@ public class ProperCase extends AbstractActionMetadata implements ColumnAction {
         final String columnId = context.getColumnId();
         final String toProperCase = row.get(columnId);
         if (toProperCase != null) {
-            row.set(columnId, WordUtils.capitalizeFully(toProperCase));
+            row.set(context.getTargetColumnId(), WordUtils.capitalizeFully(toProperCase));
         }
     }
 
