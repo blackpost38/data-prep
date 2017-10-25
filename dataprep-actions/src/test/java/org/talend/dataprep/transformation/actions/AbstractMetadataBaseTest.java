@@ -38,6 +38,8 @@ import org.talend.dataprep.transformation.pipeline.ActionRegistry;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.validation.constraints.AssertTrue;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -83,18 +85,20 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
     }
 
     @Test
-    public void test_TDP_3798_createNewColumnPolicy(){
-        switch (getCreateNewColumnPolicy()){
-            case VISIBLE_DISABLED:
-                test_TDP_3798_visible_disabled();
-                break;
-            case VISIBLE_ENABLED:
-                test_TDP_3798_visible_enabled();
-                break;
-            case INVISIBLE_DISABLED:
-                fail("tagada");
-            case INVISIBLE_ENABLED:
-                test_TDP_3798_invisible_enabled();
+    public void test_TDP_3798_createNewColumnPolicy() {
+        switch (getCreateNewColumnPolicy()) {
+        case VISIBLE_DISABLED:
+            test_TDP_3798_visible_disabled();
+            break;
+        case VISIBLE_ENABLED:
+            test_TDP_3798_visible_enabled();
+            break;
+        case INVISIBLE_DISABLED:
+            test_TDP_3798_invisible_disabled();
+            break;
+        case INVISIBLE_ENABLED:
+            test_TDP_3798_invisible_enabled();
+            break;
         }
     }
 
@@ -147,6 +151,25 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
                 fail("'Create new column' found, while it should not");
             }
         }
+
+        // test that this action will create a new column:
+        assertTrue(action.doesCreateNewColumn(Collections.<String, String>emptyMap()));
+    }
+
+    public void test_TDP_3798_invisible_disabled() {
+        Map<String, String> emptyMap = new HashMap<>();
+
+        // test that 'create_new_column' parameter is not present:
+        final List<Parameter> parameters = action.getParameters();
+
+        for (Parameter parameter : parameters) {
+            if (parameter.getName().equals(AbstractActionMetadata.CREATE_NEW_COLUMN)) {
+                fail("'Create new column' found, while it should not");
+            }
+        }
+
+        // test that this action will not create a new column:
+        assertFalse(action.doesCreateNewColumn(Collections.<String, String>emptyMap()));
     }
 
     @Test

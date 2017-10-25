@@ -54,31 +54,22 @@ public class ComputeLength extends AbstractActionMetadata implements ColumnActio
         return ActionCategory.STRINGS.getDisplayName();
     }
 
+    @Override
     protected boolean createNewColumnParamVisible() {
         return false;
     }
 
     @Override
-    public void compile(ActionContext context) {
-        super.compile(context);
-        if (context.getActionStatus() == ActionContext.ActionStatus.OK) {
-            final RowMetadata rowMetadata = context.getRowMetadata();
-            final String columnId = context.getColumnId();
-            final ColumnMetadata column = rowMetadata.getById(columnId);
-            context.column(column.getName() + APPENDIX, r -> {
-                final ColumnMetadata c = ColumnMetadata.Builder //
-                        .column() //
-                        .name(column.getName() + APPENDIX) //
-                        .type(Type.INTEGER) //
-                        .empty(column.getQuality().getEmpty()) //
-                        .invalid(column.getQuality().getInvalid()) //
-                        .valid(column.getQuality().getValid()) //
-                        .headerSize(column.getHeaderSize()) //
-                        .build();
-                rowMetadata.insertAfter(columnId, c);
-                return c;
-            });
-        }
+    public boolean getCreateNewColumnDefaultValue() {
+        return true;
+    }
+
+    public Type getColumnType(ActionContext context){
+        return Type.INTEGER;
+    }
+
+    public String getColumnNameSuffix(ActionContext context){
+        return APPENDIX;
     }
 
     /**
@@ -90,7 +81,7 @@ public class ComputeLength extends AbstractActionMetadata implements ColumnActio
         final RowMetadata rowMetadata = context.getRowMetadata();
         final String columnId = context.getColumnId();
         final ColumnMetadata column = rowMetadata.getById(columnId);
-        final String lengthColumn = context.column(column.getName() + APPENDIX);
+        final String lengthColumn = context.getTargetColumnId();
 
         // Set length value
         final String value = row.get(columnId);

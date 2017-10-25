@@ -62,6 +62,11 @@ public class DomainChange extends AbstractActionMetadata implements ColumnAction
         return ActionCategory.COLUMN_METADATA.getDisplayName();
     }
 
+    @Override
+    protected boolean createNewColumnParamVisible() {
+        return false;
+    }
+
     /**
      * @see ColumnAction#applyOnColumn(DataSetRow, ActionContext)
      */
