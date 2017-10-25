@@ -72,7 +72,7 @@ public class DomainChangeTest extends AbstractMetadataBaseTest {
 
     @Test
     public void test_apply_in_newcolumn() throws Exception {
-        // Nothing to test, this action is never applied in place
+        // Nothing to test, this action is always applied in place
     }
 
     @Test

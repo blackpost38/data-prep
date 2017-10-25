@@ -80,8 +80,8 @@ public abstract class AbstractMetadataBaseTest<T extends AbstractActionMetadata>
         INVISIBLE_ENABLED; // no checkbox, always creates new column (like 'Extract email parts')
     }
 
-    protected  CreateNewColumnPolicy getCreateNewColumnPolicy(){
-        return null; // temp solution to not fail at compilation, but when running tests, change to an abstract method later
+    protected CreateNewColumnPolicy getCreateNewColumnPolicy() {
+        return null; // TODO temp solution to not fail at compilation, but when running tests, change to an abstract method later
     }
 
     @Test
