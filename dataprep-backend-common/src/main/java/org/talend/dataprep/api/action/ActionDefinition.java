@@ -12,8 +12,6 @@
 
 package org.talend.dataprep.api.action;
 
-import static java.util.Locale.ENGLISH;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -51,19 +49,11 @@ public interface ActionDefinition extends Serializable {
      */
     String getLabel(Locale locale);
 
-    default String getLabel() {
-        return getLabel(ENGLISH);
-    }
-
     /**
      * @return The description of the action, translated in the user locale.
      * @param locale
      */
     String getDescription(Locale locale);
-
-    default String getDescription() {
-        return getDescription(ENGLISH);
-    }
 
     /**
      * @return The action documentation url.
@@ -71,19 +61,11 @@ public interface ActionDefinition extends Serializable {
      */
     String getDocUrl(Locale locale);
 
-    default String getDocUrl() {
-        return getDocUrl(ENGLISH);
-    }
-
     /**
      * @return The list of parameters required for this Action to be executed.
      *
      * @param locale*/
     List<Parameter> getParameters(Locale locale);
-
-    default List<Parameter> getParameters() {
-        return getParameters(ENGLISH);
-    }
 
     /**
      * @return A set of {@link Behavior} that describes the expected behavior of the action. It helps Data Prep runtime to
@@ -229,16 +211,16 @@ public interface ActionDefinition extends Serializable {
         FORBID_DISTRIBUTED
     }
 
-//    default ActionForm getActionForm(Locale locale) {
-//        ActionForm form = new ActionForm();
-//        form.setName(getName());
-//        form.setCategory(getCategory());
-//
-//        form.setDescription(getDescription(locale));
-//        form.setDocUrl(getDocUrl(locale));
-//        form.setLabel(getLabel(locale));
-//        form.setParameters(getParameters(locale));
-//        return form;
-//    }
+    default ActionForm getActionForm(Locale locale) {
+        ActionForm form = new ActionForm();
+        form.setName(getName());
+        form.setCategory(getCategory());
+
+        form.setDescription(getDescription(locale));
+        form.setDocUrl(getDocUrl(locale));
+        form.setLabel(getLabel(locale));
+        form.setParameters(getParameters(locale));
+        return form;
+    }
 
 }
