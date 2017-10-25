@@ -75,8 +75,8 @@ public class TimestampToDate extends AbstractDate implements ColumnAction {
     }
 
     @Override
-    public String getColumnNameSuffix(ActionContext context){
-        return APPENDIX;
+    public String getCreatedColumnName(ActionContext context){
+        return context.getColumnName() + APPENDIX;
     }
 
 

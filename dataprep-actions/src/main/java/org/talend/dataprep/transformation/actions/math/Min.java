@@ -37,7 +37,7 @@ public class Min extends AbstractMathOneParameterAction {
     }
 
     @Override
-    public String getColumnNameSuffix(ActionContext context) {
+    public String getCreatedColumnName(ActionContext context) {
         return "min";
     }
 

@@ -284,7 +284,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
             context.column("target", r -> {
                 ColumnMetadata c = ColumnMetadata.Builder //
                         .column() //
-                        .name(column.getName() + getColumnNameSuffix(context)) //
+                        .name(getCreatedColumnName(context)) //
                         .type(getColumnType(context)) // Leave actual type detection to transformation
                         .build();
                 rowMetadata.insertAfter(columnId, c);
@@ -309,7 +309,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      *
      * @return The name of the new column
      */
-    public String getColumnNameSuffix(ActionContext context){
+    public String getCreatedColumnName(ActionContext context) {
         return null; // TODO remove default implementation and let this method abstract, just here to prevent tons of compilation errors for now
     }
 

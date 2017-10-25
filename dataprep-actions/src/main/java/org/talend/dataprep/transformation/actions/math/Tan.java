@@ -40,7 +40,7 @@ public class Tan extends AbstractMathNoParameterAction {
     }
 
     @Override
-    public String getColumnNameSuffix(ActionContext context) {
+    public String getCreatedColumnName(ActionContext context) {
         return "tan";
     }
 

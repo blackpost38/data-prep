@@ -68,8 +68,8 @@ public class ComputeLength extends AbstractActionMetadata implements ColumnActio
         return Type.INTEGER;
     }
 
-    public String getColumnNameSuffix(ActionContext context){
-        return APPENDIX;
+    public String getCreatedColumnName(ActionContext context){
+        return context.getColumnName() + APPENDIX;
     }
 
     /**

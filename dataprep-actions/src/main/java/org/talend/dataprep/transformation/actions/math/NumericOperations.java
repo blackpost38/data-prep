@@ -129,7 +129,7 @@ public class NumericOperations extends AbstractActionMetadata implements ColumnA
     }
 
     @Override
-    public String getColumnNameSuffix(ActionContext context){
+    public String getCreatedColumnName(ActionContext context){
         final Map<String, String> parameters = context.getParameters();
         final RowMetadata rowMetadata = context.getRowMetadata();
         final String operator = parameters.get(OPERATOR_PARAMETER);

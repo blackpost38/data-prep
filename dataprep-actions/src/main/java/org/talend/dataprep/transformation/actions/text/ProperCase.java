@@ -49,8 +49,8 @@ public class ProperCase extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public String getColumnNameSuffix(ActionContext context) {
-        return NEW_COLUMN_SUFFIX;
+    public String getCreatedColumnName(ActionContext context) {
+        return context.getColumnName() + NEW_COLUMN_SUFFIX;
     }
 
     /**

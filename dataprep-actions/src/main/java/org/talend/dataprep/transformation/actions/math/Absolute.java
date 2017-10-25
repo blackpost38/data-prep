@@ -56,8 +56,8 @@ public class Absolute extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public String getColumnNameSuffix(ActionContext context) {
-        return "_absolute";
+    public String getCreatedColumnName(ActionContext context) {
+        return context.getColumnName() + "_absolute";
     }
 
     @Override
