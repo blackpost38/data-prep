@@ -60,6 +60,11 @@ public class ClearInvalid extends AbstractClear implements ColumnAction {
     }
 
     @Override
+    protected boolean createNewColumnParamVisible() {
+        return false;
+    }
+
+    @Override
     public boolean toClear(DataSetRow dataSetRow, String columnId, ActionContext actionContext) {
         return dataSetRow.isInvalid(columnId);
     }
