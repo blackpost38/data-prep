@@ -31,15 +31,13 @@ import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
  */
 public class ClearMatchingTest extends AbstractMetadataBaseTest {
 
-    /** The action to test. */
-    private ClearMatching action = new ClearMatching();
-
     private Map<String, String> parameters;
 
     /**
      * Default constructor.
      */
     public ClearMatchingTest() throws IOException {
+        super(new ClearMatching());
         parameters = ActionMetadataTestUtils
                 .parseParameters(ClearInvalidTest.class.getResourceAsStream("clearEqualsAction.json"));
     }
@@ -54,8 +52,18 @@ public class ClearMatchingTest extends AbstractMetadataBaseTest {
         assertThat(action.getCategory(), is(ActionCategory.DATA_CLEANSING.getDisplayName()));
     }
 
+    @Override
+    protected  CreateNewColumnPolicy getCreateNewColumnPolicy(){
+        return CreateNewColumnPolicy.INVISIBLE_DISABLED;
+    }
+
     @Test
-    public void should_clear_because_equals() throws Exception {
+    public void test_apply_in_newcolumn() throws Exception {
+        // Nothing to test, this action is always applied in place
+    }
+
+    @Test
+    public void test_apply_inplace() throws Exception {
         // given
         final Map<String, String> firstRowValues = new HashMap<>();
         firstRowValues.put("0000", "David Bowie");
