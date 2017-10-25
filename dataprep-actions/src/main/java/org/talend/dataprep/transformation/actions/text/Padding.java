@@ -59,7 +59,7 @@ public class Padding extends AbstractActionMetadata implements ColumnAction {
 
     public static final String RIGHT_POSITION = "right";
 
-    protected static final String NEW_COLUMN_SUFFIX = "padded";
+    protected static final String NEW_COLUMN_SUFFIX = "_padded";
 
     @Override
     public String getName() {
@@ -97,7 +97,7 @@ public class Padding extends AbstractActionMetadata implements ColumnAction {
 
     @Override
     public String getColumnNameSuffix(ActionContext context) {
-        return "NEW_COLUMN_SUFFIX";
+        return NEW_COLUMN_SUFFIX;
     }
 
     @Override

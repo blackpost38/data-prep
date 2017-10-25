@@ -51,6 +51,7 @@ public class PaddingTest extends AbstractMetadataBaseTest<Padding> {
         parameters = ActionMetadataTestUtils.parseParameters(PaddingTest.class.getResourceAsStream("paddingAction.json"));
     }
 
+    @Override
     public CreateNewColumnPolicy getCreateNewColumnPolicy() {
         return CreateNewColumnPolicy.VISIBLE_DISABLED;
     }
@@ -89,6 +90,9 @@ public class PaddingTest extends AbstractMetadataBaseTest<Padding> {
 
         // then
         assertEquals(expectedValues, row.values());
+        ColumnMetadata expected = ColumnMetadata.Builder.column().id(3).name("0000_padded").type(Type.STRING).build();
+        ColumnMetadata actual = row.getRowMetadata().getById("0003");
+        assertEquals(expected, actual);
     }
 
     @Test
