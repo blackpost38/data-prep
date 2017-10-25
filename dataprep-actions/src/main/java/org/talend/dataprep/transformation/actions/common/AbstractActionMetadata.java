@@ -13,8 +13,6 @@
 
 package org.talend.dataprep.transformation.actions.common;
 
-import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -92,7 +90,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      */
     @Override
     public String getLabel(Locale locale) {
-        return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), getName());
+        return ActionsBundle.actionLabel(this, locale, getName());
     }
 
     /**
@@ -102,12 +100,12 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      */
     @Override
     public String getDescription(Locale locale) {
-        return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), getName());
+        return ActionsBundle.actionDescription(this, locale, getName());
     }
 
     @Override
     public String getDocUrl(Locale locale) {
-        return ActionsBundle.INSTANCE.actionDocUrl(this, getLocale(), getName());
+        return ActionsBundle.actionDocUrl(this, locale, getName());
     }
 
     /**
@@ -205,7 +203,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      * @param locale*/
     @Override
     public List<Parameter> getParameters(Locale locale) {
-        return ImplicitParameters.getParameters();
+        return ImplicitParameters.getParameters(locale);
     }
 
     @JsonIgnore

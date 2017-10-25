@@ -240,28 +240,28 @@ public class DateCalendarConverterTest extends BaseDateTest {
 
         // then
         assertEquals(patterns.get(1).getPattern(),
-                action.parseDateFromPatterns(valueWithMonthInCapital, patterns, chronology, localeUS));
+                DateCalendarConverter.parseDateFromPatterns(valueWithMonthInCapital, patterns, chronology, localeUS));
 
         // given
         String valueMonthUSShortLitteral = "02-Dec-1997";
 
         // then
         assertEquals(patterns.get(1).getPattern(),
-                action.parseDateFromPatterns(valueMonthUSShortLitteral, patterns, chronology, localeUS));
+                DateCalendarConverter.parseDateFromPatterns(valueMonthUSShortLitteral, patterns, chronology, localeUS));
 
         // given
         String valueMonthUSLongLitteral = "2 February 1981";
 
         // then
         assertEquals(patterns.get(3).getPattern(),
-                action.parseDateFromPatterns(valueMonthUSLongLitteral, patterns, chronology, localeUS));
+                DateCalendarConverter.parseDateFromPatterns(valueMonthUSLongLitteral, patterns, chronology, localeUS));
 
         // given
         String valueMonthUSLongLitteral2 = "December 3, 2004";
 
         // then
         assertEquals(patterns.get(2).getPattern(),
-                action.parseDateFromPatterns(valueMonthUSLongLitteral2, patterns, chronology, localeUS));
+                DateCalendarConverter.parseDateFromPatterns(valueMonthUSLongLitteral2, patterns, chronology, localeUS));
 
         // given
         Locale localeFr = Locale.FRANCE;
@@ -269,7 +269,7 @@ public class DateCalendarConverterTest extends BaseDateTest {
 
         // then
         assertEquals(patterns.get(3).getPattern(),
-                action.parseDateFromPatterns(valueMonthFrLongLitteral, patterns, chronology, localeFr));
+                DateCalendarConverter.parseDateFromPatterns(valueMonthFrLongLitteral, patterns, chronology, localeFr));
 
     }
 
@@ -282,7 +282,7 @@ public class DateCalendarConverterTest extends BaseDateTest {
         Locale locale = Locale.US;
 
         // then
-        action.parseDateFromPatterns(null, patterns, chronology, locale);
+        DateCalendarConverter.parseDateFromPatterns(null, patterns, chronology, locale);
 
     }
 
@@ -296,7 +296,7 @@ public class DateCalendarConverterTest extends BaseDateTest {
         Locale locale = Locale.US;
 
         // then
-        action.parseDateFromPatterns(value, patterns, chronology, locale);
+        DateCalendarConverter.parseDateFromPatterns(value, patterns, chronology, locale);
 
     }
 
@@ -310,7 +310,7 @@ public class DateCalendarConverterTest extends BaseDateTest {
         Locale locale = Locale.US;
 
         // then
-        action.parseDateFromPatterns(value, patterns, chronology, locale);
+        DateCalendarConverter.parseDateFromPatterns(value, patterns, chronology, locale);
 
     }
 

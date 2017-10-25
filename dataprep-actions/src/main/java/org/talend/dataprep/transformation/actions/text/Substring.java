@@ -119,7 +119,7 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                 .defaultValue(FROM_BEGINNING) //
                 .build(this);
 
-        final List<Parameter> parameters = ImplicitParameters.getParameters();
+        final List<Parameter> parameters = ImplicitParameters.getParameters(locale);
         parameters.add(fromParameters);
         return parameters;
     }

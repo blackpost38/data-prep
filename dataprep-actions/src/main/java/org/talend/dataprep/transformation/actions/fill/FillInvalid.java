@@ -13,7 +13,6 @@
 
 package org.talend.dataprep.transformation.actions.fill;
 
-import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
 import static org.talend.dataprep.transformation.actions.category.ActionCategory.DATA_CLEANSING;
 
 import java.util.Locale;
@@ -55,26 +54,26 @@ public class FillInvalid extends AbstractFillWith implements ColumnAction {
     @Override
     public String getDescription(Locale locale) {
         if (Type.BOOLEAN.isAssignableFrom(type)) {
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_INVALID_BOOLEAN);
+            return ActionsBundle.actionDescription(this, locale, FILL_INVALID_BOOLEAN);
         } else if (Type.DATE.isAssignableFrom(type)) {
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_INVALID_DATE);
+            return ActionsBundle.actionDescription(this, locale, FILL_INVALID_DATE);
         } else if (Type.NUMERIC.isAssignableFrom(type)) {
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_INVALID_NUMERIC);
+            return ActionsBundle.actionDescription(this, locale, FILL_INVALID_NUMERIC);
         } else {
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_INVALID_ACTION_NAME);
+            return ActionsBundle.actionDescription(this, locale, FILL_INVALID_ACTION_NAME);
         }
     }
 
     @Override
     public String getLabel(Locale locale) {
         if (Type.BOOLEAN.isAssignableFrom(type)) {
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_INVALID_BOOLEAN);
+            return ActionsBundle.actionLabel(this, locale, FILL_INVALID_BOOLEAN);
         } else if (Type.DATE.isAssignableFrom(type)) {
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_INVALID_DATE);
+            return ActionsBundle.actionLabel(this, locale, FILL_INVALID_DATE);
         } else if (Type.NUMERIC.isAssignableFrom(type)) {
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_INVALID_NUMERIC);
+            return ActionsBundle.actionLabel(this, locale, FILL_INVALID_NUMERIC);
         } else {
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_INVALID_ACTION_NAME);
+            return ActionsBundle.actionLabel(this, locale, FILL_INVALID_ACTION_NAME);
         }
     }
 

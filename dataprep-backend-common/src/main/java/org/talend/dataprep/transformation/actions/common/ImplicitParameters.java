@@ -16,7 +16,6 @@ package org.talend.dataprep.transformation.actions.common;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.talend.dataprep.i18n.ActionsBundle.parameterDescription;
 import static org.talend.dataprep.i18n.ActionsBundle.parameterLabel;
-import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
 import static org.talend.dataprep.parameters.ParameterType.STRING;
 
 import java.util.Arrays;
@@ -54,9 +53,10 @@ public enum ImplicitParameters {
 
     /**
      * @return the full list of implicit parameters.
+     * @param locale
      */
-    public static List<Parameter> getParameters() {
-        return Arrays.stream(values()).map(ImplicitParameters::getParameter).collect(Collectors.toList());
+    public static List<Parameter> getParameters(Locale locale) {
+        return Arrays.stream(values()).map(ip -> ip.getParameter(locale)).collect(Collectors.toList());
     }
 
     /**
@@ -68,15 +68,16 @@ public enum ImplicitParameters {
 
     /**
      * @return the actual parameter.
+     * @param locale
      */
-    public Parameter getParameter() {
+    public Parameter getParameter(Locale locale) {
         return new Parameter.ParameterBuilder()
                 .setName(name().toLowerCase())
                 .setType(type)
                 .setDefaultValue(defaultValue)
                 .setImplicit(true)
-                .setLabel(parameterLabel(null, getLocale(), name().toLowerCase()))
-                .setDescription(parameterDescription(null, getLocale(), name().toLowerCase()))
+                .setLabel(parameterLabel(null, locale, name().toLowerCase()))
+                .setDescription(parameterDescription(null, locale, name().toLowerCase()))
                 .createParameter(this, Locale.ENGLISH);
     }
 }

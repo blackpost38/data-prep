@@ -13,7 +13,6 @@
 
 package org.talend.dataprep.transformation.actions.delete;
 
-import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
 import static org.talend.dataprep.transformation.actions.category.ActionCategory.DATA_CLEANSING;
 import static org.talend.dataprep.transformation.actions.category.ScopeCategory.LINE;
 
@@ -62,9 +61,9 @@ public class Delete extends AbstractActionMetadata implements RowAction {
     public String getDescription(Locale locale) {
         switch (scope) {
         case LINE:
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), DELETE_SINGLE_LINE);
+            return ActionsBundle.actionDescription(this, locale, DELETE_SINGLE_LINE);
         case COLUMN:
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), DELETE_COLUMN);
+            return ActionsBundle.actionDescription(this, locale, DELETE_COLUMN);
         default:
             return null;
         }
@@ -74,9 +73,9 @@ public class Delete extends AbstractActionMetadata implements RowAction {
     public String getLabel(Locale locale) {
         switch (scope) {
         case LINE:
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), DELETE_SINGLE_LINE);
+            return ActionsBundle.actionLabel(this, locale, DELETE_SINGLE_LINE);
         case COLUMN:
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), DELETE_COLUMN);
+            return ActionsBundle.actionLabel(this, locale, DELETE_COLUMN);
         default:
             return null;
         }
