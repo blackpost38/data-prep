@@ -34,7 +34,7 @@ public class RemoveFractionalPart extends AbstractRound {
 
     @Override
     public List<Parameter> getParameters(Locale locale) {
-        return ImplicitParameters.getParameters();
+        return ImplicitParameters.getParameters(locale);
     }
 
     @Override

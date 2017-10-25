@@ -17,7 +17,7 @@ public class ActionsBundleTest {
 
     @Test
     public void actionLabel() throws Exception {
-        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(this, Locale.ENGLISH, "negate"));
+        assertEquals("Negate value", ActionsBundle.actionLabel(this, Locale.ENGLISH, "negate"));
     }
 
     @Test
@@ -27,56 +27,56 @@ public class ActionsBundleTest {
 
     @Test
     public void actionLabel_defaultToEnglish() throws Exception {
-        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(this, Locale.KOREAN, "negate"));
+        assertEquals("Negate value", ActionsBundle.actionLabel(this, Locale.KOREAN, "negate"));
     }
 
     @Test(expected = TalendRuntimeException.class)
     public void actionLabel_nonexistentThrowsException() throws Exception {
-        assertEquals("toto", ActionsBundle.INSTANCE.actionLabel(this, Locale.US, "toto"));
+        assertEquals("toto", ActionsBundle.actionLabel(this, Locale.US, "toto"));
     }
 
     @Test
     public void actionDescription() throws Exception {
         assertEquals("Reverse the boolean value of cells from this column",
-                ActionsBundle.INSTANCE.actionDescription(this, Locale.ENGLISH, "negate"));
+                ActionsBundle.actionDescription(this, Locale.ENGLISH, "negate"));
     }
 
     @Test
     public void emptyActionDocUrl() throws Exception {
-        assertEquals("", ActionsBundle.INSTANCE.actionDocUrl(this, Locale.ENGLISH, "uppercase"));
+        assertEquals("", ActionsBundle.actionDocUrl(this, Locale.ENGLISH, "uppercase"));
     }
 
     @Test
     public void parameterLabel() throws Exception {
-        assertEquals("Dataset name", ActionsBundle.INSTANCE.parameterLabel(this, Locale.ENGLISH, "name"));
+        assertEquals("Dataset name", ActionsBundle.parameterLabel(this, Locale.ENGLISH, "name"));
     }
 
     @Test
     public void parameterDescription() throws Exception {
-        assertEquals("Name", ActionsBundle.INSTANCE.parameterDescription(this, Locale.ENGLISH, "name"));
+        assertEquals("Name", ActionsBundle.parameterDescription(this, Locale.ENGLISH, "name"));
     }
 
     @Test
     public void choice() throws Exception {
-        assertEquals("other", ActionsBundle.INSTANCE.choice(this, Locale.ENGLISH, "custom"));
+        assertEquals("other", ActionsBundle.choice(this, Locale.ENGLISH, "custom"));
     }
 
     @Test
     public void customActionBundleCache() throws Exception {
-        assertEquals("Nice custom label", ActionsBundle.INSTANCE.actionLabel(new TestAction(), Locale.ENGLISH, "custom"));
+        assertEquals("Nice custom label", ActionsBundle.actionLabel(new TestAction(), Locale.ENGLISH, "custom"));
         // Test cache of resource bundle
-        assertEquals("Nice custom label", ActionsBundle.INSTANCE.actionLabel(new TestAction(), Locale.ENGLISH, "custom"));
+        assertEquals("Nice custom label", ActionsBundle.actionLabel(new TestAction(), Locale.ENGLISH, "custom"));
     }
 
     @Test
     public void customActionLabel() throws Exception {
-        assertEquals("Nice custom label", ActionsBundle.INSTANCE.actionLabel(new TestAction(), Locale.ENGLISH, "custom"));
+        assertEquals("Nice custom label", ActionsBundle.actionLabel(new TestAction(), Locale.ENGLISH, "custom"));
     }
 
     @Test
     public void customActionDescription() throws Exception {
         assertEquals("Nice custom description",
-                ActionsBundle.INSTANCE.actionDescription(new TestAction(), Locale.ENGLISH, "custom"));
+                ActionsBundle.actionDescription(new TestAction(), Locale.ENGLISH, "custom"));
     }
 
     @Test
@@ -88,8 +88,8 @@ public class ActionsBundleTest {
 
     @Test
     public void customActionMessageDefaultFallback() throws Exception {
-        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(new Object(), Locale.ENGLISH, "negate"));
-        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(null, Locale.ENGLISH, "negate"));
+        assertEquals("Negate value", ActionsBundle.actionLabel(new Object(), Locale.ENGLISH, "negate"));
+        assertEquals("Negate value", ActionsBundle.actionLabel(null, Locale.ENGLISH, "negate"));
     }
 
 }

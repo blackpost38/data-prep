@@ -123,7 +123,7 @@ public class ActionMetadataTest extends AbstractMetadataBaseTest {
         final List<Parameter> defaultParams = columnTransformation.getParameters(ENGLISH);
 
         // then
-        assertThat(defaultParams, containsInAnyOrder(ImplicitParameters.getParameters().toArray(new Parameter[3])));
+        assertThat(defaultParams, containsInAnyOrder(ImplicitParameters.getParameters(ENGLISH).toArray(new Parameter[3])));
     }
 
     @Test

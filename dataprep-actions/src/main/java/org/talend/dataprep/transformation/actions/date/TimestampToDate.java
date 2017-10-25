@@ -61,7 +61,7 @@ public class TimestampToDate extends AbstractDate implements ColumnAction {
     @Override
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
-        parameters.addAll(getParametersForDatePattern());
+        parameters.addAll(getParametersForDatePattern(locale));
         return parameters;
     }
 

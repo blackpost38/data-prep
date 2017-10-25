@@ -82,7 +82,7 @@ public class ChangeDatePattern extends AbstractDate implements ColumnAction {
                 .build(this));
         // @formatter:on
 
-        parameters.addAll(getParametersForDatePattern());
+        parameters.addAll(getParametersForDatePattern(locale));
         return parameters;
     }
 

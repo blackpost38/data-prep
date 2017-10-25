@@ -33,8 +33,12 @@ public class ActionForm {
     /** Short description of what the action does. */
     private String description;
 
+    private String alternateDescription;
+
     /** Action title. */
     private String label;
+
+    private String alternateLabel;
 
     // TODO: should be an URL object
     /** Action documentation URL. */
@@ -64,6 +68,14 @@ public class ActionForm {
         this.description = description;
     }
 
+    public String getAlternateDescription() {
+        return alternateDescription;
+    }
+
+    public void setAlternateDescription(String alternateDescription) {
+        this.alternateDescription = alternateDescription;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -78,6 +90,14 @@ public class ActionForm {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public String getAlternateLabel() {
+        return alternateLabel;
+    }
+
+    public void setAlternateLabel(String alternateLabel) {
+        this.alternateLabel = alternateLabel;
     }
 
     public String getDocUrl() {

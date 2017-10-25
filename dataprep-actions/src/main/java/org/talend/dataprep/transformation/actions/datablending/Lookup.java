@@ -77,8 +77,8 @@ public class Lookup extends AbstractActionMetadata implements DataSetAction {
     @Override
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = new ArrayList<>();
-        parameters.add(ImplicitParameters.COLUMN_ID.getParameter());
-        parameters.add(ImplicitParameters.FILTER.getParameter());
+        parameters.add(ImplicitParameters.COLUMN_ID.getParameter(locale));
+        parameters.add(ImplicitParameters.FILTER.getParameter(locale));
         parameters.add(new Parameter.ParameterBuilder().setName(LOOKUP_DS_NAME.getKey())
                 .setType(STRING)
                 .setDefaultValue(adaptedNameValue)
