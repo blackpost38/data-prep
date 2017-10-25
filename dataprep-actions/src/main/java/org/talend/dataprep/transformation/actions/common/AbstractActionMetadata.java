@@ -269,6 +269,11 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
         return getCreateNewColumnDefaultValue();
     }
 
+    /**
+     * Used by compile(ActionContext actionContext), evaluate if a new column needs to be created, if yes creates one.
+     *
+     * Actions that creates more than one column ('split', 'extract email parts', etc...) should manage this on their own.
+     */
     private void createNewColumn(ActionContext context){
         if (doesCreateNewColumn(context.getParameters())) {
             String columnId = context.getColumnId();
@@ -288,12 +293,24 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
         }
     }
 
+    /**
+     * Used by createNewColumn(ActionContext context) to know which column Type to use when creating a new column.
+     *
+     * Default implementation is STRING, actions that creates a column of a different type should override this method.
+     *
+     * @return The Type of the new column
+     */
     public Type getColumnType(ActionContext context){
         return Type.STRING;
     }
 
+    /**
+     * Used by createNewColumn(ActionContext context) to know which name to use when creating a new column.
+     *
+     * @return The name of the new column
+     */
     public String getColumnNameSuffix(ActionContext context){
-        return null;
+        return null; // TODO remove default implementation and let this method abstract, just here to prevent tons of compilation errors for now
     }
 
 }
