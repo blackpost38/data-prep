@@ -20,7 +20,6 @@ public abstract class SpringBundle implements MessagesBundle {
 
     protected SpringBundle(String... baseNames) {
         source = new ResourceBundleMessageSource();
-        source.setDefaultEncoding("UTF-8");
         source.setFallbackToSystemLocale(false);
         source.setBasenames(baseNames);
         source.setUseCodeAsDefaultMessage(true);
