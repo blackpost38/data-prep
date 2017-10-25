@@ -13,7 +13,6 @@
 
 package org.talend.dataprep.transformation.actions.fill;
 
-import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
 import static org.talend.dataprep.transformation.actions.category.ActionCategory.DATA_CLEANSING;
 
 import java.util.Locale;
@@ -57,16 +56,16 @@ public class FillIfEmpty extends AbstractFillWith implements ColumnAction {
     public String getDescription(Locale locale) {
         switch (type) {
         case STRING:
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_EMPTY_STRING);
+            return ActionsBundle.actionDescription(this, locale, FILL_EMPTY_STRING);
         case NUMERIC:
         case DOUBLE:
         case FLOAT:
         case INTEGER:
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_EMPTY_INTEGER);
+            return ActionsBundle.actionDescription(this, locale, FILL_EMPTY_INTEGER);
         case BOOLEAN:
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_EMPTY_BOOLEAN);
+            return ActionsBundle.actionDescription(this, locale, FILL_EMPTY_BOOLEAN);
         case DATE:
-            return ActionsBundle.INSTANCE.actionDescription(this, getLocale(), FILL_EMPTY_DATE);
+            return ActionsBundle.actionDescription(this, locale, FILL_EMPTY_DATE);
         default:
             throw new UnsupportedOperationException("Type '" + type + "' is not supported.");
         }
@@ -76,16 +75,16 @@ public class FillIfEmpty extends AbstractFillWith implements ColumnAction {
     public String getLabel(Locale locale) {
         switch (type) {
         case STRING:
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_EMPTY_STRING);
+            return ActionsBundle.actionLabel(this, locale, FILL_EMPTY_STRING);
         case NUMERIC:
         case DOUBLE:
         case FLOAT:
         case INTEGER:
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_EMPTY_INTEGER);
+            return ActionsBundle.actionLabel(this, locale, FILL_EMPTY_INTEGER);
         case BOOLEAN:
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_EMPTY_BOOLEAN);
+            return ActionsBundle.actionLabel(this, locale, FILL_EMPTY_BOOLEAN);
         case DATE:
-            return ActionsBundle.INSTANCE.actionLabel(this, getLocale(), FILL_EMPTY_DATE);
+            return ActionsBundle.actionLabel(this, locale, FILL_EMPTY_DATE);
         default:
             throw new UnsupportedOperationException("Type '" + type + "' is not supported.");
         }

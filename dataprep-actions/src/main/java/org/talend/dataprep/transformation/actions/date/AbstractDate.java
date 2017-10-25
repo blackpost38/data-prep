@@ -15,7 +15,6 @@ package org.talend.dataprep.transformation.actions.date;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.talend.dataprep.api.type.Type.DATE;
-import static org.talend.dataprep.i18n.ActionsLocaleContextHolder.getLocale;
 
 import java.util.*;
 
@@ -59,11 +58,12 @@ public abstract class AbstractDate extends AbstractActionMetadata {
 
     /**
      * @return the Parameters to display for the date related action.
+     * @param locale
      */
-    protected List<Parameter> getParametersForDatePattern() {
+    protected List<Parameter> getParametersForDatePattern(Locale locale) {
 
         ResourceBundle patterns = ResourceBundle
-                .getBundle("org.talend.dataprep.transformation.actions.date.date_patterns", getLocale());
+                .getBundle("org.talend.dataprep.transformation.actions.date.date_patterns", locale);
         Enumeration<String> keys = patterns.getKeys();
 
         List<Item> items = new ArrayList<>();

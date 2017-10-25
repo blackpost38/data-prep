@@ -12,6 +12,8 @@
 
 package org.talend.dataprep.api.action;
 
+import static java.util.Locale.ENGLISH;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -217,8 +219,10 @@ public interface ActionDefinition extends Serializable {
         form.setCategory(getCategory());
 
         form.setDescription(getDescription(locale));
-        form.setDocUrl(getDocUrl(locale));
+        form.setAlternateDescription(getDescription(ENGLISH));
         form.setLabel(getLabel(locale));
+        form.setAlternateLabel(getLabel(ENGLISH));
+        form.setDocUrl(getDocUrl(locale));
         form.setParameters(getParameters(locale));
         return form;
     }
