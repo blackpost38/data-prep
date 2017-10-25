@@ -93,6 +93,7 @@ public class CompareDatesTest extends BaseDateTest<CompareDates> {
         assertFalse(action.acceptField(getColumn(Type.BOOLEAN)));
     }
 
+    @Override
     public CreateNewColumnPolicy getCreateNewColumnPolicy() {
         return CreateNewColumnPolicy.VISIBLE_ENABLED;
     }

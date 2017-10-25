@@ -46,13 +46,14 @@ import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
  *
  * @see CompareNumbers
  */
-public class CompareNumbersTest extends AbstractMetadataBaseTest {
-
-    /** The action to test. */
-    private CompareNumbers action = new CompareNumbers();
+public class CompareNumbersTest extends AbstractMetadataBaseTest<CompareNumbers> {
 
     /** The action parameters. */
     private Map<String, String> parameters;
+
+    public CompareNumbersTest() {
+        super(new CompareNumbers());
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -68,7 +69,7 @@ public class CompareNumbersTest extends AbstractMetadataBaseTest {
     @Test
     public void testActionParameters() throws Exception {
         final List<Parameter> parameters = action.getParameters();
-        assertEquals(6, parameters.size());
+        assertEquals(7, parameters.size());
         assertTrue(parameters.stream().filter(p -> StringUtils.equals(p.getName(), CompareNumbers.COMPARE_MODE)).findFirst().isPresent());
         assertTrue(parameters.stream().filter(p -> StringUtils.equals(p.getName(), CompareNumbers.MODE_PARAMETER)).findFirst().isPresent());
     }
@@ -83,6 +84,11 @@ public class CompareNumbersTest extends AbstractMetadataBaseTest {
     @Test
     public void testCategory() throws Exception {
         assertThat(action.getCategory(), is(ActionCategory.NUMBERS.getDisplayName()));
+    }
+
+    @Override
+    public CreateNewColumnPolicy getCreateNewColumnPolicy() {
+        return CreateNewColumnPolicy.VISIBLE_ENABLED;
     }
 
     @Test
@@ -106,7 +112,7 @@ public class CompareNumbersTest extends AbstractMetadataBaseTest {
     }
 
     @Test
-    public void should_apply_on_column_not_equals() {
+    public void test_apply_in_newcolumn() {
         // given
         DataSetRow row = getRow("5", "3", "Done !");
 
@@ -119,7 +125,7 @@ public class CompareNumbersTest extends AbstractMetadataBaseTest {
     }
 
     @Test
-    public void should_apply_on_column_not_equals_in_place() {
+    public void test_apply_inplace() {
         // given
         DataSetRow row = getRow("5", "3", "Done !");
 
