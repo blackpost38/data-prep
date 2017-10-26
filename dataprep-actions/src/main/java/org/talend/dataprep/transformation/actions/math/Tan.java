@@ -14,8 +14,6 @@ package org.talend.dataprep.transformation.actions.math;
 
 import static org.talend.dataprep.transformation.actions.math.Tan.TAN_NAME;
 
-import java.util.Map;
-
 import org.apache.commons.math3.util.FastMath;
 import org.talend.daikon.number.BigDecimalParser;
 import org.talend.dataprep.api.action.Action;
@@ -41,7 +39,7 @@ public class Tan extends AbstractMathNoParameterAction {
 
     @Override
     public String getCreatedColumnName(ActionContext context) {
-        return "tan";
+        return context.getColumnName() + "_tan";
     }
 
     @Override
