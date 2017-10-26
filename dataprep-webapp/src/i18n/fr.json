@@ -122,7 +122,7 @@
   "_comment": "Datagrid",
   "ENTER_PREPARATION_NAME": "Saisissez un nom pour votre préparation",
   "FILE_DETAILS_LINES": "{{records}} lignes",
-  "FILE_DETAILS_LIMIT": "cut at {{records}} rows",
+  "FILE_DETAILS_LIMIT": "tronqué à {{records}} lignes",
   "FILTER": "Rechercher et filtrer",
   "NB_LINES_MATCHING_FILTERS": "{{percentage}} % de lignes correspondant à votre (vos) filtre(s)",
   "NEW_FILTER": "Ajouter un filtre…",
@@ -288,9 +288,9 @@
   "MAX_LENGTH": "Longueur max.",
   "MIN_LENGTH": "Longueur min.",
   "LINE_COUNT": "Nombre de lignes",
-  "SUM": "Sum",
-  "AVERAGE": "Average",
-  "GROUP_BY": "group by ",
+  "SUM": "Somme",
+  "AVERAGE": "Moyenne",
+  "GROUP_BY": "groupé par",
   "CURRENT_NO_AGGREGATION": "Choix actuel (pas d'agrégation)",
   "COLUMN": "Colonne",
   "AGGREGATION": "Agrégation",
@@ -398,8 +398,5 @@
 
   "_comment": "404",
   "ERROR_404_TITLE": "Oups…",
-  "ERROR_404_MESSAGE": "La page que vous cherchez est introuvable",
-
-  "_comment": "React components",
-  "HEADERBAR_HELP": "Aide"
+  "ERROR_404_MESSAGE": "La page que vous cherchez est introuvable"
 }

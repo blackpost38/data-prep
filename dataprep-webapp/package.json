@@ -44,6 +44,8 @@
     "animate.css": "^3.5.1",
     "d3": "^3.5.5",
     "d3-tip": "^0.6.7",
+    "i18next": "^10.0.3",
+    "i18next-xhr-backend": "^1.4.3",
     "intro.js": "^1.1.1",
     "jquery": "2.1.4",
     "jquery-datetimepicker": "2.5.4",
@@ -61,6 +63,7 @@
     "react-bootstrap": "^0.30.3",
     "react-css-transition": "^0.7.4",
     "react-dom": "^15.4.2",
+    "react-i18next": "^6.0.6",
     "sunchoke": "git+https://github.com/Talend/sunchoke.git#2.0.0",
     "uuid": "^2.0.3"
   },
