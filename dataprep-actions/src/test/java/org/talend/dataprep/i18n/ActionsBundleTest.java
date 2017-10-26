@@ -10,6 +10,10 @@ import org.talend.dataprep.i18n.custom.actions.TestAction;
 
 public class ActionsBundleTest {
 
+    public ActionsBundleTest() {
+        Locale.setDefault(Locale.ENGLISH);
+    }
+
     @Test
     public void actionLabel() throws Exception {
         assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(this, Locale.US, "negate"));
@@ -17,7 +21,7 @@ public class ActionsBundleTest {
 
     @Test
     public void actionLabel_defaultToEnglish() throws Exception {
-        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(this, Locale.FRANCE, "negate"));
+        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(this, Locale.ITALY, "negate"));
     }
 
     @Test(expected = TalendRuntimeException.class)

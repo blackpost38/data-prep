@@ -126,7 +126,7 @@ public class ErrorMessageTest extends ServiceBaseTest {
 
         // then
         String errorExpected = "{\"code\":\"" + errorCode.getProduct() + '_' + errorCode.getGroup() + '_' + errorCode.getCode()
-                + "\",\"message\":\"" + "Unable to create data set, content is not supported. Try with a csv or xls file!"
+                + "\",\"message\":\"" + "Unable to create dataset, content is not supported. Try with a csv or xls file!"
                 + "\",\"messageTitle\":Unsupported content,\"context\":{}}";
         StringWriter stringWriter = new StringWriter();
         unsupportedContent.writeTo(stringWriter);
