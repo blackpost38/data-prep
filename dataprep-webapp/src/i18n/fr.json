@@ -72,6 +72,8 @@
   "NO_DATASET": "Aucun jeu de données disponible",
   "CLICK_ADD_DATASETS": "Aucun jeu de données à afficher. Cliquez sur 'Ajouter un jeu de données' pour ajouter un jeu de données.",
   "CLICK_ADD_PREPARATIONS": "Aucune préparation dans ce dossier. Cliquez sur 'Ajouter une préparation' pour ajouter une préparation.",
+  "UPDATE_DATASET_INPUT": "Mettre à jour le jeu de données",
+  "IMPORT_DATASET_FILE": "Importer un jeu de données",
 
   "_comment": "Preparations",
   "LAST_MODIFICATION": "dernière modification",
