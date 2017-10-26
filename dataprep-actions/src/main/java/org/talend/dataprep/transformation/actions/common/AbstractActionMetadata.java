@@ -278,7 +278,6 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
         if (doesCreateNewColumn(context.getParameters())) {
             String columnId = context.getColumnId();
             RowMetadata rowMetadata = context.getRowMetadata();
-            ColumnMetadata column = rowMetadata.getById(columnId);
 
             // create new column and append it after current column
             context.column("target", r -> {
