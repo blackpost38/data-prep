@@ -398,7 +398,7 @@
 
   "_comment": "404",
   "ERROR_404_TITLE": "Oups…",
-  "ERROR_404_MESSAGE": "La page que vous cherchez est introuvable"
+  "ERROR_404_MESSAGE": "La page que vous cherchez est introuvable",
 
   "_comment": "React components",
   "HEADERBAR_HELP": "Aide"
