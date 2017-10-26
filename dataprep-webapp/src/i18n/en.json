@@ -233,7 +233,7 @@
   "SERVER_ERROR_TITLE": "An error has occurred",
   "SERVICE_UNAVAILABLE": "Service unavailable",
   "UNSUPPORTED_CONTENT_TITLE": "Unsupported content",
-  "UNSUPPORTED_CONTENT": "Unable to create the dataset: the content is not supported. Try with a CSV or XSL file.",
+  "UNSUPPORTED_CONTENT": "Unable to create the dataset: the content is not supported. Try with a CSV or XLS file.",
   "DATASET_NAME_ALREADY_USED_TITLE": "Dataset name already used",
   "DATASET_NAME_ALREADY_USED": "This Dataset name is already used by an other dataset",
 
@@ -403,5 +403,8 @@
 
   "_comment": "404",
   "ERROR_404_TITLE": "Oops ...",
-  "ERROR_404_MESSAGE": "The page you are looking for cannot be found"
+  "ERROR_404_MESSAGE": "The page you are looking for cannot be found",
+
+  "_comment": "React components",
+  "HEADERBAR_HELP": "Help"
 }

@@ -34,7 +34,7 @@ public interface HomeViewsForNonTDPUsers {
         )
         .brand(
                 LinkSettings.builder()
-                        .name("appheaderbar.brand")
+                        .label("appheaderbar.brand")
                         .build()
         )
         .build();

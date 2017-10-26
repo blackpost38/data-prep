@@ -31,7 +31,7 @@ public interface PlaygroundViews {
             .id("appheaderbar:playground")
             .brand(
                     LinkSettings.builder()
-                            .name("appheaderbar.brand")
+                            .label("appheaderbar.brand")
                             .onClick(MENU_PREPARATIONS.getId())
                             .build()
             )
