@@ -20,8 +20,13 @@ public class ActionsBundleTest {
     }
 
     @Test
+    public void actionLabel_french() throws Exception {
+        assertEquals("Mettre à la forme négative", ActionsBundle.INSTANCE.actionLabel(this, Locale.FRENCH, "negate"));
+    }
+
+    @Test
     public void actionLabel_defaultToEnglish() throws Exception {
-        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(this, Locale.ITALY, "negate"));
+        assertEquals("Negate value", ActionsBundle.INSTANCE.actionLabel(this, Locale.KOREAN, "negate"));
     }
 
     @Test(expected = TalendRuntimeException.class)

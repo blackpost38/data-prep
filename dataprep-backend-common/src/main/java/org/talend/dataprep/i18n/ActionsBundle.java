@@ -54,9 +54,9 @@ public class ActionsBundle implements MessagesBundle {
     /**
      * Represents the fallBackKey used to map the default resource bundle since a concurrentHashMap does not map a null key.
      */
-    private final Class fallBackKey;
+    private final String fallBackKey;
 
-    private final Map<Class, ResourceBundle> actionToResourceBundle = new ConcurrentHashMap<>();
+    private final Map<String, ResourceBundle> actionToResourceBundle = new ConcurrentHashMap<>();
 
     /** Base URL of the documentation portal. */
     // Documentation URL is not thread safe. It is acceptable while it is only changed at the application startup.
@@ -64,13 +64,25 @@ public class ActionsBundle implements MessagesBundle {
     private String documentationUrlBase;
 
     private ActionsBundle() {
-        fallBackKey = this.getClass();
+        fallBackKey = ActionsBundle.generateBundleKey(this.getClass());
         actionToResourceBundle.put(fallBackKey, ResourceBundle.getBundle(BUNDLE_NAME, Locale.ENGLISH));
+    }
+
+    private static String generateBundleKey(Class clazz, Locale locale) {
+        if (Objects.isNull(locale)) {
+            locale = Locale.ENGLISH;
+        }
+        return clazz.getName() + "_" + locale.toString();
+    }
+
+    private static String generateBundleKey(Class clazz) {
+        return ActionsBundle.generateBundleKey(clazz, Locale.ENGLISH);
     }
 
     /**
      * Link all <code>parameters</code> to the <code>parent</code>: when looking for parameters translation, bundle
      * will use <code>parent</code> to find resource bundle.
+     *
      * @param parameters The {@link Parameter parameters} to attach to <code>parent</code>.
      * @param parent An object to be used in resource bundle search.
      * @return A list of {@link Parameter parameters} that will use <code>parent</code> to look for message keys.
@@ -105,6 +117,7 @@ public class ActionsBundle implements MessagesBundle {
 
     /**
      * Format the message template with provided arguments
+     *
      * @param template The string template
      * @param args The arguments
      */
@@ -119,11 +132,14 @@ public class ActionsBundle implements MessagesBundle {
      */
     private String getOptionalMessage(Object action, Locale locale, String code, Object... args) {
         final ResourceBundle bundle = findBundle(action, locale);
+        final String fallbackBundleKey = generateBundleKey(this.getClass());
+
         // We can put some cache here if default internal caching it is not enough
-        if (bundle.containsKey(code)) {
+        if (Objects.nonNull(bundle) && bundle.containsKey(code)) {
             return formatMessage(bundle.getString(code), args);
-        } else if(actionToResourceBundle.get(fallBackKey).containsKey(code)) {
-            return formatMessage(actionToResourceBundle.get(fallBackKey).getString(code), args);
+        } else if (Objects.nonNull(actionToResourceBundle.get(fallbackBundleKey))
+                && actionToResourceBundle.get(fallbackBundleKey).containsKey(code)) {
+            return formatMessage(actionToResourceBundle.get(fallbackBundleKey).getString(code), args);
         }
         return null;
     }
@@ -142,11 +158,13 @@ public class ActionsBundle implements MessagesBundle {
     }
 
     private ResourceBundle findBundle(Object action, Locale locale) {
+        String fallbackBundleKey = ActionsBundle.generateBundleKey(this.getClass());
         if (action == null) {
-            return actionToResourceBundle.get(fallBackKey);
+            return actionToResourceBundle.get(fallbackBundleKey);
         }
-        if (actionToResourceBundle.containsKey(action.getClass())) {
-            final ResourceBundle resourceBundle = actionToResourceBundle.get(action.getClass());
+        String actionBundleKey = ActionsBundle.generateBundleKey(action.getClass(), locale);
+        if (actionToResourceBundle.containsKey(actionBundleKey)) {
+            final ResourceBundle resourceBundle = actionToResourceBundle.get(actionBundleKey);
             LOGGER.trace("Cache hit for action '{}': '{}'", action, resourceBundle);
             return resourceBundle;
         }
@@ -167,7 +185,7 @@ public class ActionsBundle implements MessagesBundle {
             LOGGER.debug("Choose default action resource bundle for action '{}'", action);
             bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
         }
-        actionToResourceBundle.putIfAbsent(action.getClass(), bundle);
+        actionToResourceBundle.putIfAbsent(actionBundleKey, bundle);
         return bundle;
     }
 
