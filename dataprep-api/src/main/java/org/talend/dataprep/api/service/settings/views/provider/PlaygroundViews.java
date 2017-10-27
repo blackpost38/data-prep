@@ -48,7 +48,7 @@ public interface PlaygroundViews {
                             .onChange(SEARCH_DOC.getId())
                             .onKeyDown(SEARCH_FOCUS.getId())
                             .onToggle(SEARCH_TOGGLE.getId())
-                            .onSelect("appheaderbar.search.types.documentation", EXTERNAL_DOCUMENTATION.getId())
+                            .onSelect("documentation", EXTERNAL_DOCUMENTATION.getId())
                             .placeholder("appheaderbar.search.playground.placeholder")
                             .build()
             )

@@ -274,7 +274,7 @@ public class AppSettingsAPITest extends ApiServiceTestBase {
         assertThat(ahb.getLogo().getName(), is("Talend"));
         assertThat(ahb.getLogo().getOnClick(), is("menu:preparations"));
         assertThat(ahb.getLogo().getLabel(), is("Go to home page"));
-        assertThat(ahb.getBrand().getName(), is("Data Preparation"));
+        assertThat(ahb.getBrand().getLabel(), is("Data Preparation"));
         assertThat(ahb.getBrand().getOnClick(), is("menu:preparations"));
         assertThat(ahb.getSearch().getDebounceTimeout(), is(300));
         assertThat(ahb.getSearch().getPlaceholder(), is("Search Talend Data Preparation and Documentation"));
@@ -299,7 +299,7 @@ public class AppSettingsAPITest extends ApiServiceTestBase {
         assertThat(ahb.getLogo().getName(), is("Talend"));
         assertThat(ahb.getLogo().getOnClick(), is("menu:preparations"));
         assertThat(ahb.getLogo().getLabel(), is("Go to home page"));
-        assertThat(ahb.getBrand().getName(), is("Data Preparation"));
+        assertThat(ahb.getBrand().getLabel(), is("Data Preparation"));
         assertThat(ahb.getBrand().getOnClick(), is("menu:preparations"));
         assertThat(ahb.getSearch().getDebounceTimeout(), is(300));
         assertThat(ahb.getSearch().getPlaceholder(), is("Search Documentation"));
