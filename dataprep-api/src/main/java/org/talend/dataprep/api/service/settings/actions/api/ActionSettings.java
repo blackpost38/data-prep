@@ -315,6 +315,9 @@ public class ActionSettings {
             if (StringUtils.isNotEmpty(this.name)) {
                 this.name = DataprepBundle.message(this.name);
             }
+            if (StringUtils.isNotEmpty(this.toolTip)) {
+                this.toolTip = DataprepBundle.message(this.toolTip);
+            }
             return this;
         }
 
