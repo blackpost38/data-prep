@@ -29,6 +29,7 @@ import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest;
 import org.talend.dataprep.transformation.actions.ActionMetadataTestUtils;
+import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
 
 /**
@@ -38,11 +39,17 @@ import org.talend.dataprep.transformation.api.action.ActionTestWorkbench;
  */
 public class SquareRootTest extends AbstractMetadataBaseTest {
 
-    /** The action to test. */
-    private SquareRoot action = new SquareRoot();
+    public SquareRootTest() {
+        super(new SquareRoot());
+    }
 
     /** The action parameters. */
     private Map<String, String> parameters;
+
+    @Override
+    public CreateNewColumnPolicy getCreateNewColumnPolicy() {
+        return CreateNewColumnPolicy.VISIBLE_DISABLED;
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -51,9 +58,10 @@ public class SquareRootTest extends AbstractMetadataBaseTest {
     }
 
     @Test
-    public void square_with_positive() {
+    public void test_apply_in_newcolumn() {
         // given
         DataSetRow row = getRow("25", "3", "Done !");
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
 
         // when
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
@@ -64,9 +72,23 @@ public class SquareRootTest extends AbstractMetadataBaseTest {
     }
 
     @Test
+    public void test_apply_inplace() {
+        // given
+        DataSetRow row = getRow("25", "3", "Done !");
+
+        // when
+        ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
+
+        // then
+        DataSetRow expected = getRow("5.0", "3", "Done !");
+        assertEquals(expected, row);
+    }
+
+    @Test
     public void square_with_negative() {
         // given
         DataSetRow row = getRow("-5", "3", "Done !");
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
 
         // when
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
@@ -80,6 +102,7 @@ public class SquareRootTest extends AbstractMetadataBaseTest {
     public void square_with_NaN() {
         // given
         DataSetRow row = getRow("beer", "3", "Done !");
+        parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
 
         // when
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
