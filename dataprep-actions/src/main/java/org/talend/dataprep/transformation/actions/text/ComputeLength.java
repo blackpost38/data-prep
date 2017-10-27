@@ -64,10 +64,12 @@ public class ComputeLength extends AbstractActionMetadata implements ColumnActio
         return true;
     }
 
+    @Override
     public Type getColumnType(ActionContext context){
         return Type.INTEGER;
     }
 
+    @Override
     public String getCreatedColumnName(ActionContext context){
         return context.getColumnName() + APPENDIX;
     }

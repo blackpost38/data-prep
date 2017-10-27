@@ -67,6 +67,7 @@ public class ComputeLengthTest extends AbstractMetadataBaseTest<ComputeLength> {
         assertThat(action.getCategory(), is(ActionCategory.STRINGS.getDisplayName()));
     }
 
+    @Override
     protected  CreateNewColumnPolicy getCreateNewColumnPolicy(){
         return CreateNewColumnPolicy.INVISIBLE_ENABLED;
     }

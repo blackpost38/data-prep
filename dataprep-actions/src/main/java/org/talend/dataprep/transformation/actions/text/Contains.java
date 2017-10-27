@@ -78,6 +78,16 @@ public class Contains extends AbstractActionMetadata implements ColumnAction, Ot
     }
 
     @Override
+    protected boolean createNewColumnParamVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean getCreateNewColumnDefaultValue() {
+        return true;
+    }
+
+    @Override
     public List<Parameter> getParameters() {
         final List<Parameter> parameters = super.getParameters();
 
@@ -95,32 +105,15 @@ public class Contains extends AbstractActionMetadata implements ColumnAction, Ot
     }
 
     @Override
+    public Type getColumnType(ActionContext context){
+        return Type.BOOLEAN;
+    }
+
+    @Override
     public void compile(ActionContext context) {
         super.compile(context);
         if (context.getActionStatus() == ActionContext.ActionStatus.OK) {
             checkSelectedColumnParameter(context.getParameters(), context.getRowMetadata());
-            // Create result column
-            final String columnId = context.getColumnId();
-            final RowMetadata rowMetadata = context.getRowMetadata();
-            final ColumnMetadata column = rowMetadata.getById(columnId);
-            if (column != null) {
-                String newColumnName = evalNewColumnName(column.getName(), rowMetadata, context.getParameters());
-                context.get(NEW_COLUMN_NAME, p -> newColumnName);
-
-                context.column(newColumnName, r -> {
-                    final ColumnMetadata c = ColumnMetadata.Builder //
-                            .column() //
-                            .name(newColumnName) //
-                            .type(BOOLEAN) //
-                            .empty(column.getQuality().getEmpty()) //
-                            .invalid(column.getQuality().getInvalid()) //
-                            .valid(column.getQuality().getValid()) //
-                            .headerSize(column.getHeaderSize()) //
-                            .build();
-                    rowMetadata.insertAfter(columnId, c);
-                    return c;
-                });
-            }
         }
     }
 
@@ -131,8 +124,7 @@ public class Contains extends AbstractActionMetadata implements ColumnAction, Ot
         final ColumnMetadata column = rowMetadata.getById(columnId);
         Map<String, String> parameters = context.getParameters();
 
-        // create new column and append it after current column
-        final String containsColumn = context.column(context.get(NEW_COLUMN_NAME));
+        final String containsColumn = context.getTargetColumnId();
 
         String value = row.get(context.getColumnId());
         String referenceValue;
@@ -148,7 +140,11 @@ public class Contains extends AbstractActionMetadata implements ColumnAction, Ot
         row.set(containsColumn, toStringTrueFalse(contains));
     }
 
-    private String evalNewColumnName(String sourceColumnName, RowMetadata rowMetadata, Map<String, String> parameters) {
+    @Override
+    public String getCreatedColumnName(ActionContext context){
+        final Map<String, String> parameters = context.getParameters();
+        final RowMetadata rowMetadata = context.getRowMetadata();
+        final String sourceColumnName = context.getColumnName();
         String prefix;
         if (parameters.get(MODE_PARAMETER).equals(OTHER_COLUMN_MODE)) {
             final ColumnMetadata selectedColumn = rowMetadata.getById(parameters.get(SELECTED_COLUMN_PARAMETER));
