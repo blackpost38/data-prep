@@ -53,7 +53,7 @@ describe('History control directive', function () {
 		//given
 		createElement();
 
-		var event = angular.element.Event('keydown');
+		const event = angular.element.Event('keydown');
 		event.keyCode = 90;
 		event.ctrlKey = true;
 
@@ -68,7 +68,7 @@ describe('History control directive', function () {
 		//given
 		createElement();
 
-		var event = angular.element.Event('keydown');
+		const event = angular.element.Event('keydown');
 		event.keyCode = 89;
 		event.ctrlKey = true;
 
