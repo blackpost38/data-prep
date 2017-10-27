@@ -35,14 +35,14 @@ import com.jayway.restassured.RestAssured;
 
 @RunWith(SpringRunner.class)
 @Import(LocalContentServiceConfiguration.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "dataset.asynchronous.analysis=false",
-        "content-service.store=local", "live.dataset.location=tac", "dataprep.locale:" + TEST_LOCALE})
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "dataset.asynchronous.analysis=false", "content-service.store=local",
+        "live.dataset.location=tac", "dataprep.locale:" + TEST_LOCALE })
 public abstract class ServiceBaseTest {
 
     public static final String TEST_LOCALE = "vi_VN";
 
     @Configuration
-    @ComponentScan(basePackages = {"org.talend.daikon.content", "org.talend.dataprep"})
+    @ComponentScan(basePackages = { "org.talend.daikon.content", "org.talend.dataprep" })
     public static class TestComponentScan {
     }
 

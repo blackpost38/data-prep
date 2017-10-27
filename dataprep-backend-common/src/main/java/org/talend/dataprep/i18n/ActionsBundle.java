@@ -65,18 +65,18 @@ public class ActionsBundle implements MessagesBundle {
 
     private ActionsBundle() {
         fallBackKey = ActionsBundle.generateBundleKey(this.getClass());
-        actionToResourceBundle.put(fallBackKey, ResourceBundle.getBundle(BUNDLE_NAME, Locale.ENGLISH));
+        actionToResourceBundle.put(fallBackKey, ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault()));
     }
 
     private static String generateBundleKey(Class clazz, Locale locale) {
         if (Objects.isNull(locale)) {
-            locale = Locale.ENGLISH;
+            locale = Locale.getDefault();
         }
         return clazz.getName() + "_" + locale.toString();
     }
 
     private static String generateBundleKey(Class clazz) {
-        return ActionsBundle.generateBundleKey(clazz, Locale.ENGLISH);
+        return ActionsBundle.generateBundleKey(clazz, null);
     }
 
     /**
@@ -158,7 +158,7 @@ public class ActionsBundle implements MessagesBundle {
     }
 
     private ResourceBundle findBundle(Object action, Locale locale) {
-        String fallbackBundleKey = ActionsBundle.generateBundleKey(this.getClass());
+        String fallbackBundleKey = ActionsBundle.generateBundleKey(this.getClass(), locale);
         if (action == null) {
             return actionToResourceBundle.get(fallbackBundleKey);
         }
