@@ -70,6 +70,7 @@ public abstract class ServiceBaseTest {
 
     @Before
     public void setUp() {
+        Locale.setDefault(Locale.US);
         if (!environmentSet) {
             RestAssured.port = port;
 
