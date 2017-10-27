@@ -201,13 +201,6 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 }
                 actionContext.get(JULIAN_DAY_CONVERT_KEY, p -> julianDayConvert);
             }
-            // register the new pattern in column stats as most used pattern, to be able to process date action more
-            // efficiently later
-            final RowMetadata rowMetadata = actionContext.getRowMetadata();
-            final String columnId = actionContext.getColumnId();
-            final ColumnMetadata column = rowMetadata.getById(columnId);
-
-            rowMetadata.update(columnId, column);
         }
     }
 
@@ -248,7 +241,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 newValue = julianDayConvert.convert(value);
             }
             if (StringUtils.isNotEmpty(newValue) && StringUtils.isNotBlank(newValue)) {
-                row.set(columnId, newValue);
+                row.set(context.getTargetColumnId(), newValue);
             }
         } catch (DateTimeException e) {
             // cannot parse the date, let's leave it as is
