@@ -21,7 +21,7 @@ public class ActionsBundleTest {
 
     @Test
     public void actionLabel_french() throws Exception {
-        assertEquals("Mettre à la forme négative", ActionsBundle.INSTANCE.actionLabel(this, Locale.FRENCH, "negate"));
+        assertEquals("Négation mathématique de la valeur", ActionsBundle.INSTANCE.actionLabel(this, Locale.FRENCH, "negate"));
     }
 
     @Test
