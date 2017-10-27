@@ -405,6 +405,6 @@
   "ERROR_404_TITLE": "Oops ...",
   "ERROR_404_MESSAGE": "The page you are looking for cannot be found",
 
-  "_comment": "React components",
+  "_comment": "talend/ui components",
   "HEADERBAR_HELP": "Help"
 }

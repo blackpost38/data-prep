@@ -16,6 +16,7 @@
 import angular from 'angular';
 import ngSanitize from 'angular-sanitize';
 import ngTranslate from 'angular-translate';
+import moment from 'moment';
 import uiRouter from 'angular-ui-router';
 
 import APP_MODULE from './components/app/app-module';
@@ -62,8 +63,7 @@ const app = angular.module(MODULE_NAME,
 			prefix: 'i18n/',
 			suffix: '.json',
 		});
-
-		$translateProvider.preferredLanguage('fr');
+		$translateProvider.preferredLanguage('en');
 		$translateProvider.useSanitizeValueStrategy(null);
 	})
 
@@ -74,7 +74,10 @@ const app = angular.module(MODULE_NAME,
 	// Language to use at startup (for now only english)
 	.run(($window, $translate) => {
 		'ngInject';
-		$translate.use('fr');
+
+		const preferredLanguage = 'fr';
+		moment.locale(preferredLanguage);
+		$translate.use(preferredLanguage);
 	});
 
 window.fetchConfiguration = function fetchConfiguration() {

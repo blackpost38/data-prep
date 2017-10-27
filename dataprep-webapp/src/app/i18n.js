@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import XHR from 'i18next-xhr-backend';
 
-i18n
+i18n // eslint-disable-line import/no-named-as-default-member
 	.use(XHR)
 	.init({
 		// locales load path. lng = language, ns = namespace
