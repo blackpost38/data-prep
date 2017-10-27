@@ -38,8 +38,9 @@ import org.talend.dataprep.transformation.actions.category.ActionCategory;
  */
 public class RoundFloorTest extends AbstractRoundTest {
 
-    /** The action ton test. */
-    private RoundFloor action = new RoundFloor();
+    public RoundFloorTest() {
+        super(new RoundFloor());
+    }
 
     private Map<String, String> parameters;
 
@@ -159,11 +160,6 @@ public class RoundFloorTest extends AbstractRoundTest {
     }
 
     @Override
-    protected AbstractRound getAction() {
-        return action;
-    }
-
-    @Override
     protected Map<String, String> getParameters() {
         return parameters;
     }
@@ -172,4 +168,6 @@ public class RoundFloorTest extends AbstractRoundTest {
     protected List<String> getExpectedParametersName() {
         return Arrays.asList("column_id", "row_id", "scope", "filter", "precision");
     }
+
+
 }

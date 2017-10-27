@@ -40,6 +40,7 @@ public abstract class AbstractRound extends AbstractActionMetadata implements Co
     /** Number of digit after the decimal symbol. */
     protected static final String PRECISION = "precision"; //$NON-NLS-1$
 
+    protected static  final String NEW_COLUMNE_SUFFIX = "_rounded";
     @Override
     public String getCategory() {
         return ActionCategory.NUMBERS.getDisplayName();
@@ -50,6 +51,11 @@ public abstract class AbstractRound extends AbstractActionMetadata implements Co
         final List<Parameter> parameters = super.getParameters();
         parameters.add(new Parameter(PRECISION, INTEGER, "0"));
         return ActionsBundle.attachToAction(parameters, this);
+    }
+
+    @Override
+    public String getCreatedColumnName(ActionContext context) {
+        return context.getColumnName() + NEW_COLUMNE_SUFFIX;
     }
 
     @Override
@@ -76,7 +82,7 @@ public abstract class AbstractRound extends AbstractActionMetadata implements Co
         if (NumericHelper.isBigDecimal(value)) {
             BigDecimal bd = BigDecimalParser.toBigDecimal(value);
             bd = bd.setScale(precision, getRoundingMode());
-            row.set(columnId, String.valueOf(bd));
+            row.set(context.getTargetColumnId(), String.valueOf(bd));
         }
     }
 
@@ -87,6 +93,11 @@ public abstract class AbstractRound extends AbstractActionMetadata implements Co
         Type columnType = Type.get(column.getType());
         // in order to 'clean' integer typed columns, this function needs to be allowed on any numeric types
         return Type.NUMERIC.isAssignableFrom(columnType);
+    }
+
+    @Override
+    public Type getColumnType(ActionContext context){
+        return Type.DOUBLE;
     }
 
     @Override

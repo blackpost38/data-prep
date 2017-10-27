@@ -38,8 +38,9 @@ import org.talend.dataprep.transformation.actions.category.ActionCategory;
  */
 public class RoundCeilTest extends AbstractRoundTest {
 
-    /** The action ton test. */
-    private RoundCeil action = new RoundCeil();
+    public RoundCeilTest() {
+        super(new RoundCeil());
+    }
 
     private Map<String, String> parameters;
 
@@ -135,11 +136,6 @@ public class RoundCeilTest extends AbstractRoundTest {
     public void should_have_expected_behavior() {
         assertEquals(1, action.getBehavior().size());
         assertTrue(action.getBehavior().contains(ActionDefinition.Behavior.VALUES_COLUMN));
-    }
-
-    @Override
-    protected AbstractRound getAction() {
-        return action;
     }
 
     @Override
