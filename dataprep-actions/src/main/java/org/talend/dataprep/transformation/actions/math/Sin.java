@@ -14,8 +14,6 @@ package org.talend.dataprep.transformation.actions.math;
 
 import static org.talend.dataprep.transformation.actions.math.Sin.SIN_NAME;
 
-import java.util.Map;
-
 import org.apache.commons.math3.util.FastMath;
 import org.talend.daikon.number.BigDecimalParser;
 import org.talend.dataprep.api.action.Action;
@@ -30,6 +28,8 @@ public class Sin extends AbstractMathNoParameterAction {
 
     protected static final String SIN_NAME = "sin_numbers";
 
+    protected static final String SIN_SUFFIXE = "_sin";
+
     @Override
     protected String calculateResult(String columnValue, ActionContext context) {
         double value = BigDecimalParser.toBigDecimal(columnValue).doubleValue();
@@ -41,7 +41,7 @@ public class Sin extends AbstractMathNoParameterAction {
 
     @Override
     public String getCreatedColumnName(ActionContext context) {
-        return "sin";
+        return context.getColumnName() + SIN_SUFFIXE;
     }
 
     @Override

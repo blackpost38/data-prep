@@ -21,7 +21,6 @@ import java.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.talend.dataprep.ClassPathActionRegistry;
-import org.talend.dataprep.api.action.Action;
 import org.talend.dataprep.api.dataset.ColumnMetadata;
 import org.talend.dataprep.api.dataset.RowMetadata;
 import org.talend.dataprep.api.dataset.row.DataSetRow;
@@ -32,15 +31,11 @@ import org.talend.dataprep.quality.AnalyzerService;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ActionFactory;
 import org.talend.dataprep.transformation.actions.common.ReplaceOnValueHelper;
-import org.talend.dataprep.transformation.actions.math.Negate;
 import org.talend.dataprep.transformation.pipeline.ActionRegistry;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.validation.constraints.AssertTrue;
-
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
