@@ -79,7 +79,17 @@ angular.module(MODULE_NAME,
 			't',
 		]
 	)])
-	.directive('pureSidePanel', ['reactDirective', reactDirective => reactDirective(SidePanel)])
+	.directive('pureSidePanel', ['reactDirective', reactDirective => reactDirective(
+		getTranslated(SidePanel, { i18n }), [
+			'id',
+			'actions',
+			'onSelect',
+			'onToggleDock',
+			'docked',
+			'selected',
+			't',
+		]
+	)])
 	.directive('pureProgress', ['reactDirective', reactDirective => reactDirective(Progress)])
 	.directive('iconsProvider', ['reactDirective', reactDirective => reactDirective(IconsProvider)])
 	.directive('icon', ['reactDirective', reactDirective => reactDirective(Icon)])
