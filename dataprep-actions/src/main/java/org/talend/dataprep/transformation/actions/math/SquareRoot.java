@@ -30,6 +30,7 @@ public class SquareRoot extends AbstractMathNoParameterAction {
 
     protected static final String SQRT_NAME = "square_root_numbers";
 
+    protected static final String SQRT_SUFFIXE = "_square_root";
     @Override
     protected String calculateResult(String columnValue, ActionContext context) {
         double value = BigDecimalParser.toBigDecimal(columnValue).doubleValue();
@@ -39,7 +40,7 @@ public class SquareRoot extends AbstractMathNoParameterAction {
 
     @Override
     public String getCreatedColumnName(ActionContext context) {
-        return "square_root";
+        return context.getColumnName() + SQRT_SUFFIXE;
     }
 
     @Override

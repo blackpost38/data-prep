@@ -28,6 +28,8 @@ public class Tan extends AbstractMathNoParameterAction {
 
     protected static final String TAN_NAME = "tan_numbers";
 
+    protected static final String TAN_SUFFIXE = "_tan";
+
     @Override
     protected String calculateResult(String columnValue, ActionContext context) {
         double value = BigDecimalParser.toBigDecimal(columnValue).doubleValue();
@@ -39,7 +41,7 @@ public class Tan extends AbstractMathNoParameterAction {
 
     @Override
     public String getCreatedColumnName(ActionContext context) {
-        return context.getColumnName() + "_tan";
+        return context.getColumnName() + TAN_SUFFIXE;
     }
 
     @Override

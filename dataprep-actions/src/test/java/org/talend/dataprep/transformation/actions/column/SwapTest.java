@@ -170,12 +170,12 @@ public class SwapTest extends BaseDateTest {
 
     @Test
     public void test_apply_in_newcolumn() {
-
+        // Nothing to test, this action is never applied in newcolumn
     }
 
     @Test
     public void test_apply_inplace() {
-
+        // Nothing to test, this action is never applied in place
     }
 
     @Override

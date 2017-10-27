@@ -274,7 +274,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      *
      * Actions that creates more than one column ('split', 'extract email parts', etc...) should manage this on their own.
      */
-    private void createNewColumn(ActionContext context){
+    protected void createNewColumn(ActionContext context){
         if (doesCreateNewColumn(context.getParameters())) {
             String columnId = context.getColumnId();
             RowMetadata rowMetadata = context.getRowMetadata();

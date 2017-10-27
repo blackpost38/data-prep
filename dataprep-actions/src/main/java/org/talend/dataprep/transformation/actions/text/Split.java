@@ -77,6 +77,16 @@ public class Split extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
+    public boolean createNewColumnParamVisible() {
+        return false;
+    }
+
+    @Override
+    public boolean getCreateNewColumnDefaultValue() {
+        return true;
+    }
+
+    @Override
     @Nonnull
     public List<Parameter> getParameters() {
         final List<Parameter> parameters = super.getParameters();
@@ -115,30 +125,34 @@ public class Split extends AbstractActionMetadata implements ColumnAction {
                 LOGGER.warn("Cannot split on an empty separator");
                 context.setActionStatus(ActionContext.ActionStatus.CANCELED);
             }
-            // Create split columns
-            final RowMetadata rowMetadata = context.getRowMetadata();
-            final String columnId = context.getColumnId();
-            final ColumnMetadata column = rowMetadata.getById(columnId);
-            final Deque<String> lastColumnId = new ArrayDeque<>();
-            final Map<String, String> parameters = context.getParameters();
-            int limit = Integer.parseInt(parameters.get(LIMIT));
-            final List<String> newColumns = new ArrayList<>();
-            lastColumnId.push(columnId);
-            for (int i = 0; i < limit; i++) {
-                final int newColumnIndex = i + 1;
-                newColumns.add(context.column(column.getName() + SPLIT_APPENDIX + i, r -> {
-                    final ColumnMetadata c = ColumnMetadata.Builder //
-                            .column() //
-                            .type(Type.STRING) //
-                            .computedId(StringUtils.EMPTY) //
-                            .name(column.getName() + SPLIT_APPENDIX + newColumnIndex) //
-                            .build();
-                    lastColumnId.push(rowMetadata.insertAfter(lastColumnId.pop(), c));
-                    return c;
-                }));
-            }
-            context.get(NEW_COLUMNS_CONTEXT, p -> newColumns); // Save new column names for apply
         }
+    }
+
+    @Override
+    protected void createNewColumn(ActionContext context){
+        // Create split columns
+        final RowMetadata rowMetadata = context.getRowMetadata();
+        final String columnId = context.getColumnId();
+        final ColumnMetadata column = rowMetadata.getById(columnId);
+        final Deque<String> lastColumnId = new ArrayDeque<>();
+        final Map<String, String> parameters = context.getParameters();
+        int limit = Integer.parseInt(parameters.get(LIMIT));
+        final List<String> newColumns = new ArrayList<>();
+        lastColumnId.push(columnId);
+        for (int i = 0; i < limit; i++) {
+            final int newColumnIndex = i + 1;
+            newColumns.add(context.column(column.getName() + SPLIT_APPENDIX + i, r -> {
+                final ColumnMetadata c = ColumnMetadata.Builder //
+                        .column() //
+                        .type(Type.STRING) //
+                        .computedId(StringUtils.EMPTY) //
+                        .name(column.getName() + SPLIT_APPENDIX + newColumnIndex) //
+                        .build();
+                lastColumnId.push(rowMetadata.insertAfter(lastColumnId.pop(), c));
+                return c;
+            }));
+        }
+        context.get(NEW_COLUMNS_CONTEXT, p -> newColumns); // Save new column names for apply
     }
 
     @Override
