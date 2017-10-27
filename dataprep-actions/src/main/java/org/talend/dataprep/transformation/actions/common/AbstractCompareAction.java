@@ -101,6 +101,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
         return new Parameter(CONSTANT_VALUE, ParameterType.STRING, "2");
     }
 
+    @Override
     public Type getColumnType(ActionContext context){
         return Type.BOOLEAN;
     }

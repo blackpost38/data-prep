@@ -53,6 +53,8 @@ public class DistanceConverter extends AbstractActionMetadata implements ColumnA
 
     private static final String TARGET_PRECISION = "precision";
 
+    protected static final String NEW_COLUMN_SEPARATOR = "_in_";
+
     /**
      * @return The list of parameters required for this Action to be executed.
      **/
@@ -102,6 +104,16 @@ public class DistanceConverter extends AbstractActionMetadata implements ColumnA
     }
 
     @Override
+    public String getCreatedColumnName(ActionContext context) {
+        return context.getColumnName() + NEW_COLUMN_SEPARATOR + context.getParameters().get(TO_UNIT_PARAMETER);
+    }
+
+    @Override
+    public Type getColumnType(ActionContext context){
+        return Type.DOUBLE;
+    }
+
+    @Override
     public boolean acceptField(ColumnMetadata column) {
         return Type.NUMERIC.isAssignableFrom(column.getType());
     }
@@ -144,7 +156,7 @@ public class DistanceConverter extends AbstractActionMetadata implements ColumnA
                 valueToString = columnValue;
             }
 
-            row.set(columnId, valueToString);
+            row.set(context.getTargetColumnId(), valueToString);
         }
     }
 }
