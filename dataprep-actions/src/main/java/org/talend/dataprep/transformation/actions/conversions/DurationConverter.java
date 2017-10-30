@@ -55,6 +55,8 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
 
     protected static final String TARGET_PRECISION = "precision";
 
+    protected static final String NEW_COLUMN_SEPARATOR = "_in_";
+
     /**
      * Converter help class.
      */
@@ -68,6 +70,16 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
     @Override
     public String getCategory() {
         return ActionCategory.CONVERSIONS.getDisplayName();
+    }
+
+    @Override
+    public String getCreatedColumnName(ActionContext context) {
+        return context.getColumnName() + NEW_COLUMN_SEPARATOR + context.getParameters().get(TO_UNIT_PARAMETER);
+    }
+
+    @Override
+    public Type getColumnType(ActionContext context){
+        return Type.DOUBLE;
     }
 
     @Override
@@ -88,12 +100,12 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
 
         parameters.add(builder
                 .name(FROM_UNIT_PARAMETER)
-                .defaultValue(ChronoUnit.DAYS.name()) 
+                .defaultValue(ChronoUnit.DAYS.name())
                 .build());
-        
+
         parameters.add(builder
                 .name(TO_UNIT_PARAMETER)
-                .defaultValue(ChronoUnit.HOURS.name()) 
+                .defaultValue(ChronoUnit.HOURS.name())
                 .build());
 
          parameters.add(new Parameter(TARGET_PRECISION, INTEGER, "1", false, true, "precision"));
@@ -137,7 +149,7 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
                 valueToString = colValue;
             }
 
-            row.set(columnId, valueToString);
+            row.set(context.getTargetColumnId(), valueToString);
         }
     }
 
@@ -148,7 +160,7 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.talend.dataprep.transformation.actions.common.AbstractActionMetadata#acceptField(org.talend.dataprep.api.dataset.
      * ColumnMetadata)
      */
