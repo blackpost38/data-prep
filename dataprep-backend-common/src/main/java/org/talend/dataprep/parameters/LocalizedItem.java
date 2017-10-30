@@ -14,9 +14,9 @@
 package org.talend.dataprep.parameters;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.talend.dataprep.i18n.ActionsBundle;
+import org.talend.dataprep.i18n.ActionsLocaleContextHolder;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -67,7 +67,7 @@ public class LocalizedItem implements Item {
 
     @Override
     public String getLabel() {
-        return ActionsBundle.INSTANCE.choice(parent, Locale.ENGLISH, label);
+        return ActionsBundle.INSTANCE.choice(parent, ActionsLocaleContextHolder.getLocale(), label);
     }
 
 }

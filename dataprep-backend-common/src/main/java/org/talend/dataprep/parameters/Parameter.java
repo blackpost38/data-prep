@@ -15,11 +15,11 @@ package org.talend.dataprep.parameters;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.talend.dataprep.i18n.ActionsBundle;
+import org.talend.dataprep.i18n.ActionsLocaleContextHolder;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -47,7 +47,7 @@ public class Parameter implements Serializable {
     private boolean canBeBlank;
 
     /** Provides a hint to user on how to fill parameter (e.g "http://" for a url, "mm/dd/yy" for a date). */
-    private  String placeHolder;
+    private String placeHolder;
 
     /** The configuration. */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -125,11 +125,11 @@ public class Parameter implements Serializable {
     }
 
     public String getLabel() {
-        return ActionsBundle.INSTANCE.parameterLabel(parent, Locale.ENGLISH, getName());
+        return ActionsBundle.INSTANCE.parameterLabel(parent, ActionsLocaleContextHolder.getLocale(), getName());
     }
 
     public String getDescription() {
-        return ActionsBundle.INSTANCE.parameterDescription(parent, Locale.ENGLISH, getName());
+        return ActionsBundle.INSTANCE.parameterDescription(parent, ActionsLocaleContextHolder.getLocale(), getName());
     }
 
     public String getType() {

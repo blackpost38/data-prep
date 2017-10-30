@@ -16,6 +16,7 @@
 import angular from 'angular';
 import ngSanitize from 'angular-sanitize';
 import ngTranslate from 'angular-translate';
+import moment from 'moment';
 import uiRouter from 'angular-ui-router';
 
 import APP_MODULE from './components/app/app-module';
@@ -62,20 +63,13 @@ const app = angular.module(MODULE_NAME,
 			prefix: 'i18n/',
 			suffix: '.json',
 		});
-
 		$translateProvider.preferredLanguage('en');
 		$translateProvider.useSanitizeValueStrategy(null);
 	})
 
 	// Router config
 	.config(routeConfig)
-	.run(routeInterceptor)
-
-	// Language to use at startup (for now only english)
-	.run(($window, $translate) => {
-		'ngInject';
-		$translate.use('en');
-	});
+	.run(routeInterceptor);
 
 window.fetchConfiguration = function fetchConfiguration() {
 	return getAppConfiguration()
@@ -105,6 +99,14 @@ window.fetchConfiguration = function fetchConfiguration() {
 
 					// dataset encodings
 					DatasetService.refreshSupportedEncodings();
+				})
+				// Language to use at startup (for now only english)
+				.run(($window, $translate) => {
+					'ngInject';
+
+					const preferredLanguage = appSettings.context.locale;
+					moment.locale(preferredLanguage);
+					$translate.preferredLanguage(preferredLanguage);
 				})
 				// Open a keepalive websocket if requested
 				.run(() => {

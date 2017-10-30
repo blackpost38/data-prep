@@ -11,7 +11,7 @@
 //
 // ============================================================================
 
-package org.talend.dataprep.api.service.settings.uris.api;
+package org.talend.dataprep.api.service.settings.context.api;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -19,22 +19,20 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * Uris settings
  *
  */
 @JsonInclude(NON_NULL)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
-public class UriSettings {
-
+public class ContextSettings {
     /**
-     * The uri display id
+     * The context property id
      */
     private String id;
 
     /**
-     * The action uri that will appears next to the id
+     * The context property value
      */
-    private String uri;
+    private String value;
 
     /**
      * Getters & Setters
@@ -47,53 +45,49 @@ public class UriSettings {
         this.id = id;
     }
 
-    public String getUri() {
-        return uri;
+    public String getValue() {
+        return value;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setValue(String value) {
+        this.value = value;
     }
+
 
     /**
      * Builder Pattern for immutable purpose
      */
-    public static Builder builder() {
-        return new Builder();
+    public static ContextSettings.Builder builder() {
+        return new ContextSettings.Builder();
     }
 
-    public static Builder from(final UriSettings uriSettings) {
+    public static ContextSettings.Builder from(final ContextSettings contextSettings) {
         return builder() //
-                .id(uriSettings.getId()) //
-                .uri(uriSettings.getUri());
+                .id(contextSettings.getId()) //
+                .value(contextSettings.getValue());
     }
 
     public static class Builder {
 
         private String id;
 
-        private String uri;
+        private String value;
 
-        public Builder id(String id) {
+        public ContextSettings.Builder id(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder uri(final String uri) {
-            this.uri = uri;
+        public ContextSettings.Builder value(final String value) {
+            this.value = value;
             return this;
         }
 
-        public UriSettings build() {
-            final UriSettings action = new UriSettings();
-            action.setId(this.id);
-            action.setUri(this.uri);
-            return action;
-        }
-
-        public Builder translate() {
-            // we have nothing to translate for UriSettings
-            return this;
+        public ContextSettings build() {
+            final ContextSettings contextSettings = new ContextSettings();
+            contextSettings.setId(this.id);
+            contextSettings.setValue(this.value);
+            return contextSettings;
         }
     }
 }

@@ -1,15 +1,15 @@
-//  ============================================================================
+// ============================================================================
 //
-//  Copyright (C) 2006-2016 Talend Inc. - www.talend.com
+// Copyright (C) 2006-2016 Talend Inc. - www.talend.com
 //
-//  This source code is available under agreement available at
-//  https://github.com/Talend/data-prep/blob/master/LICENSE
+// This source code is available under agreement available at
+// https://github.com/Talend/data-prep/blob/master/LICENSE
 //
-//  You should have received a copy of the agreement
-//  along with this program; if not, write to Talend SA
-//  9 rue Pages 92150 Suresnes, France
+// You should have received a copy of the agreement
+// along with this program; if not, write to Talend SA
+// 9 rue Pages 92150 Suresnes, France
 //
-//  ============================================================================
+// ============================================================================
 
 package org.talend.dataprep.transformation.actions.column;
 
@@ -23,6 +23,7 @@ import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.assertj.core.api.Assertions;
@@ -53,9 +54,9 @@ public class ConcatTest extends AbstractMetadataBaseTest {
     /** The action parameters. */
     private Map<String, String> parameters;
 
-
     @Before
     public void setUp() throws Exception {
+        Locale.setDefault(Locale.US);
         final InputStream parametersSource = ConcatTest.class.getResourceAsStream("concatAction.json");
         parameters = ActionMetadataTestUtils.parseParameters(parametersSource);
     }
@@ -148,7 +149,6 @@ public class ConcatTest extends AbstractMetadataBaseTest {
         DataSetRow expected = getRow("first", "second", "Done !", "<firstsecond>");
         assertEquals(expected, row);
     }
-
 
     @Test
     public void should_not_apply_without_first_value() {
@@ -283,9 +283,9 @@ public class ConcatTest extends AbstractMetadataBaseTest {
 
         // then
         Assertions.assertThat(row.values()).contains(MapEntry.entry("0000", "first"), //
-                                                     MapEntry.entry("0001", "  "), //
-                                                     MapEntry.entry("0002", "Done !"), //
-                                                     MapEntry.entry("0003", "<first>"));
+                MapEntry.entry("0001", "  "), //
+                MapEntry.entry("0002", "Done !"), //
+                MapEntry.entry("0003", "<first>"));
     }
 
     @Test

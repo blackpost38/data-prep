@@ -17,8 +17,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.talend.dataprep.api.dataset.DataSetMetadata;
 
@@ -29,9 +31,15 @@ public class CSVFormatTest extends BaseFormatTest {
 
     private CSVFormat format;
 
+    @BeforeClass
+    public static void setupClass() {
+        Locale.setDefault(Locale.US);
+    }
+
     @Before
     public void setUp() {
         super.setUp();
+        Locale.setDefault(Locale.US);
         format = new CSVFormat();
     }
 

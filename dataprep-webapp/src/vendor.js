@@ -56,6 +56,7 @@ import 'lodash';
 
 // Moment https://github.com/moment/moment/
 import 'moment';
+import 'moment/locale/fr';
 import 'moment-jdateformatparser';
 
 // https://github.com/danialfarid/ng-file-upload

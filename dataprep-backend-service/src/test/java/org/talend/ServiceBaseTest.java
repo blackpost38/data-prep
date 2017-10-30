@@ -16,6 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.talend.ServiceBaseTest.TEST_LOCALE;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +34,18 @@ import org.talend.daikon.content.local.LocalContentServiceConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.restassured.RestAssured;
 
+import java.util.Locale;
+
 @RunWith(SpringRunner.class)
 @Import(LocalContentServiceConfiguration.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "dataset.asynchronous.analysis=false",
-        "content-service.store=local", "live.dataset.location=tac", "dataprep.locale:" + TEST_LOCALE})
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "dataset.asynchronous.analysis=false", "content-service.store=local",
+        "live.dataset.location=tac", "dataprep.locale:" + TEST_LOCALE })
 public abstract class ServiceBaseTest {
 
-    public static final String TEST_LOCALE = "vi_VN";
+    public static final String TEST_LOCALE = "en_US";
 
     @Configuration
-    @ComponentScan(basePackages = {"org.talend.daikon.content", "org.talend.dataprep"})
+    @ComponentScan(basePackages = { "org.talend.daikon.content", "org.talend.dataprep" })
     public static class TestComponentScan {
     }
 
@@ -60,8 +63,14 @@ public abstract class ServiceBaseTest {
 
     private boolean environmentSet = false;
 
+    @BeforeClass
+    public static void setUpClass(){
+        Locale.setDefault(Locale.US);
+    }
+
     @Before
     public void setUp() {
+        Locale.setDefault(Locale.US);
         if (!environmentSet) {
             RestAssured.port = port;
 
