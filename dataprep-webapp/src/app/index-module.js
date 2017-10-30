@@ -69,16 +69,7 @@ const app = angular.module(MODULE_NAME,
 
 	// Router config
 	.config(routeConfig)
-	.run(routeInterceptor)
-
-	// Language to use at startup (for now only english)
-	.run(($window, $translate) => {
-		'ngInject';
-
-		const preferredLanguage = 'fr';
-		moment.locale(preferredLanguage);
-		$translate.use(preferredLanguage);
-	});
+	.run(routeInterceptor);
 
 window.fetchConfiguration = function fetchConfiguration() {
 	return getAppConfiguration()
@@ -108,6 +99,14 @@ window.fetchConfiguration = function fetchConfiguration() {
 
 					// dataset encodings
 					DatasetService.refreshSupportedEncodings();
+				})
+				// Language to use at startup (for now only english)
+				.run(($window, $translate) => {
+					'ngInject';
+
+					const preferredLanguage = appSettings.context.locale;
+					moment.locale(preferredLanguage);
+					$translate.preferredLanguage(preferredLanguage);
 				})
 				// Open a keepalive websocket if requested
 				.run(() => {
