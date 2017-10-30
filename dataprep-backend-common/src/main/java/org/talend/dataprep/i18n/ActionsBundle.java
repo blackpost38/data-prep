@@ -72,7 +72,7 @@ public class ActionsBundle implements MessagesBundle {
         if (Objects.isNull(locale)) {
             locale = Locale.getDefault();
         }
-        return clazz.getName() + "_" + locale.toString();
+        return clazz.getName() + "_" + locale.getLanguage();
     }
 
     private static String generateBundleKey(Class clazz) {
@@ -158,28 +158,28 @@ public class ActionsBundle implements MessagesBundle {
     }
 
     private ResourceBundle findBundle(Object action, Locale locale) {
-        String fallbackBundleKey = ActionsBundle.generateBundleKey(this.getClass(), locale);
-        if (action == null) {
-            return actionToResourceBundle.get(fallbackBundleKey);
-        }
-        String actionBundleKey = ActionsBundle.generateBundleKey(action.getClass(), locale);
-        if (actionToResourceBundle.containsKey(actionBundleKey)) {
-            final ResourceBundle resourceBundle = actionToResourceBundle.get(actionBundleKey);
-            LOGGER.trace("Cache hit for action '{}': '{}'", action, resourceBundle);
-            return resourceBundle;
-        }
-        // Lookup for resource bundle in package hierarchy
-        final Package actionPackage = action.getClass().getPackage();
-        String currentPackageName = actionPackage.getName();
-        ResourceBundle bundle = null;
-        while (currentPackageName.contains(".")) {
-            try {
-                bundle = ResourceBundle.getBundle(currentPackageName + '.' + ACTIONS_MESSAGES, locale);
-                break; // Found, exit lookup
-            } catch (MissingResourceException e) {
-                LOGGER.debug("No action resource bundle found for action '{}' at '{}'", action, currentPackageName, e);
+        String actionBundleKey = ActionsBundle.generateBundleKey(this.getClass(), locale);
+        ResourceBundle bundle = actionToResourceBundle.get(actionBundleKey);
+        if (Objects.nonNull(action)) {
+            actionBundleKey = ActionsBundle.generateBundleKey(action.getClass(), locale);
+            if (actionToResourceBundle.containsKey(actionBundleKey)) {
+                final ResourceBundle resourceBundle = actionToResourceBundle.get(actionBundleKey);
+                LOGGER.trace("Cache hit for action '{}': '{}'", action, resourceBundle);
+                return resourceBundle;
             }
-            currentPackageName = StringUtils.substringBeforeLast(currentPackageName, ".");
+            // Lookup for resource bundle in package hierarchy
+            final Package actionPackage = action.getClass().getPackage();
+            String currentPackageName = actionPackage.getName();
+
+            while (currentPackageName.contains(".")) {
+                try {
+                    bundle = ResourceBundle.getBundle(currentPackageName + '.' + ACTIONS_MESSAGES, locale);
+                    break; // Found, exit lookup
+                } catch (MissingResourceException e) {
+                    LOGGER.debug("No action resource bundle found for action '{}' at '{}'", action, currentPackageName, e);
+                }
+                currentPackageName = StringUtils.substringBeforeLast(currentPackageName, ".");
+            }
         }
         if (bundle == null) {
             LOGGER.debug("Choose default action resource bundle for action '{}'", action);
