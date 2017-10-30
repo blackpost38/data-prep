@@ -11,10 +11,16 @@
 
   ============================================================================*/
 
+import moment from 'moment'
+
 describe('Moment filter', function () {
     'use strict';
 
     beforeEach(angular.mock.module('data-prep.services.utils'));
+
+    beforeEach(() => {
+			moment.locale('en');
+		});
 
     it('should transform timestamp to human readable moment', inject(function ($filter) {
         // given
