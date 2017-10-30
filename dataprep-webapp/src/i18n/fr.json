@@ -257,9 +257,9 @@
   "CORRECT_POSTAL_ADDRESS": "Corriger les adresses postales",
   "SELECT_COLUMN_TO_DISPLAY_ACTIONS": "Sélectionnez une colonne pour afficher ses actions",
   "SELECT_LINE_TO_DISPLAY_ACTIONS": "Sélectionnez une ligne pour afficher ses actions",
-  "APPLY_CHANGE_TO": "Appliquer les modifications sur :",
-  "ALL_LINES": "Toutes les lignes",
-  "FILTERED_LINED": "Les lignes filtrées",
+  "APPLY_CHANGE_TO": "Appliquer sur :",
+  "ALL_LINES": "Tout",
+  "FILTERED_LINED": "Uniquement les lignes filtrées",
   "MULTI_COLUMNS_SELECTED": "{{nb}} colonnes sélectionnées",
   "ACTIONS_TAB_ROW": "Ligne",
   "ACTIONS_TAB_COLUMN": "Colonne",
@@ -403,11 +403,18 @@
   "ERROR_404_MESSAGE": "La page que vous cherchez est introuvable",
 
   "_comment": "talend/ui components",
+  "HEADERBAR_SEARCH_SEARCHING": "Recherche en cours…",
+  "HEADERBAR_SEARCH_NO_RESULT": "Aucun résultat",
   "HEADERBAR_HELP": "Aide",
   "SIDEPANEL_COLLAPSE": "Réduire",
   "SIDEPANEL_EXPAND": "Développer",
 
   "_comment": "On Boarding",
+  "BACK": "Précédent",
+  "NEXT": "Suivant",
+  "SKIP": "Passer",
+  "LET_ME_TRY": "J'ai compris",
+
   "PLAYGROUND_STEP_1_TITLE": "Bienvenue dans la vue des préparations",
   "PLAYGROUND_STEP_1_CONTENT": "Dans cette vue, vous pouvez appliquer des étapes de préparations à votre jeu de données.</br>Cette table représente le résultat de votre préparation.",
   "PLAYGROUND_STEP_2_TITLE": "Colonnes",
@@ -437,5 +444,10 @@
   "PREPARATIONS_STEP_3_TITLE": "Ajouter la préparation",
   "PREPARATIONS_STEP_3_CONTENT": "Cliquez ici pour ajouter une préparation et commencer à nettoyer vos données.",
   "PREPARATIONS_STEP_4_TITLE": "Aide",
-  "PREPARATIONS_STEP_4_CONTENT": "Cliquez ici pour obtenir de l'aide(Documentation en ligne, Présentation, À propos de Data Preparation)"
+  "PREPARATIONS_STEP_4_CONTENT": "Cliquez ici pour obtenir de l'aide(Documentation en ligne, Présentation, À propos de Data Preparation)",
+
+  "EMPTY_RECORDS_LABEL": "lignes avec des valeurs vides",
+  "INVALID_RECORDS_LABEL": "lignes avec des valeurs invalides",
+  "VALID_RECORDS_LABEL": "33 avec des valeurs valides",
+  "INVALID_EMPTY_RECORDS_LABEL": "lignes avec des valeurs invalides ou vides"
 }

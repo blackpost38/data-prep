@@ -40,8 +40,8 @@ const MODULE_NAME = 'data-prep';
 let ws;
 let wsPing;
 
-const fallbackLng = 'en';
 let preferredLanguage;
+const fallbackLng = 'en';
 export const i18n = init({
 	fallbackLng, // Fallback language
 

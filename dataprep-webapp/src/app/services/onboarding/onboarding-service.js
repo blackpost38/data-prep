@@ -141,10 +141,10 @@ export default class OnboardingService {
 		this.$timeout(() => {
 			this.currentTour = introJs()
 				.setOptions({
-					nextLabel: 'NEXT',
-					prevLabel: 'BACK',
-					skipLabel: 'SKIP',
-					doneLabel: 'LET ME TRY',
+					nextLabel: this.$translate.instant('NEXT'),
+					prevLabel: this.$translate.instant('BACK'),
+					skipLabel: this.$translate.instant('SKIP'),
+					doneLabel: this.$translate.instant('LET_ME_TRY'),
 					steps: this.createIntroSteps(this.getTour(tour)),
 				})
 				.oncomplete(onTourDone)

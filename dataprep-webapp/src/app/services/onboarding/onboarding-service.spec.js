@@ -73,10 +73,10 @@ describe('Onboarding service', () => {
 
 		// then
 		const options = OnboardingService.currentTour._options;
-		expect(options.nextLabel).toBe('NEXT');
-		expect(options.prevLabel).toBe('BACK');
-		expect(options.skipLabel).toBe('SKIP');
-		expect(options.doneLabel).toBe('LET ME TRY');
+		expect(options.nextLabel).toBe('Next');
+		expect(options.prevLabel).toBe('Back');
+		expect(options.skipLabel).toBe('Skip');
+		expect(options.doneLabel).toBe('Let me try');
 	}));
 
 	it('should create/adapt preparation tour step', inject(($timeout, OnboardingService) => {
