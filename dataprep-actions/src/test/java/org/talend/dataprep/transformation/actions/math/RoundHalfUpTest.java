@@ -20,10 +20,7 @@ import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils
 import static org.talend.dataprep.transformation.actions.ActionMetadataTestUtils.getRow;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,25 +68,20 @@ public class RoundHalfUpTest extends AbstractRoundTest {
         assertThat(action.getCategory(), is(ActionCategory.NUMBERS.getDisplayName()));
     }
 
-    @Override
-    public CreateNewColumnPolicy getCreateNewColumnPolicy() {
-        return CreateNewColumnPolicy.VISIBLE_DISABLED;
-    }
-
     @Test
     public void test_apply_in_newcolumn() {
         // given
-        final Map<String, String> values = new HashMap<>();
-        values.put("0000", "10.0");
+        final Map<String, String> values = new LinkedHashMap<>();
+        values.put("0000", "-5.1");
         values.put("0001", "3.0");
         values.put("0002", "Done !");
         final DataSetRow row = new DataSetRow(values);
 
         final Map<String, Object> expectedValues = new HashMap<>();
-        expectedValues.put("0000", "10.0");
+        expectedValues.put("0000", "-5.1");
         expectedValues.put("0001", "3.0");
         expectedValues.put("0002", "Done !");
-        expectedValues.put("0003", "10");
+        expectedValues.put("0003", "-5");
 
         parameters.put(AbstractActionMetadata.CREATE_NEW_COLUMN, "true");
 
@@ -98,7 +90,7 @@ public class RoundHalfUpTest extends AbstractRoundTest {
 
         // then
         assertEquals(expectedValues, row.values());
-        ColumnMetadata expected = ColumnMetadata.Builder.column().id(4).name("0000_rounded").type(Type.DOUBLE).build();
+        ColumnMetadata expected = ColumnMetadata.Builder.column().id(3).name("0000_rounded").type(Type.DOUBLE).build();
         ColumnMetadata actual = row.getRowMetadata().getById("0003");
         assertEquals(expected, actual);
     }
@@ -106,14 +98,14 @@ public class RoundHalfUpTest extends AbstractRoundTest {
     @Test
     public void test_apply_inplace() {
         // given
-        DataSetRow row = getRow("10.0", "3", "Done !");
+        DataSetRow row = getRow("-5.1", "3", "Done !");
 
         // when
         ActionTestWorkbench.test(row, actionRegistry, factory.create(action, parameters));
         assertEquals(row.values().size(), 3);
 
         // then
-        DataSetRow expected = getRow("10", "3", "Done !");
+        DataSetRow expected = getRow("-5", "3", "Done !");
         assertEquals(expected, row);
     }
 
@@ -191,6 +183,6 @@ public class RoundHalfUpTest extends AbstractRoundTest {
 
     @Override
     protected List<String> getExpectedParametersName() {
-        return Arrays.asList("column_id", "row_id", "scope", "filter", "precision");
+        return Arrays.asList("create_new_column","column_id", "row_id", "scope", "filter", "precision");
     }
 }

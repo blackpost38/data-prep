@@ -49,8 +49,14 @@ public abstract class AbstractRound extends AbstractActionMetadata implements Co
     @Override
     public List<Parameter> getParameters() {
         final List<Parameter> parameters = super.getParameters();
-        parameters.add(new Parameter(PRECISION, INTEGER, "0"));
+        if (hasPrecisionField()) {
+            parameters.add(new Parameter(PRECISION, INTEGER, "0"));
+        }
         return ActionsBundle.attachToAction(parameters, this);
+    }
+
+    protected boolean hasPrecisionField() {
+        return true;
     }
 
     @Override

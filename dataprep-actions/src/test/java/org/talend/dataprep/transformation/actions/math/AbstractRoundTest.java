@@ -37,7 +37,10 @@ public abstract class AbstractRoundTest<T extends AbstractActionMetadata> extend
         super(action);
     }
 
-
+    @Override
+    public CreateNewColumnPolicy getCreateNewColumnPolicy() {
+        return CreateNewColumnPolicy.VISIBLE_DISABLED;
+    }
 
     protected void testCommon(String input, String expected) {
         testCommon(input, expected, null);
