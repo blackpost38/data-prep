@@ -16,6 +16,10 @@ import static java.time.Month.JANUARY;
 import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.DateTimeException;
@@ -892,6 +896,8 @@ public class SimpleFilterServiceTest extends FilterServiceTest {
         assertThat(filter.test(row), is(false));
         row.set("0001", "2000-01-01"); //gt max
         assertThat(filter.test(row), is(false));
+
+        verify(dateParser, times(6)).parse(anyString(), any());
     }
 
     @Test
