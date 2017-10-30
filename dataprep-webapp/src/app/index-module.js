@@ -63,7 +63,6 @@ const app = angular.module(MODULE_NAME,
 			prefix: 'i18n/',
 			suffix: '.json',
 		});
-		$translateProvider.preferredLanguage('en');
 		$translateProvider.useSanitizeValueStrategy(null);
 	})
 
@@ -79,6 +78,12 @@ window.fetchConfiguration = function fetchConfiguration() {
 				.config(($compileProvider) => {
 					'ngInject';
 					$compileProvider.debugInfoEnabled(config.enableDebug);
+				})
+				.config(($translateProvider) => {
+					'ngInject';
+					const preferredLanguage = (appSettings.context && appSettings.context.locale) || 'en';
+					moment.locale(preferredLanguage.split('_')[0]);
+					$translateProvider.preferredLanguage(preferredLanguage.split('_')[0]);
 				})
 				// Fetch dynamic configuration
 				.run((SettingsService) => {
@@ -111,6 +116,7 @@ window.fetchConfiguration = function fetchConfiguration() {
 				// Open a keepalive websocket if requested
 				.run(() => {
 					if (!config.serverKeepAliveUrl) return;
+
 					function setupWebSocket() {
 						clearInterval(wsPing);
 
