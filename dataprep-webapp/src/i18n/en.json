@@ -1,6 +1,7 @@
 {
   "_comment": "Punctuations",
   "COLON": ": ",
+  "IN": "in",
 
   "_comment": "Navbar",
   "TALEND": "Talend",

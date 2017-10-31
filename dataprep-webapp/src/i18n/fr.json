@@ -1,6 +1,7 @@
 {
   "_comment": "Punctuations",
   "COLON": ": ",
+  "IN": "dans",
 
   "_comment": "Navbar",
   "TALEND": "Talend",
@@ -259,7 +260,7 @@
   "SELECT_LINE_TO_DISPLAY_ACTIONS": "Sélectionnez une ligne pour afficher ses actions",
   "APPLY_CHANGE_TO": "Appliquer sur :",
   "ALL_LINES": "Tout",
-  "FILTERED_LINED": "Uniquement les lignes filtrées",
+  "FILTERED_LINED": "Les lignes filtrées",
   "MULTI_COLUMNS_SELECTED": "{{nb}} colonnes sélectionnées",
   "ACTIONS_TAB_ROW": "Ligne",
   "ACTIONS_TAB_COLUMN": "Colonne",
