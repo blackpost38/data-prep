@@ -54,7 +54,7 @@ public class DurationConverterTest extends BaseDateTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.CONVERSIONS.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.CONVERSIONS.getDisplayName(ENGLISH)));
     }
 
     @Test

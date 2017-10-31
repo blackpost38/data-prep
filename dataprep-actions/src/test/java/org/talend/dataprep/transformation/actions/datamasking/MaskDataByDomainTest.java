@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.datamasking;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest.ValueBuilder.value;
@@ -59,7 +60,7 @@ public class MaskDataByDomainTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(maskDataByDomain.getCategory(), is(ActionCategory.DATA_MASKING.getDisplayName()));
+        assertThat(maskDataByDomain.getCategory(ENGLISH), is(ActionCategory.DATA_MASKING.getDisplayName(ENGLISH)));
     }
 
     @Test

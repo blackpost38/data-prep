@@ -63,8 +63,8 @@ public class GenerateSequence extends AbstractActionMetadata implements ColumnAc
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.NUMBERS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.NUMBERS.getDisplayName(locale);
     }
 
     @Override

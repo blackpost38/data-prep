@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.clear;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -62,7 +63,7 @@ public class ClearInvalidTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(clearInvalid.getCategory(), is(ActionCategory.DATA_CLEANSING.getDisplayName()));
+        assertThat(clearInvalid.getCategory(ENGLISH), is(ActionCategory.DATA_CLEANSING.getDisplayName(ENGLISH)));
     }
 
     @Test

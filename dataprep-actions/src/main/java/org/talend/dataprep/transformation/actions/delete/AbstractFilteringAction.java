@@ -15,13 +15,12 @@ package org.talend.dataprep.transformation.actions.delete;
 import static org.talend.dataprep.transformation.actions.category.ActionCategory.FILTERED;
 
 import java.util.EnumSet;
+import java.util.Locale;
 import java.util.Set;
 
 import org.talend.dataprep.api.dataset.ColumnMetadata;
-import org.talend.dataprep.api.dataset.row.DataSetRow;
 import org.talend.dataprep.transformation.actions.common.AbstractActionMetadata;
 import org.talend.dataprep.transformation.actions.common.ColumnAction;
-import org.talend.dataprep.transformation.api.action.context.ActionContext;
 
 public abstract class AbstractFilteringAction extends AbstractActionMetadata implements ColumnAction {
 
@@ -41,7 +40,7 @@ public abstract class AbstractFilteringAction extends AbstractActionMetadata imp
     }
 
     @Override
-    public String getCategory() {
-        return FILTERED.getDisplayName();
+    public String getCategory(Locale locale) {
+        return FILTERED.getDisplayName(locale);
     }
 }

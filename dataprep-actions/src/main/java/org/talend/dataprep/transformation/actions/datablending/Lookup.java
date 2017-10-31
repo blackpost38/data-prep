@@ -70,8 +70,8 @@ public class Lookup extends AbstractActionMetadata implements DataSetAction {
      * @return A 'category' for the action used to group similar actions (eg. 'math', 'repair'...).
      */
     @Override
-    public String getCategory() {
-        return ActionCategory.DATA_BLENDING.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.DATA_BLENDING.getDisplayName(locale);
     }
 
     @Override

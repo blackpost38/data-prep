@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.bool;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
@@ -54,7 +55,7 @@ public class NegateTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.BOOLEAN.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.BOOLEAN.getDisplayName(ENGLISH)));
     }
 
     @Test

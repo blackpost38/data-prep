@@ -61,8 +61,8 @@ public class ReplaceCellValue extends AbstractActionMetadata implements CellActi
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.STRINGS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.STRINGS.getDisplayName(locale);
     }
 
     @Override

@@ -64,8 +64,8 @@ public class Contains extends AbstractActionMetadata implements ColumnAction, Ot
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.STRINGS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.STRINGS.getDisplayName(locale);
     }
 
     @Override

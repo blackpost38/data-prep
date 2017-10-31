@@ -194,8 +194,8 @@ public class FormatPhoneNumber extends AbstractActionMetadata implements ColumnA
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.PHONE_NUMBER.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.PHONE_NUMBER.getDisplayName(locale);
     }
 
     @Override

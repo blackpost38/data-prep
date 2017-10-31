@@ -46,10 +46,10 @@ public class DeleteTest extends AbstractMetadataBaseTest {
     @Test
     public void should_be_in_data_cleansing_category() {
         //when
-        final String name = action.getCategory();
+        final String name = action.getCategory(ENGLISH);
 
         //then
-        assertThat(name, is(DATA_CLEANSING.getDisplayName()));
+        assertThat(name, is(DATA_CLEANSING.getDisplayName(ENGLISH)));
     }
 
     @Test

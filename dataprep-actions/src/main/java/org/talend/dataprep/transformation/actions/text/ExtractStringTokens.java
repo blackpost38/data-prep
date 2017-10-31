@@ -79,8 +79,8 @@ public class ExtractStringTokens extends AbstractActionMetadata implements Colum
     }
 
     @Override
-    public String getCategory() {
-        return SPLIT.getDisplayName();
+    public String getCategory(Locale locale) {
+        return SPLIT.getDisplayName(locale);
     }
 
     @Override

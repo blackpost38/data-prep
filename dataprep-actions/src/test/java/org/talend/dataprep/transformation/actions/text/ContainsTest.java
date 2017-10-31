@@ -66,7 +66,7 @@ public class ContainsTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.STRINGS.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.STRINGS.getDisplayName(ENGLISH)));
     }
 
     @Test

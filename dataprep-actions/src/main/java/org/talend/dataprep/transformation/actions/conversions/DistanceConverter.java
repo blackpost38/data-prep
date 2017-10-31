@@ -102,8 +102,8 @@ public class DistanceConverter extends AbstractActionMetadata implements ColumnA
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.CONVERSIONS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.CONVERSIONS.getDisplayName(locale);
     }
 
     @Override

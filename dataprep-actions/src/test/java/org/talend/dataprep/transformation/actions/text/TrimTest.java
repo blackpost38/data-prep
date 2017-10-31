@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.text;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.*;
@@ -60,7 +61,7 @@ public class TrimTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.STRINGS.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.STRINGS.getDisplayName(ENGLISH)));
     }
 
     @Test
@@ -147,7 +148,7 @@ public class TrimTest extends AbstractMetadataBaseTest {
     public void should_remove_custom_value() {
         // given
         final Map<String, String> values = new HashMap<>();
-        values.put("0000", "the beatles"); //$NON-NLS-1$ //$NON-NLS-2$ 
+        values.put("0000", "the beatles"); //$NON-NLS-1$ //$NON-NLS-2$
         final DataSetRow row = new DataSetRow(values);
 
         parameters = new HashMap<>();

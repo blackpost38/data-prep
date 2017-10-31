@@ -41,7 +41,7 @@ public class GenerateSequenceTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.NUMBERS.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.NUMBERS.getDisplayName(ENGLISH)));
     }
 
     @Test

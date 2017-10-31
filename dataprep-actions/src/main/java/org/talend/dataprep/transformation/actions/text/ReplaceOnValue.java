@@ -57,8 +57,8 @@ public class ReplaceOnValue extends AbstractActionMetadata implements ColumnActi
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.STRINGS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.STRINGS.getDisplayName(locale);
     }
 
     @Override

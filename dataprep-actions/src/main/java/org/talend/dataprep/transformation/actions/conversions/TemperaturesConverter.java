@@ -101,8 +101,8 @@ public class TemperaturesConverter extends AbstractMathNoParameterAction {
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.CONVERSIONS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.CONVERSIONS.getDisplayName(locale);
     }
 
     @Override

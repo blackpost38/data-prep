@@ -106,8 +106,8 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.NUMBERS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.NUMBERS.getDisplayName(locale);
     }
 
     @Override

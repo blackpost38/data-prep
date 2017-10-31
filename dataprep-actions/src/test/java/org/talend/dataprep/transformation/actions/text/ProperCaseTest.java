@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.text;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.api.dataset.ColumnMetadata.Builder.column;
@@ -59,7 +60,7 @@ public class ProperCaseTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.STRINGS.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.STRINGS.getDisplayName(ENGLISH)));
     }
 
     @Test

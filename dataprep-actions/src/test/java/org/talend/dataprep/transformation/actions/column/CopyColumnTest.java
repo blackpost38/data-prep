@@ -12,6 +12,7 @@
 //  ============================================================================
 package org.talend.dataprep.transformation.actions.column;
 
+import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -63,7 +64,7 @@ public class CopyColumnTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        Assert.assertThat(action.getCategory(), is(ActionCategory.COLUMN_METADATA.getDisplayName()));
+        Assert.assertThat(action.getCategory(ENGLISH), is(ActionCategory.COLUMN_METADATA.getDisplayName(ENGLISH)));
     }
 
     @Test

@@ -74,8 +74,8 @@ public class CreateNewColumn extends AbstractActionMetadata implements ColumnAct
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.COLUMN_METADATA.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.COLUMN_METADATA.getDisplayName(locale);
     }
 
     @Override

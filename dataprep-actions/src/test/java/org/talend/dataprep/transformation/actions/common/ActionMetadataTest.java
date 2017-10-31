@@ -279,7 +279,7 @@ class CellTransformation extends AbstractActionMetadata implements CellAction {
     }
 
     @Override
-    public String getCategory() {
+    public String getCategory(Locale locale) {
         return null;
     }
 
@@ -309,7 +309,7 @@ class LineTransformation extends AbstractActionMetadata implements RowAction {
     }
 
     @Override
-    public String getCategory() {
+    public String getCategory(Locale locale) {
         return null;
     }
 
@@ -339,7 +339,7 @@ class ColumnTransformation extends AbstractActionMetadata implements ColumnActio
     }
 
     @Override
-    public String getCategory() {
+    public String getCategory(Locale locale) {
         return null;
     }
 
@@ -369,7 +369,7 @@ class TableTransformation extends AbstractActionMetadata implements DataSetActio
     }
 
     @Override
-    public String getCategory() {
+    public String getCategory(Locale locale) {
         return null;
     }
 

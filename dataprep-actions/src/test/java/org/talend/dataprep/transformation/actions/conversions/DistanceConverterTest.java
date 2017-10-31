@@ -52,10 +52,10 @@ public class DistanceConverterTest extends AbstractMetadataBaseTest {
     @Test
     public void testCategory() {
         // when
-        final String name = action.getCategory();
+        final String name = action.getCategory(ENGLISH);
 
         // then
-        assertThat(name, Is.is(ActionCategory.CONVERSIONS.getDisplayName()));
+        assertThat(name, Is.is(ActionCategory.CONVERSIONS.getDisplayName(ENGLISH)));
     }
 
     @Test

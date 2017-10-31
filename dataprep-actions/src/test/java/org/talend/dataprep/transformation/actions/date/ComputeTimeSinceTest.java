@@ -78,7 +78,7 @@ public class ComputeTimeSinceTest extends BaseDateTest {
 
     @Test
     public void testCategory() throws Exception {
-        Assert.assertThat(action.getCategory(), is(ActionCategory.DATE.getDisplayName()));
+        Assert.assertThat(action.getCategory(ENGLISH), is(ActionCategory.DATE.getDisplayName(ENGLISH)));
     }
 
     @Test

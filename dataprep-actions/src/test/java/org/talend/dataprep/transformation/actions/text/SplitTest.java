@@ -86,7 +86,7 @@ public class SplitTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.SPLIT.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.SPLIT.getDisplayName(ENGLISH)));
     }
 
     @Test

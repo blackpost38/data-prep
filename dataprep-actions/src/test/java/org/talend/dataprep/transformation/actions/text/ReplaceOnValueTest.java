@@ -66,7 +66,7 @@ public class ReplaceOnValueTest extends AbstractMetadataBaseTest {
 
     @Test
     public void test_category() throws Exception {
-        assertEquals("strings", action.getCategory());
+        assertEquals("strings", action.getCategory(ENGLISH));
     }
 
     @Test

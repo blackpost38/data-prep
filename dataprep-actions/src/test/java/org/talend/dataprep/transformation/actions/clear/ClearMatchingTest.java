@@ -1,5 +1,6 @@
 package org.talend.dataprep.transformation.actions.clear;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.talend.dataprep.transformation.actions.AbstractMetadataBaseTest.ValuesBuilder.builder;
@@ -51,7 +52,7 @@ public class ClearMatchingTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.DATA_CLEANSING.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.DATA_CLEANSING.getDisplayName(ENGLISH)));
     }
 
     @Test

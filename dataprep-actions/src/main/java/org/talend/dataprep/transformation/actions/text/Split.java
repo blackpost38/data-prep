@@ -71,8 +71,8 @@ public class Split extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public String getCategory() {
-        return SPLIT.getDisplayName();
+    public String getCategory(Locale locale) {
+        return SPLIT.getDisplayName(locale);
     }
 
     @Override

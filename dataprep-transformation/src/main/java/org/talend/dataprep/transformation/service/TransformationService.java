@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -623,7 +624,7 @@ public class TransformationService extends BaseTransformationService {
     @ResponseBody
     public Stream<ActionForm> columnActions(@RequestBody(required = false) ColumnMetadata column) {
         return actionRegistry.findAll() //
-                .filter(action -> !"TEST".equals(action.getCategory()) && action.acceptScope(COLUMN)) //
+                .filter(action -> !"TEST".equals(action.getCategory(LocaleContextHolder.getLocale())) && action.acceptScope(COLUMN)) //
                 .map(am -> column != null ? am.adapt(column) : am)
                 .map(ad -> ad.getActionForm(getLocale()));
     }

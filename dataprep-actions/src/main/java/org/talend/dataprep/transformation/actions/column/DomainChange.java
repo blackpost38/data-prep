@@ -14,6 +14,7 @@
 package org.talend.dataprep.transformation.actions.column;
 
 import java.util.EnumSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -58,8 +59,8 @@ public class DomainChange extends AbstractActionMetadata implements ColumnAction
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.COLUMN_METADATA.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.COLUMN_METADATA.getDisplayName(locale);
     }
 
     /**

@@ -72,7 +72,7 @@ public class RenameTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.COLUMN_METADATA.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.COLUMN_METADATA.getDisplayName(ENGLISH)));
     }
 
     @Test

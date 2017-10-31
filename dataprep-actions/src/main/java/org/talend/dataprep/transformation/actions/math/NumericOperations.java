@@ -79,8 +79,8 @@ public class NumericOperations extends AbstractActionMetadata implements ColumnA
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.MATH.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.MATH.getDisplayName(locale);
     }
 
     @Override

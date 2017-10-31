@@ -47,10 +47,10 @@ public class TemperaturesConverterTest extends AbstractMetadataBaseTest {
     @Test
     public void testCategory() {
         // when
-        final String name = action.getCategory();
+        final String name = action.getCategory(ENGLISH);
 
         // then
-        assertThat(name, is(ActionCategory.CONVERSIONS.getDisplayName()));
+        assertThat(name, is(ActionCategory.CONVERSIONS.getDisplayName(ENGLISH)));
     }
 
     @Test

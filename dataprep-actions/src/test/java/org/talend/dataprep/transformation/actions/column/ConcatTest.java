@@ -71,7 +71,7 @@ public class ConcatTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.COLUMNS.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.COLUMNS.getDisplayName(ENGLISH)));
     }
 
     @Test

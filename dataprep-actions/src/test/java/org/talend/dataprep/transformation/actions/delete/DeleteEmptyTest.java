@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.delete;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -65,7 +66,7 @@ public class DeleteEmptyTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertThat(action.getCategory(), is(ActionCategory.DATA_CLEANSING.getDisplayName()));
+        assertThat(action.getCategory(ENGLISH), is(ActionCategory.DATA_CLEANSING.getDisplayName(ENGLISH)));
     }
 
     @Test

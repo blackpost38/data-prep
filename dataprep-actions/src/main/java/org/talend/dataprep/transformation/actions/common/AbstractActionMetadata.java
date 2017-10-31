@@ -72,7 +72,7 @@ public abstract class AbstractActionMetadata implements InternalActionDefinition
      * @see ActionCategory
      */
     @Override
-    public abstract String getCategory();
+    public abstract String getCategory(Locale locale);
 
     /**
      * Return true if the action can be applied to the given column metadata.

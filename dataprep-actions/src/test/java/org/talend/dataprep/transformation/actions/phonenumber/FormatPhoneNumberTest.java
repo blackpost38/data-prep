@@ -56,7 +56,7 @@ public class FormatPhoneNumberTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() throws Exception {
-        assertEquals(action.getCategory(), ActionCategory.PHONE_NUMBER.getDisplayName());
+        assertEquals(action.getCategory(ENGLISH), ActionCategory.PHONE_NUMBER.getDisplayName(ENGLISH));
     }
 
     @Test

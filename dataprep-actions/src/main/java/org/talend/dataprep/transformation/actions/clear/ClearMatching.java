@@ -62,8 +62,8 @@ public class ClearMatching extends AbstractClear implements ColumnAction {
     }
 
     @Override
-    public String getCategory() {
-        return DATA_CLEANSING.getDisplayName();
+    public String getCategory(Locale locale) {
+        return DATA_CLEANSING.getDisplayName(locale);
     }
 
     @Override

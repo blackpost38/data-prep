@@ -49,7 +49,7 @@ public class TestI18nKeysForActionsTest extends TransformationBaseTest {
             actionMetadata.getLabel(ENGLISH);
             actionMetadata.getDescription(ENGLISH);
 
-            String toString = actionMetadata.getName() + "," + actionMetadata.getCategory() + "," + actionMetadata.getLabel(
+            String toString = actionMetadata.getName() + "," + actionMetadata.getCategory(ENGLISH) + "," + actionMetadata.getLabel(
                     ENGLISH)
                     + "," + actionMetadata.getDescription(ENGLISH);
             LOGGER.info(toString);

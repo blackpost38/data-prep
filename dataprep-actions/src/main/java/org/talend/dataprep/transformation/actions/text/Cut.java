@@ -51,8 +51,8 @@ public class Cut extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public String getCategory() {
-        return STRINGS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return STRINGS.getDisplayName(locale);
     }
 
     @Override

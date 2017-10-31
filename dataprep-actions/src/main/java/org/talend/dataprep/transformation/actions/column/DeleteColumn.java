@@ -15,10 +15,7 @@ package org.talend.dataprep.transformation.actions.column;
 
 import static org.talend.dataprep.transformation.actions.category.ActionScope.COLUMN_METADATA;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,8 +51,8 @@ public class DeleteColumn extends AbstractActionMetadata implements ColumnAction
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.COLUMNS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.COLUMNS.getDisplayName(locale);
     }
 
     @Override

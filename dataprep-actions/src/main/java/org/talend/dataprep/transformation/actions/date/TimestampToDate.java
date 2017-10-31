@@ -54,8 +54,8 @@ public class TimestampToDate extends AbstractDate implements ColumnAction {
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.DATE.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.DATE.getDisplayName(locale);
     }
 
     @Override

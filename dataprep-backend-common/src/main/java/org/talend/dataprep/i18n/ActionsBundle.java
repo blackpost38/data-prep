@@ -47,6 +47,8 @@ public class ActionsBundle implements MessagesBundle {
 
     private static final String PARAMETER_PREFIX = "parameter.";
 
+    private static final String CATEGORY_PREFIX = "category.";
+
     private static final String CHOICE_PREFIX = "choice.";
 
     /**
@@ -134,6 +136,15 @@ public class ActionsBundle implements MessagesBundle {
             return StringUtils.EMPTY;
         }
         return docUrl;
+    }
+
+    /**
+     * Fetches action label at {@code action.<action_name>.label} in the dataprep actions resource bundle. If message does not
+     * exist, code will lookup in {@link #fallBackKey} resource bundle (i.e. Data Prep one) for message.
+     */
+    public static String categoryName(Object action, Locale locale, String categoryName, Object... values) {
+        final String categoryLabelKey = CATEGORY_PREFIX + categoryName + LABEL_SUFFIX;
+        return INSTANCE.getMandatoryMessage(action, locale, categoryLabelKey, values);
     }
 
     /**

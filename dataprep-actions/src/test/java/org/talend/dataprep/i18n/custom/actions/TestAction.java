@@ -32,7 +32,7 @@ public class TestAction extends AbstractActionMetadata {
     }
 
     @Override
-    public String getCategory() {
+    public String getCategory(Locale locale) {
         return "No category";
     }
 

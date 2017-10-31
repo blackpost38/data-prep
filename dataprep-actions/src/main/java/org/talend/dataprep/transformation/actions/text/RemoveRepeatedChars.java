@@ -106,8 +106,8 @@ public class RemoveRepeatedChars extends AbstractActionMetadata implements Colum
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.STRINGS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.STRINGS.getDisplayName(locale);
     }
 
     @Override

@@ -70,8 +70,8 @@ public class Rename extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.COLUMN_METADATA.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.COLUMN_METADATA.getDisplayName(locale);
     }
 
     @Override

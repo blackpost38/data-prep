@@ -61,8 +61,8 @@ public class Padding extends AbstractActionMetadata implements ColumnAction {
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.STRINGS_ADVANCED.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.STRINGS_ADVANCED.getDisplayName(locale);
     }
 
     @Override

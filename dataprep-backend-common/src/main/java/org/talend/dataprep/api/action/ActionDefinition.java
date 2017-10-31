@@ -43,8 +43,9 @@ public interface ActionDefinition extends Serializable {
 
     /**
      * @return A 'category' for the action used to group similar actions (eg. 'math', 'repair'...).
+     * @param locale
      */
-    String getCategory();
+    String getCategory(Locale locale);
 
     /**
      * @return The label of the action, translated in the user locale.
@@ -251,7 +252,7 @@ public interface ActionDefinition extends Serializable {
     default ActionForm getActionForm(Locale locale, Locale alternateLocale) {
         ActionForm form = new ActionForm();
         form.setName(getName());
-        form.setCategory(getCategory());
+        form.setCategory(getCategory(locale));
 
         form.setDescription(getDescription(locale));
         form.setLabel(getLabel(locale));

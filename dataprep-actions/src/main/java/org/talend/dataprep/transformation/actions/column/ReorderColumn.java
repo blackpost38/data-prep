@@ -58,8 +58,8 @@ public class ReorderColumn extends AbstractActionMetadata implements DataSetActi
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.COLUMNS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.COLUMNS.getDisplayName(locale);
     }
 
     @Override

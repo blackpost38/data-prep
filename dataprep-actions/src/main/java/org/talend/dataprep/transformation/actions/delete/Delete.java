@@ -82,8 +82,8 @@ public class Delete extends AbstractActionMetadata implements RowAction {
     }
 
     @Override
-    public String getCategory() {
-        return DATA_CLEANSING.getDisplayName();
+    public String getCategory(Locale locale) {
+        return DATA_CLEANSING.getDisplayName(locale);
     }
 
     @Override

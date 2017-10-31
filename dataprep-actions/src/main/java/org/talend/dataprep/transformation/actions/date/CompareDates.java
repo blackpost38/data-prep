@@ -58,8 +58,8 @@ public class CompareDates extends AbstractCompareAction implements ColumnAction,
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.DATE.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.DATE.getDisplayName(locale);
     }
 
     @Override

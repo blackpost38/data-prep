@@ -98,8 +98,8 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.DATE.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.DATE.getDisplayName(locale);
     }
 
     @Override

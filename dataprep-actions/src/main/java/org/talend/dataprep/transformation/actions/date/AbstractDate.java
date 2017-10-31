@@ -130,8 +130,8 @@ public abstract class AbstractDate extends AbstractActionMetadata {
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.DATE.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.DATE.getDisplayName(locale);
     }
 
     /**

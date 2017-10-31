@@ -13,6 +13,7 @@
 
 package org.talend.dataprep.transformation.actions.line;
 
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -40,10 +41,10 @@ public class MakeLineHeaderTest extends AbstractMetadataBaseTest {
     @Test
     public void should_be_in_data_cleansing_category() {
         // when
-        final String name = action.getCategory();
+        final String name = action.getCategory(ENGLISH);
 
         // then
-        assertThat(name, is(DATA_CLEANSING.getDisplayName()));
+        assertThat(name, is(DATA_CLEANSING.getDisplayName(ENGLISH)));
     }
 
     @Test

@@ -85,8 +85,8 @@ public class Concat extends AbstractActionMetadata implements ColumnAction, Othe
     }
 
     @Override
-    public String getCategory() {
-        return ActionCategory.COLUMNS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.COLUMNS.getDisplayName(locale);
     }
 
     @Override

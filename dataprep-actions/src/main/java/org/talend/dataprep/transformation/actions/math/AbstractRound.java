@@ -41,8 +41,8 @@ public abstract class AbstractRound extends AbstractActionMetadata implements Co
     protected static final String PRECISION = "precision"; //$NON-NLS-1$
 
     @Override
-    public String getCategory() {
-        return ActionCategory.NUMBERS.getDisplayName();
+    public String getCategory(Locale locale) {
+        return ActionCategory.NUMBERS.getDisplayName(locale);
     }
 
     @Override
