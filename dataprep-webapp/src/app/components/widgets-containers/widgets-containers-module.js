@@ -26,7 +26,7 @@ import Progress from '@talend/react-components/lib/Progress';
 import Form from '@talend/react-forms';
 import getTranslated from '@talend/react-components/lib/TranslateWrapper';
 
-import i18n from './../../i18n';
+import { i18n } from './../../index-module';
 
 import AppHeaderBarContainer from './app-header-bar/app-header-bar-container';
 import BreadcrumbContainer from './breadcrumb/breadcrumb-container';
@@ -52,43 +52,16 @@ angular.module(MODULE_NAME,
 		STEP_PROGRESS_MODULE,
 	])
 	.directive('pureAppHeaderBar', ['reactDirective', reactDirective => reactDirective(
-		getTranslated(AppHeaderBar, { i18n }), [
-			'logo',
-			'brand',
-			'env',
-			'search',
-			'help',
-			'user',
-			'notification',
-			'products',
-			'renderers',
-			't',
-		]
+		getTranslated(AppHeaderBar, { i18n })
 	)])
 	.directive('pureBreadcrumb', ['reactDirective', reactDirective => reactDirective(Breadcrumbs)])
 	.directive('pureCircularProgress', ['reactDirective', reactDirective => reactDirective(CircularProgress)])
 	.directive('pureCollapsiblePanel', ['reactDirective', reactDirective => reactDirective(CollapsiblePanel)])
 	.directive('pureList', ['reactDirective', reactDirective => reactDirective(
-		getTranslated(List, { i18n }), [
-			'displayMode',
-			'id',
-			'list',
-			'toolbar',
-			'useContent',
-			'virtualized',
-			't',
-		]
+		getTranslated(List, { i18n })
 	)])
 	.directive('pureSidePanel', ['reactDirective', reactDirective => reactDirective(
-		getTranslated(SidePanel, { i18n }), [
-			'id',
-			'actions',
-			'onSelect',
-			'onToggleDock',
-			'docked',
-			'selected',
-			't',
-		]
+		getTranslated(SidePanel, { i18n })
 	)])
 	.directive('pureProgress', ['reactDirective', reactDirective => reactDirective(Progress)])
 	.directive('iconsProvider', ['reactDirective', reactDirective => reactDirective(IconsProvider)])

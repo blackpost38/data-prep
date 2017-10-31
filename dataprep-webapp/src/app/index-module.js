@@ -19,6 +19,9 @@ import ngTranslate from 'angular-translate';
 import moment from 'moment';
 import uiRouter from 'angular-ui-router';
 
+import { init } from 'i18next';
+import { I18N_DOMAIN_COMPONENTS } from '@talend/react-components';
+
 import APP_MODULE from './components/app/app-module';
 import HOME_MODULE from './components/home/home-module';
 import PLAYGROUND_MODULE from './components/playground/playground-module';
@@ -36,6 +39,16 @@ const MODULE_NAME = 'data-prep';
 
 let ws;
 let wsPing;
+
+let preferredLanguage;
+const fallbackLng = 'en';
+export const i18n = init({
+	fallbackLng, // Fallback language
+
+	debug: false,
+	wait: true, // globally set to wait for loaded translations in translate hoc
+});
+
 const app = angular.module(MODULE_NAME,
 	[
 		ngSanitize,
@@ -63,7 +76,6 @@ const app = angular.module(MODULE_NAME,
 			prefix: 'i18n/',
 			suffix: '.json',
 		});
-		$translateProvider.preferredLanguage('en');
 		$translateProvider.useSanitizeValueStrategy(null);
 	})
 
@@ -79,6 +91,17 @@ window.fetchConfiguration = function fetchConfiguration() {
 				.config(($compileProvider) => {
 					'ngInject';
 					$compileProvider.debugInfoEnabled(config.enableDebug);
+				})
+				.config(($translateProvider) => {
+					'ngInject';
+					const locale = (appSettings.context && appSettings.context.locale) || fallbackLng;
+					preferredLanguage = locale.split('_')[0];
+
+					$translateProvider.preferredLanguage(preferredLanguage);
+					i18n.changeLanguage(preferredLanguage);
+					moment.locale(preferredLanguage);
+
+					$.datetimepicker.setLocale(preferredLanguage);
 				})
 				// Fetch dynamic configuration
 				.run((SettingsService) => {
@@ -100,17 +123,10 @@ window.fetchConfiguration = function fetchConfiguration() {
 					// dataset encodings
 					DatasetService.refreshSupportedEncodings();
 				})
-				// Language to use at startup (for now only english)
-				.run(($window, $translate) => {
-					'ngInject';
-
-					const preferredLanguage = appSettings.context.locale;
-					moment.locale(preferredLanguage);
-					$translate.preferredLanguage(preferredLanguage);
-				})
 				// Open a keepalive websocket if requested
 				.run(() => {
 					if (!config.serverKeepAliveUrl) return;
+
 					function setupWebSocket() {
 						clearInterval(wsPing);
 
@@ -125,6 +141,19 @@ window.fetchConfiguration = function fetchConfiguration() {
 					}
 
 					setupWebSocket();
+				})
+				.run(($translate) => {
+					'ngInject';
+
+					$translate.onReady(() => {
+						i18n.addResourceBundle(
+							preferredLanguage,
+							I18N_DOMAIN_COMPONENTS,
+							$translate.getTranslationTable(),
+							false,
+							false
+						);
+					});
 				});
 
 			angular.module(SERVICES_UTILS_MODULE)
