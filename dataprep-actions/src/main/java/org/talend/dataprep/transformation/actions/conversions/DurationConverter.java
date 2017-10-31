@@ -88,14 +88,14 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
         parameters.add(builder
                 .name(FROM_UNIT_PARAMETER)
                 .defaultValue(ChronoUnit.DAYS.name())
-                .build(this));
+                .build(this, locale));
 
         parameters.add(builder
                 .name(TO_UNIT_PARAMETER)
                 .defaultValue(ChronoUnit.HOURS.name())
-                .build(this));
+                .build(this, locale));
 
-         parameters.add(new Parameter.ParameterBuilder().setName(TARGET_PRECISION).setType(INTEGER).setDefaultValue("1").setPlaceHolder("precision").createParameter(this, locale));
+         parameters.add(Parameter.parameter().setName(TARGET_PRECISION).setType(INTEGER).setDefaultValue("1").setPlaceHolder("precision").createParameter(this, locale));
 
         //@formatter:on
         return parameters;

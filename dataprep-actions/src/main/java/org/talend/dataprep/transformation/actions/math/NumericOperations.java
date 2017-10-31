@@ -95,18 +95,18 @@ public class NumericOperations extends AbstractActionMetadata implements ColumnA
                         .item(MINUS)
                         .item(DIVIDE)
                         .defaultValue(MULTIPLY)
-                        .build(this)
+                        .build(this, locale)
         );
         //@formatter:on
 
         //@formatter:off
         parameters.add(SelectParameter.Builder.builder()
                         .name(MODE_PARAMETER)
-                        .item(CONSTANT_MODE, CONSTANT_MODE, new Parameter.ParameterBuilder().setName(OPERAND_PARAMETER).setType(ParameterType.STRING).setDefaultValue("2").createParameter(this, locale))
+                        .item(CONSTANT_MODE, CONSTANT_MODE, Parameter.parameter().setName(OPERAND_PARAMETER).setType(ParameterType.STRING).setDefaultValue("2").createParameter(this, locale))
                         .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE,
-                              new Parameter.ParameterBuilder().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale)) //
+                              Parameter.parameter().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale)) //
                         .defaultValue(CONSTANT_MODE)
-                        .build(this)
+                        .build(this, locale)
         );
         //@formatter:on
 

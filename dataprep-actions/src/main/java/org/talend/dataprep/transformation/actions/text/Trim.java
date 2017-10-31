@@ -78,10 +78,10 @@ public class Trim extends AbstractActionMetadata implements ColumnAction {
         parameters.add(SelectParameter.Builder.builder()
                 .name(PADDING_CHAR_PARAMETER)
                 .item(WHITESPACE,WHITESPACE)
-                .item(CUSTOM, CUSTOM, new Parameter.ParameterBuilder().setName(CUSTOM_PADDING_CHAR_PARAMETER).setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).createParameter(this, locale))
+                .item(CUSTOM, CUSTOM, Parameter.parameter().setName(CUSTOM_PADDING_CHAR_PARAMETER).setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).createParameter(this, locale))
                 .canBeBlank(true)
                 .defaultValue(WHITESPACE)
-                .build(this));
+                .build(this, locale));
         // @formatter:on
         return parameters;
     }

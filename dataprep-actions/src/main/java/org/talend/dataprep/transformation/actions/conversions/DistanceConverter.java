@@ -80,14 +80,14 @@ public class DistanceConverter extends AbstractActionMetadata implements ColumnA
         parameters.add(builder
                 .defaultValue(DistanceEnum.MILE.name())
                 .name(FROM_UNIT_PARAMETER)
-                .build(this));
+                .build(this, locale));
 
         parameters.add(builder
                 .defaultValue(DistanceEnum.KILOMETER.name())
                 .name(TO_UNIT_PARAMETER)
-                .build(this));
+                .build(this, locale));
 
-        parameters.add(new Parameter.ParameterBuilder().setName(TARGET_PRECISION)
+        parameters.add(Parameter.parameter().setName(TARGET_PRECISION)
                 .setType(INTEGER)
                 .setDefaultValue("2")
                 .setPlaceHolder("precision")

@@ -119,7 +119,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString())
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString())
                 .defaultValue(CalendarUnit.ISO.name())
-                .build(this);
+                .build(this, locale);
         final Parameter toCompleteParameters = SelectParameter.Builder.builder()
                 .name(TO_CALENDAR_TYPE_PARAMETER)
                 .item(CalendarUnit.ISO.name(), CalendarUnit.ISO.toString())
@@ -132,7 +132,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString())
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString())
                 .defaultValue(CalendarUnit.MINGUO.name())
-                .build(this);
+                .build(this, locale);
         //@formatter:off
         parameters.add(Builder.builder()
                 .name(FROM_CALENDAR_TYPE_PARAMETER)
@@ -146,7 +146,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString(), toJulianDayOrISOParameters)
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString(), toJulianDayOrISOParameters)
                 .defaultValue(CalendarUnit.ISO.name())
-                .build(this));
+                .build(this, locale));
         //@formatter:on
 
         return parameters;

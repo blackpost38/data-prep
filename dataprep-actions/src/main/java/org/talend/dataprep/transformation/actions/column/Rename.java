@@ -83,7 +83,7 @@ public class Rename extends AbstractActionMetadata implements ColumnAction {
     @Nonnull
     public List<Parameter> getParameters(Locale locale) {
         List<Parameter> parameters = super.getParameters(locale);
-        parameters.add(new Parameter.ParameterBuilder().setName(NEW_COLUMN_NAME_PARAMETER_NAME)
+        parameters.add(Parameter.parameter().setName(NEW_COLUMN_NAME_PARAMETER_NAME)
                 .setType(ParameterType.STRING)
                 .setDefaultValue(defaultName)
                 .setCanBeBlank(false)

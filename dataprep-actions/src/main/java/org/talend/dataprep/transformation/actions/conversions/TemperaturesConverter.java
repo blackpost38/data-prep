@@ -78,7 +78,7 @@ public class TemperaturesConverter extends AbstractMathNoParameterAction {
                 .canBeBlank(false)
                 .defaultValue(FAHRENHEIT.name())
                 .name(FROM_UNIT_PARAMETER)
-                .build(this));
+                .build(this, locale));
 
         parameters.add(SelectParameter.Builder.builder()
                 .item(FAHRENHEIT.name(), FAHRENHEIT.toString())
@@ -87,10 +87,10 @@ public class TemperaturesConverter extends AbstractMathNoParameterAction {
                 .canBeBlank(false)
                 .defaultValue(CELSIUS.name())
                 .name(TO_UNIT_PARAMETER)
-                .build(this));
+                .build(this, locale));
 
         parameters.add(
-                new Parameter.ParameterBuilder().setName(TARGET_PRECISION).setType(INTEGER).setPlaceHolder("precision").createParameter(
+                Parameter.parameter().setName(TARGET_PRECISION).setType(INTEGER).setPlaceHolder("precision").createParameter(
                         this, locale));
         return parameters;
     }

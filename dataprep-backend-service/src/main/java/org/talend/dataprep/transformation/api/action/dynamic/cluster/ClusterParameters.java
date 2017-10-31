@@ -61,7 +61,7 @@ public class ClusterParameters implements DynamicParameters {
                 for (String value : cluster.originalValues) {
                     currentCluster.parameter(new ConstantParameter(value, ParameterType.BOOLEAN));
                 }
-                currentCluster.replace(new Parameter.ParameterBuilder().setName("replaceValue")
+                currentCluster.replace(Parameter.parameter().setName("replaceValue")
                         .setType(ParameterType.STRING)
                         .setDefaultValue(cluster.survivedValue)
                         .createParameter(null, LocaleContextHolder.getLocale()));
