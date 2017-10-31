@@ -243,7 +243,9 @@ export default class TransformationUtilsService {
 	transfosMatchSearch(search) {
 		return (transfo) => {
 			return transfo.labelHtml.toLowerCase().indexOf(search) !== -1 ||
-				transfo.description.toLowerCase().indexOf(search) !== -1;
+				transfo.description.toLowerCase().indexOf(search) !== -1 ||
+				(transfo.alternateLabel !== undefined && transfo.alternateLabel.toLowerCase().indexOf(search) !== -1) ||
+				(transfo.alternateDescription !== undefined && transfo.alternateDescription.toLowerCase().indexOf(search) !== -1);
 		};
 	}
 
