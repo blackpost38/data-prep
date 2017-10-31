@@ -36,7 +36,7 @@ export default class FilterItemCtrl {
 				this.sign = ' = ';
 				break;
 			case 'inside_range':
-				this.sign = ' in ';
+				this.sign = ` ${this.$translate.instant('IN')} `;
 				break;
 			default:
 				this.sign = this.$translate.instant('COLON');

@@ -16,6 +16,7 @@
 import angular from 'angular';
 import ngSanitize from 'angular-sanitize';
 import ngTranslate from 'angular-translate';
+import d3 from 'd3';
 import moment from 'moment';
 import uiRouter from 'angular-ui-router';
 
@@ -101,6 +102,24 @@ window.fetchConfiguration = function fetchConfiguration() {
 					i18n.changeLanguage(preferredLanguage);
 					moment.locale(preferredLanguage);
 
+					if (preferredLanguage === 'fr') {
+						const d3LocaleFr = d3.locale({
+							decimal: ',',
+							thousands: '.',
+							grouping: [3],
+							currency: ['', ' €'],
+							dateTime: '%A, le %e %B %Y, %X',
+							date: '%d/%m/%Y',
+							time: '%H:%M:%S',
+							periods: ['AM', 'PM'], // unused
+							days: ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
+							shortDays: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
+							months: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+							shortMonths: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
+						});
+						d3.format = d3LocaleFr.numberFormat;
+						d3.time.format = d3LocaleFr.timeFormat;
+					}
 					$.datetimepicker.setLocale(preferredLanguage);
 				})
 				// Fetch dynamic configuration
