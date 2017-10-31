@@ -100,6 +100,8 @@ window.fetchConfiguration = function fetchConfiguration() {
 					$translateProvider.preferredLanguage(preferredLanguage);
 					i18n.changeLanguage(preferredLanguage);
 					moment.locale(preferredLanguage);
+
+					$.datetimepicker.setLocale(preferredLanguage);
 				})
 				// Fetch dynamic configuration
 				.run((SettingsService) => {
