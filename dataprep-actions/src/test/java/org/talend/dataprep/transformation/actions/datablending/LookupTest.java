@@ -65,7 +65,7 @@ public class LookupTest extends AbstractMetadataBaseTest {
 
     @Test
     public void testCategory() {
-        assertEquals("data_blending", action.getCategory(ENGLISH));
+        assertEquals("data blending", action.getCategory(ENGLISH));
     }
 
     @Test
