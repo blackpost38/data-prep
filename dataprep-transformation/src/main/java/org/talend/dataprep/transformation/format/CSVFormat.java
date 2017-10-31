@@ -15,7 +15,6 @@ package org.talend.dataprep.transformation.format;
 import static org.springframework.context.i18n.LocaleContextHolder.getLocale;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -52,7 +51,7 @@ public class CSVFormat extends ExportFormat {
         //@formatter:off
         super("CSV", "text/csv", ".csv", true, false,
                 Arrays.asList(CSV_DELIMITERS,
-                Parameter.parameter().setName("fileName").setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(null, Locale.ENGLISH) //
+                Parameter.parameter().setName("fileName").setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(null, getLocale()) //
         ));
         //@formatter:on
     }

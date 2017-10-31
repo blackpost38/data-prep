@@ -158,7 +158,7 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
                 .item(CUSTOM, CUSTOM, Parameter.parameter().setName(name + "_" + CUSTOM)
                         .setType(STRING)
                         .setDefaultValue(".")
-                        .createParameter(this, Locale.ENGLISH)) //
+                        .createParameter(this, locale)) //
                 .defaultValue(".") //
                 .build(this, locale);
     }
@@ -175,7 +175,7 @@ public class ChangeNumberFormat extends AbstractActionMetadata implements Column
                 .item(CUSTOM, CUSTOM, Parameter.parameter().setName(name + "_" + CUSTOM)
                         .setType(STRING)
                         .setDefaultValue(",")
-                        .createParameter(this, Locale.ENGLISH)) //
+                        .createParameter(this, locale)) //
                 .canBeBlank(true) //
                 .defaultValue(",") //
                 .build(this, locale);

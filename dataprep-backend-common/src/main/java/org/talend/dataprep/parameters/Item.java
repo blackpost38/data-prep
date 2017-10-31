@@ -64,7 +64,7 @@ public interface Item {
             return this;
         }
 
-        public Item build() {
+        public Item build(Locale locale) {
             final List<Parameter> parameters = inlineParameters == null ? emptyList() : inlineParameters;
             if (label == null) {
                 if (text == null) {
@@ -73,7 +73,7 @@ public interface Item {
                     return new TextItem(value, text, parameters);
                 }
             } else {
-                return new LocalizedItem(value, choice(null, Locale.ENGLISH, label), parameters);
+                return new LocalizedItem(value, choice(null, locale, label), parameters);
             }
         }
 

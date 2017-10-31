@@ -87,7 +87,7 @@ public class Rename extends AbstractActionMetadata implements ColumnAction {
                 .setType(ParameterType.STRING)
                 .setDefaultValue(defaultName)
                 .setCanBeBlank(false)
-                .createParameter(this, Locale.ENGLISH));
+                .createParameter(this, locale));
         return parameters;
     }
 

@@ -48,15 +48,6 @@ public abstract class AbstractDate extends AbstractActionMetadata {
     public static String COMPILED_DATE_PATTERN = "compiled_datePattern";
 
     /**
-     * The parameter object for the custom new pattern.
-     */
-    Parameter CUSTOM_PATTERN_PARAMETER = Parameter.parameter().setName(CUSTOM_PATTERN)
-            .setType(ParameterType.STRING)
-            .setDefaultValue(EMPTY)
-            .setCanBeBlank(false)
-            .createParameter(this, Locale.ENGLISH);
-
-    /**
      * @return the Parameters to display for the date related action.
      * @param locale
      */
@@ -74,7 +65,7 @@ public abstract class AbstractDate extends AbstractActionMetadata {
             Item item = Item.Builder.builder()
                     .value(value)
                     .label(key)
-                    .build();
+                    .build(locale);
             items.add(item);
 
             if ("ISO".equals(key)){
@@ -85,17 +76,28 @@ public abstract class AbstractDate extends AbstractActionMetadata {
             defaultItem = items.get(0);
         }
 
-        items.sort((item, t1) -> item.getLabel().compareTo(t1.getLabel()));
+        items.sort(Comparator.comparing(Item::getLabel));
 
         List<Parameter> parameters = new ArrayList<>();
         parameters.add(SelectParameter.Builder.builder() //
                 .name(NEW_PATTERN) //
                 .items(items) //
-                .item("custom", CUSTOM_PATTERN_PARAMETER) //
+                .item("custom", buildCustomPatternParam(locale)) //
                 .defaultValue(defaultItem.getValue()) //
                 .build(this, locale));
 
         return parameters;
+    }
+
+    /**
+     * The parameter object for the custom new pattern.
+     */
+    private Parameter buildCustomPatternParam(Locale locale) {
+        return Parameter.parameter().setName(CUSTOM_PATTERN)
+                .setType(ParameterType.STRING)
+                .setDefaultValue(EMPTY)
+                .setCanBeBlank(false)
+                .createParameter(this, locale);
     }
 
     /**

@@ -774,7 +774,7 @@ public class DataSetAPITest extends ApiServiceTestBase {
         }
 
         @Override
-        public List<Parameter> getParameters() {
+        public List<Parameter> getParameters(Locale locale) {
             return null;
         }
 
