@@ -112,11 +112,19 @@ public class SelectParameter extends Parameter {
         private String label;
 
         private String description;
+
+        private Locale locale;
+
         /**
          * @return A SelectParameter builder.
+         * @param locale
          */
-        public static Builder builder() {
-            return new Builder();
+        public static Builder builder(Locale locale) {
+            return new Builder(locale);
+        }
+
+        public Builder(Locale locale) {
+            this.locale = locale;
         }
 
         /**
@@ -258,9 +266,8 @@ public class SelectParameter extends Parameter {
          *
          * @return the built column metadata.
          * @param action
-         * @param locale
          */
-        public SelectParameter build(Object action, Locale locale) {
+        public SelectParameter build(Object action) {
             if (label == null) {
                 label = parameterLabel(action, locale, name);
             }

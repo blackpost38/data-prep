@@ -111,7 +111,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
     @Override
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
-        final Parameter toJulianDayOrISOParameters = SelectParameter.Builder.builder()
+        final Parameter toJulianDayOrISOParameters = SelectParameter.Builder.builder(locale)
                 .name(TO_CALENDAR_TYPE_PARAMETER)
                 .item(CalendarUnit.ISO.name(), CalendarUnit.ISO.toString())
                 .item(CalendarUnit.JULIAN_DAY.name(), CalendarUnit.JULIAN_DAY.toString())
@@ -119,8 +119,8 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString())
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString())
                 .defaultValue(CalendarUnit.ISO.name())
-                .build(this, locale);
-        final Parameter toCompleteParameters = SelectParameter.Builder.builder()
+                .build(this);
+        final Parameter toCompleteParameters = SelectParameter.Builder.builder(locale)
                 .name(TO_CALENDAR_TYPE_PARAMETER)
                 .item(CalendarUnit.ISO.name(), CalendarUnit.ISO.toString())
                 .item(CalendarUnit.HIJRI.name(), CalendarUnit.HIJRI.toString())
@@ -132,9 +132,9 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString())
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString())
                 .defaultValue(CalendarUnit.MINGUO.name())
-                .build(this, locale);
+                .build(this);
         //@formatter:off
-        parameters.add(Builder.builder()
+        parameters.add(Builder.builder(locale)
                 .name(FROM_CALENDAR_TYPE_PARAMETER)
                 .item(CalendarUnit.ISO.name(), CalendarUnit.ISO.toString(), toCompleteParameters)
                 .item(CalendarUnit.HIJRI.name(), CalendarUnit.HIJRI.toString(), toCompleteParameters)
@@ -146,7 +146,7 @@ public class DateCalendarConverter extends AbstractActionMetadata implements Col
                 .item(CalendarUnit.RATA_DIE.name(), CalendarUnit.RATA_DIE.toString(), toJulianDayOrISOParameters)
                 .item(CalendarUnit.EPOCH_DAY.name(), CalendarUnit.EPOCH_DAY.toString(), toJulianDayOrISOParameters)
                 .defaultValue(CalendarUnit.ISO.name())
-                .build(this, locale));
+                .build(this ));
         //@formatter:on
 
         return parameters;

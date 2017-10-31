@@ -75,11 +75,11 @@ public class ClearMatching extends AbstractClear implements ColumnAction {
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
         if (this.type == Type.BOOLEAN) {
-            parameters.add(SelectParameter.Builder.builder() //
+            parameters.add(SelectParameter.Builder.builder(locale) //
                     .name(VALUE_PARAMETER) //
                     .item(Boolean.TRUE.toString()) //
                     .item(Boolean.FALSE.toString()) //
-                    .build(this, locale));
+                    .build(this));
         } else {
             parameters.add(Parameter.parameter().setName(VALUE_PARAMETER)
                     .setType(ParameterType.REGEX)

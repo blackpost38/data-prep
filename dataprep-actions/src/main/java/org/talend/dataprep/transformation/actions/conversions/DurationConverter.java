@@ -74,7 +74,7 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
         final List<Parameter> parameters = super.getParameters(locale);
 
         //@formatter:off
-        Builder builder = Builder.builder()
+        Builder builder = Builder.builder(locale)
                 .item(ChronoUnit.YEARS.name(), ChronoUnit.YEARS.toString())
                 .item(ChronoUnit.MONTHS.name(), ChronoUnit.MONTHS.toString())
                 .item(ChronoUnit.WEEKS.name(), ChronoUnit.WEEKS.toString())
@@ -88,12 +88,12 @@ public class DurationConverter extends AbstractActionMetadata implements ColumnA
         parameters.add(builder
                 .name(FROM_UNIT_PARAMETER)
                 .defaultValue(ChronoUnit.DAYS.name())
-                .build(this, locale));
+                .build(this ));
 
         parameters.add(builder
                 .name(TO_UNIT_PARAMETER)
                 .defaultValue(ChronoUnit.HOURS.name())
-                .build(this, locale));
+                .build(this ));
 
          parameters.add(Parameter.parameter().setName(TARGET_PRECISION).setType(INTEGER).setDefaultValue("1").setPlaceHolder("precision").createParameter(this, locale));
 

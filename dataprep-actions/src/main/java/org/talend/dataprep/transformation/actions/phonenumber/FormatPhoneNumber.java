@@ -135,7 +135,7 @@ public class FormatPhoneNumber extends AbstractActionMetadata implements ColumnA
     @Nonnull
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                 .name(OtherColumnParameters.MODE_PARAMETER) //
                 .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, //
                         Parameter.parameter().setName(OtherColumnParameters.SELECTED_COLUMN_PARAMETER)
@@ -144,7 +144,7 @@ public class FormatPhoneNumber extends AbstractActionMetadata implements ColumnA
                                 .setCanBeBlank(false)
                                 .createParameter(this, locale)) //
                 .item(CONSTANT_MODE, CONSTANT_MODE, //
-                        SelectParameter.Builder.builder().name(REGIONS_PARAMETER_CONSTANT_MODE).canBeBlank(true) //
+                        SelectParameter.Builder.builder(locale).name(REGIONS_PARAMETER_CONSTANT_MODE).canBeBlank(true) //
                                 .item(US_REGION_CODE, US_REGION_CODE) //
                                 .item(FR_REGION_CODE, FR_REGION_CODE) //
                                 .item(UK_REGION_CODE, UK_REGION_CODE) //
@@ -153,15 +153,15 @@ public class FormatPhoneNumber extends AbstractActionMetadata implements ColumnA
                                         .setType(ParameterType.STRING)
                                         .setDefaultValue(EMPTY)
                                         .createParameter(this, locale))
-                                .defaultValue(US_REGION_CODE).build(this, locale)) //
-                .defaultValue(CONSTANT_MODE).build(this, locale));
+                                .defaultValue(US_REGION_CODE).build(this)) //
+                .defaultValue(CONSTANT_MODE).build(this));
 
-        parameters.add(SelectParameter.Builder.builder().name(FORMAT_TYPE_PARAMETER) //
+        parameters.add(SelectParameter.Builder.builder(locale).name(FORMAT_TYPE_PARAMETER) //
                 .item(TYPE_INTERNATIONAL) //
                 .item(TYPE_NATIONAL) //
                 .item(TYPE_E164) //
                 .item(TYPE_RFC3966) //
-                .defaultValue(TYPE_INTERNATIONAL).build(this, locale));
+                .defaultValue(TYPE_INTERNATIONAL).build(this));
         return parameters;
     }
 

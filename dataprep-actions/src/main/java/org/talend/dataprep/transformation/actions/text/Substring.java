@@ -90,25 +90,25 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                 .createParameter(this, locale);
 
         // "to" parameter with all possible values
-        final Parameter toCompleteParameters = SelectParameter.Builder.builder() //
+        final Parameter toCompleteParameters = SelectParameter.Builder.builder(locale) //
                 .name(TO_MODE_PARAMETER) //
                 .item(TO_END, TO_END) //
                 .item(TO_INDEX_PARAMETER, TO_INDEX_PARAMETER, toIndexParameters) //
                 .item(TO_N_BEFORE_END_PARAMETER, TO_N_BEFORE_END_PARAMETER, toNBeforeEndParameters) //
                 .defaultValue(TO_INDEX_PARAMETER) //
-                .build(this, locale);
+                .build(this);
 
         // "to" parameter with possible values for "From N Before End" selection
         // the "to index" option should not be available
-        final Parameter toParametersWithoutIndexSelection = SelectParameter.Builder.builder() //
+        final Parameter toParametersWithoutIndexSelection = SelectParameter.Builder.builder(locale) //
                 .name(TO_MODE_PARAMETER) //
                 .item(TO_END, TO_END) //
                 .item(TO_N_BEFORE_END_PARAMETER, TO_N_BEFORE_END_PARAMETER, toNBeforeEndParameters) //
                 .defaultValue(TO_END) //
-                .build(this, locale);
+                .build(this);
 
         // "from" parameter
-        final Parameter fromParameters = SelectParameter.Builder.builder() //
+        final Parameter fromParameters = SelectParameter.Builder.builder(locale) //
                 .name(FROM_MODE_PARAMETER) //
                 .item(FROM_BEGINNING, FROM_BEGINNING, toCompleteParameters) // has all the "To" choices
                 .item(FROM_INDEX_PARAMETER, FROM_INDEX_PARAMETER, fromIndexParameters, toCompleteParameters) // has all the "To" choices
@@ -117,7 +117,7 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                                                                                                                 // "To
                                                                                                                 // index"
                 .defaultValue(FROM_BEGINNING) //
-                .build(this, locale);
+                .build(this);
 
         final List<Parameter> parameters = ImplicitParameters.getParameters(locale);
         parameters.add(fromParameters);

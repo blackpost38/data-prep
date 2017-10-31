@@ -75,7 +75,7 @@ public class FuzzyMatching extends AbstractActionMetadata implements ColumnActio
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
 
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                 .name(OtherColumnParameters.MODE_PARAMETER) //
                 .item(OtherColumnParameters.CONSTANT_MODE, OtherColumnParameters.CONSTANT_MODE,//
                         Parameter.parameter().setName(VALUE_PARAMETER)
@@ -88,7 +88,7 @@ public class FuzzyMatching extends AbstractActionMetadata implements ColumnActio
                                 .setDefaultValue(StringUtils.EMPTY)
                                 .setCanBeBlank(false)
                                 .createParameter(this, locale)) //
-                .defaultValue(OtherColumnParameters.CONSTANT_MODE).build(this, locale));
+                .defaultValue(OtherColumnParameters.CONSTANT_MODE).build(this));
 
         parameters.add(Parameter.parameter().setName(SENSITIVITY)
                 .setType(INTEGER)

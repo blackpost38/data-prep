@@ -84,7 +84,7 @@ public class MatchesPattern extends AbstractActionMetadata implements ColumnActi
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
         // @formatter:off
-		parameters.add(SelectParameter.Builder.builder()
+		parameters.add(SelectParameter.Builder.builder(locale)
 				.name(PATTERN_PARAMETER)
 				.item("[a-z]+", "[a-z]+")
 				.item("[A-Z]+", "[A-Z]+")
@@ -93,7 +93,7 @@ public class MatchesPattern extends AbstractActionMetadata implements ColumnActi
 				.item("[a-zA-Z0-9]+", "[a-zA-Z0-9]+")
 				.item(CUSTOM, CUSTOM, Parameter.parameter().setName(MANUAL_PATTERN_PARAMETER).setType(REGEX).setDefaultValue(EMPTY).createParameter(this, locale))
 				.defaultValue("[a-zA-Z]+")
-				.build(this, locale));
+				.build(this ));
 		// @formatter:on
         return parameters;
     }

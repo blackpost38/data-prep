@@ -93,16 +93,16 @@ public class ComputeTimeSince extends AbstractDate implements ColumnAction {
     public List<Parameter> getParameters(Locale locale) {
         List<Parameter> parameters = super.getParameters(locale);
 
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                 .name(TIME_UNIT_PARAMETER) //
                 .item(ChronoUnit.YEARS.name(), "years") //
                 .item(ChronoUnit.MONTHS.name(), "months") //
                 .item(ChronoUnit.DAYS.name(), "days") //
                 .item(ChronoUnit.HOURS.name(), "hours") //
                 .defaultValue(ChronoUnit.HOURS.name()) //
-                .build(this, locale));
+                .build(this));
 
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                 .name(SINCE_WHEN_PARAMETER) //
                 .canBeBlank(false) //
                 .item(NOW_SERVER_SIDE_MODE, NOW_SERVER_SIDE_MODE) //
@@ -117,7 +117,7 @@ public class ComputeTimeSince extends AbstractDate implements ColumnAction {
                         .setCanBeBlank(false)
                         .createParameter(this, locale)) //
                 .defaultValue(NOW_SERVER_SIDE_MODE) //
-                .build(this, locale));
+                .build(this));
 
         return parameters;
     }

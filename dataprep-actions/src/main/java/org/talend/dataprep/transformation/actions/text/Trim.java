@@ -75,13 +75,13 @@ public class Trim extends AbstractActionMetadata implements ColumnAction {
         final List<Parameter> parameters = super.getParameters(locale);
 
         // @formatter:off
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                 .name(PADDING_CHAR_PARAMETER)
                 .item(WHITESPACE,WHITESPACE)
                 .item(CUSTOM, CUSTOM, Parameter.parameter().setName(CUSTOM_PADDING_CHAR_PARAMETER).setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).createParameter(this, locale))
                 .canBeBlank(true)
                 .defaultValue(WHITESPACE)
-                .build(this, locale));
+                .build(this ));
         // @formatter:on
         return parameters;
     }

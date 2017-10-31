@@ -123,12 +123,12 @@ public abstract class AbstractFillWith extends AbstractActionMetadata implements
                     .createParameter(this, locale);
             break;
         case BOOLEAN:
-            constantParameter = SelectParameter.Builder.builder() //
+            constantParameter = SelectParameter.Builder.builder(locale) //
                     .name(DEFAULT_VALUE_PARAMETER) //
                     .item("True") //
                     .item("False") //
                     .defaultValue("True") //
-                    .build(this, locale);
+                    .build(this);
             break;
         case DATE:
             constantParameter = Parameter.parameter().setName(DEFAULT_VALUE_PARAMETER)
@@ -143,12 +143,12 @@ public abstract class AbstractFillWith extends AbstractActionMetadata implements
         }
 
         //@formatter:off
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                         .name(MODE_PARAMETER)
                         .item(CONSTANT_MODE, CONSTANT_MODE, constantParameter)
                         .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, Parameter.parameter().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale))
                         .defaultValue(CONSTANT_MODE)
-                        .build(this, locale)
+                        .build(this )
         );
         //@formatter:on
 

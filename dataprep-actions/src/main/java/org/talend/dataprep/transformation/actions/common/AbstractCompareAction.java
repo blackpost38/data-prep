@@ -47,12 +47,12 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
         parameters.add(getCompareModeSelectParameter(locale));
 
         //@formatter:off
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                         .name(MODE_PARAMETER) //
                         .item(CONSTANT_MODE, CONSTANT_MODE, getDefaultConstantValue(locale)) //
                         .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, Parameter.parameter().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale)) //
                         .defaultValue(CONSTANT_MODE)
-                        .build(this, locale)
+                        .build(this )
         );
         //@formatter:on
 
@@ -67,7 +67,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
     protected SelectParameter getCompareModeSelectParameter(Locale locale) {
 
         //@formatter:off
-        return SelectParameter.Builder.builder() //
+        return SelectParameter.Builder.builder(locale) //
                            .name(CompareAction.COMPARE_MODE) //
                            .item(EQ, EQ) //
                            .item(NE, NE) //
@@ -76,7 +76,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
                            .item(LT, LT) //
                            .item(LE, LE) //
                            .defaultValue(EQ) //
-                           .build(this, locale);
+                           .build(this );
         //@formatter:on
 
     }

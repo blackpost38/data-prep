@@ -79,12 +79,12 @@ public abstract class AbstractDate extends AbstractActionMetadata {
         items.sort(Comparator.comparing(Item::getLabel));
 
         List<Parameter> parameters = new ArrayList<>();
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                 .name(NEW_PATTERN) //
                 .items(items) //
                 .item("custom", buildCustomPatternParam(locale)) //
                 .defaultValue(defaultItem.getValue()) //
-                .build(this, locale));
+                .build(this));
 
         return parameters;
     }

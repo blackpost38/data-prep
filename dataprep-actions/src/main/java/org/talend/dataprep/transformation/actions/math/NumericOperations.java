@@ -88,25 +88,25 @@ public class NumericOperations extends AbstractActionMetadata implements ColumnA
         final List<Parameter> parameters = super.getParameters(locale);
 
         //@formatter:off
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                         .name(OPERATOR_PARAMETER)
                         .item(PLUS)
                         .item(MULTIPLY)
                         .item(MINUS)
                         .item(DIVIDE)
                         .defaultValue(MULTIPLY)
-                        .build(this, locale)
+                        .build(this )
         );
         //@formatter:on
 
         //@formatter:off
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                         .name(MODE_PARAMETER)
                         .item(CONSTANT_MODE, CONSTANT_MODE, Parameter.parameter().setName(OPERAND_PARAMETER).setType(ParameterType.STRING).setDefaultValue("2").createParameter(this, locale))
                         .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE,
                               Parameter.parameter().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale)) //
                         .defaultValue(CONSTANT_MODE)
-                        .build(this, locale)
+                        .build(this )
         );
         //@formatter:on
 

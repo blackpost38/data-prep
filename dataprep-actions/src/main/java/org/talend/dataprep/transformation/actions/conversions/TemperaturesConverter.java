@@ -71,23 +71,23 @@ public class TemperaturesConverter extends AbstractMathNoParameterAction {
     @Override
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                 .item(FAHRENHEIT.name(), FAHRENHEIT.toString())
                 .item(CELSIUS.name(), CELSIUS.toString())
                 .item(KELVIN.name(), KELVIN.toString())
                 .canBeBlank(false)
                 .defaultValue(FAHRENHEIT.name())
                 .name(FROM_UNIT_PARAMETER)
-                .build(this, locale));
+                .build(this));
 
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                 .item(FAHRENHEIT.name(), FAHRENHEIT.toString())
                 .item(CELSIUS.name(), CELSIUS.toString())
                 .item(KELVIN.name(), KELVIN.toString())
                 .canBeBlank(false)
                 .defaultValue(CELSIUS.name())
                 .name(TO_UNIT_PARAMETER)
-                .build(this, locale));
+                .build(this));
 
         parameters.add(
                 Parameter.parameter().setName(TARGET_PRECISION).setType(INTEGER).setPlaceHolder("precision").createParameter(

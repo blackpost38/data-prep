@@ -71,16 +71,16 @@ public class ModifyDate extends AbstractDate implements ColumnAction {
     public List<Parameter> getParameters(Locale locale) {
         List<Parameter> parameters = super.getParameters(locale);
 
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                 .name(TIME_UNIT_PARAMETER) //
                 .item(YEARS.name(), YEARS.name()) //
                 .item(MONTHS.name(), MONTHS.name()) //
                 .item(DAYS.name(), DAYS.name()) //
                 .item(HOURS.name(), HOURS.name()) //
                 .defaultValue(YEARS.name()) //
-                .build(this, locale));
+                .build(this));
 
-        parameters.add(SelectParameter.Builder.builder() //
+        parameters.add(SelectParameter.Builder.builder(locale) //
                 .name(MODE_PARAMETER) //
                 .item(CONSTANT_MODE, CONSTANT_MODE, Parameter.parameter().setName(CONSTANT_VALUE)
                         .setType(ParameterType.INTEGER)
@@ -92,7 +92,7 @@ public class ModifyDate extends AbstractDate implements ColumnAction {
                         .setCanBeBlank(false)
                         .createParameter(this, locale)) //
                 .defaultValue(CONSTANT_MODE) //
-                .build(this, locale));
+                .build(this));
 
         return parameters;
     }

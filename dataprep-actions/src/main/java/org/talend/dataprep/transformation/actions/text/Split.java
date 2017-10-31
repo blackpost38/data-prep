@@ -82,7 +82,7 @@ public class Split extends AbstractActionMetadata implements ColumnAction {
         parameters.add(Parameter.parameter().setName(LIMIT).setType(INTEGER).setDefaultValue("2").createParameter(
                 this, locale));
         //@formatter:off
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                         .name(SEPARATOR_PARAMETER)
                         .canBeBlank(true)
                         .item(":")
@@ -96,7 +96,7 @@ public class Split extends AbstractActionMetadata implements ColumnAction {
                         .item("other (string)", Parameter.parameter().setName(MANUAL_SEPARATOR_PARAMETER_STRING).setType(STRING).setDefaultValue(EMPTY).createParameter(this, locale))
                         .item("other (regex)", Parameter.parameter().setName(MANUAL_SEPARATOR_PARAMETER_REGEX).setType(STRING).setDefaultValue(EMPTY).createParameter(this, locale))
                         .defaultValue(":")
-                        .build(this, locale)
+                        .build(this )
         );
         //@formatter:on
         return parameters;

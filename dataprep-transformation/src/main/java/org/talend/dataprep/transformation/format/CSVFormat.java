@@ -15,6 +15,7 @@ package org.talend.dataprep.transformation.format;
 import static org.springframework.context.i18n.LocaleContextHolder.getLocale;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -33,27 +34,29 @@ public class CSVFormat extends ExportFormat {
     /** CSV format type name. */
     public static final String CSV = "CSV";
 
-    public static final SelectParameter CSV_DELIMITERS = SelectParameter.Builder.builder().name("csv_fields_delimiter") //
-            .item(";", "semiColon") //
-            .item("\u0009", "tabulation") //
-            .item(" ", "space") //
-            .item(",", "comma") //
-            .item("|", "pipe") //
-            .defaultValue(";") //
-            .canBeBlank(true) //
-            .radio(true) //
-            .build(null, getLocale());
-
     /**
      * Default constructor.
      */
     public CSVFormat() {
         //@formatter:off
         super("CSV", "text/csv", ".csv", true, false,
-                Arrays.asList(CSV_DELIMITERS,
+                Arrays.asList(buildCsvDelimiterParameter(getLocale()),
                 Parameter.parameter().setName("fileName").setType(ParameterType.STRING).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(null, getLocale()) //
         ));
         //@formatter:on
+    }
+
+    private static Parameter buildCsvDelimiterParameter(Locale locale) {
+        return SelectParameter.Builder.builder(locale).name("csv_fields_delimiter") //
+                .item(";", "semiColon") //
+                .item("\u0009", "tabulation") //
+                .item(" ", "space") //
+                .item(",", "comma") //
+                .item("|", "pipe") //
+                .defaultValue(";") //
+                .canBeBlank(true) //
+                .radio(true) //
+                .build(null);
     }
 
     @Override

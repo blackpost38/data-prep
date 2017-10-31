@@ -98,7 +98,7 @@ public class Concat extends AbstractActionMetadata implements ColumnAction, Othe
                 .setDefaultValue(StringUtils.EMPTY)
                 .createParameter(this, locale));
 
-        parameters.add(SelectParameter.Builder.builder().name(MODE_PARAMETER)
+        parameters.add(SelectParameter.Builder.builder(locale).name(MODE_PARAMETER)
                 .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, Parameter.parameter().setName(SELECTED_COLUMN_PARAMETER)
                                 .setType(ParameterType.COLUMN)
                                 .setDefaultValue(StringUtils.EMPTY)
@@ -107,15 +107,15 @@ public class Concat extends AbstractActionMetadata implements ColumnAction, Othe
                                 .setType(ParameterType.STRING)
                                 .setDefaultValue(StringUtils.EMPTY)
                                 .createParameter(this, locale), //
-                        SelectParameter.Builder.builder() //
+                        SelectParameter.Builder.builder(locale) //
                                 .name(SEPARATOR_CONDITION) //
                                 .item(BOTH_NOT_EMPTY, BOTH_NOT_EMPTY) //
                                 .item(ALWAYS, ALWAYS) //
                                 .defaultValue(BOTH_NOT_EMPTY) //
-                                .build(this, locale))//
+                                .build(this))//
                 .item(CONSTANT_MODE, CONSTANT_MODE) //
                 .defaultValue(OTHER_COLUMN_MODE) //
-                .build(this, locale));
+                .build(this));
 
         parameters.add(Parameter.parameter().setName(SUFFIX_PARAMETER)
                 .setType(ParameterType.STRING)

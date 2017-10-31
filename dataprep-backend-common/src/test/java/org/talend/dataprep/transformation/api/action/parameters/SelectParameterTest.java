@@ -38,7 +38,7 @@ public class SelectParameterTest extends ParameterBaseTest {
     @Test
     public void shouldSerializeToJsonWithItemsInConfiguration() throws IOException {
         // given
-        SelectParameter expected = SelectParameter.Builder.builder() //
+        SelectParameter expected = SelectParameter.Builder.builder(ENGLISH) //
                 .name("column_id") //
                 .defaultValue("") //
                 .implicit(false) //
@@ -50,7 +50,7 @@ public class SelectParameterTest extends ParameterBaseTest {
                         .setDefaultValue(StringUtils.EMPTY)
                         .setCanBeBlank(false)
                         .createParameter(this, ENGLISH)) //
-                .build(this, ENGLISH);
+                .build(this);
 
         // when
         StringWriter out = new StringWriter();
@@ -64,7 +64,7 @@ public class SelectParameterTest extends ParameterBaseTest {
     @Test
     public void shouldCreateLocalizedItem() {
         // when
-        final SelectParameter params = SelectParameter.Builder.builder().item("key", "key").build(this, ENGLISH);
+        final SelectParameter params = SelectParameter.Builder.builder(ENGLISH).item("key", "key").build(this);
 
         // then
         assertThat(params.getItems().get(0), IsInstanceOf.instanceOf(LocalizedItem.class));
@@ -75,9 +75,9 @@ public class SelectParameterTest extends ParameterBaseTest {
         // when
         final SelectParameter params = SelectParameter
                 .Builder
-                .builder()
+                .builder(ENGLISH)
                 .item("key", "key", Parameter.parameter().createParameter(this, ENGLISH))
-                .build(this, ENGLISH);
+                .build(this);
 
         // then
         assertThat(params.getItems().get(0), IsInstanceOf.instanceOf(LocalizedItem.class));
@@ -88,9 +88,9 @@ public class SelectParameterTest extends ParameterBaseTest {
         // when
         final SelectParameter params = SelectParameter
                 .Builder
-                .builder()
+                .builder(ENGLISH)
                 .constant("key", "a constant key")
-                .build(this, ENGLISH);
+                .build(this);
 
         // then
         assertThat(params.getItems().get(0), IsInstanceOf.instanceOf(TextItem.class));

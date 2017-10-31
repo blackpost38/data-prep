@@ -87,7 +87,7 @@ public class CompareDates extends AbstractCompareAction implements ColumnAction,
     protected SelectParameter getCompareModeSelectParameter(Locale locale) {
 
         //@formatter:off
-        return SelectParameter.Builder.builder() //
+        return SelectParameter.Builder.builder(locale) //
             .name(COMPARE_MODE) //
             .item(EQ, EQ) //
             .item(NE, NE) //
@@ -96,7 +96,7 @@ public class CompareDates extends AbstractCompareAction implements ColumnAction,
             .item(LT, LT) //
             .item(LE, LE) //
             .defaultValue(EQ) //
-            .build(this, locale);
+            .build(this );
         //@formatter:on
 
     }

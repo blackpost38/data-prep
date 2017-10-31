@@ -93,12 +93,12 @@ public class ExtractStringTokens extends AbstractActionMetadata implements Colum
                         this, locale));
 
         //@formatter:off
-        parameters.add(SelectParameter.Builder.builder()
+        parameters.add(SelectParameter.Builder.builder(locale)
                         .name(MODE_PARAMETER)
                         .item(MULTIPLE_COLUMNS_MODE, MULTIPLE_COLUMNS_MODE, Parameter.parameter().setName(LIMIT).setType(INTEGER).setDefaultValue("4").createParameter(this, locale))
                         .item(SINGLE_COLUMN_MODE, SINGLE_COLUMN_MODE, Parameter.parameter().setName(PARAMETER_SEPARATOR).setType(STRING).setDefaultValue(",").createParameter(this, locale))
                         .defaultValue(MULTIPLE_COLUMNS_MODE)
-                        .build(this, locale)
+                        .build(this )
         );
         //@formatter:on
 

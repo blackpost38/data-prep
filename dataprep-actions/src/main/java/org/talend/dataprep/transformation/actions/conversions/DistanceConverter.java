@@ -61,7 +61,7 @@ public class DistanceConverter extends AbstractActionMetadata implements ColumnA
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
 
-        SelectParameter.Builder builder = SelectParameter.Builder.builder()
+        SelectParameter.Builder builder = SelectParameter.Builder.builder(locale)
                 .item(DistanceEnum.MILLIMETER.name(), DistanceEnum.MILLIMETER.getShortName())
                 .item(DistanceEnum.CENTIMETER.name(), DistanceEnum.CENTIMETER.getShortName())
                 .item(DistanceEnum.DECIMETER.name(), DistanceEnum.DECIMETER.getShortName())
@@ -80,12 +80,12 @@ public class DistanceConverter extends AbstractActionMetadata implements ColumnA
         parameters.add(builder
                 .defaultValue(DistanceEnum.MILE.name())
                 .name(FROM_UNIT_PARAMETER)
-                .build(this, locale));
+                .build(this));
 
         parameters.add(builder
                 .defaultValue(DistanceEnum.KILOMETER.name())
                 .name(TO_UNIT_PARAMETER)
-                .build(this, locale));
+                .build(this));
 
         parameters.add(Parameter.parameter().setName(TARGET_PRECISION)
                 .setType(INTEGER)
