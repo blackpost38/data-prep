@@ -122,7 +122,6 @@ public class DurationConverterTest extends BaseDateTest {
         ActionTestWorkbench.test(Arrays.asList(row1), actionRegistry, factory.create(action, parameters));
 
         // then
-       // assertEquals("365", row1.get("0001"));
         assertEquals("1", row1.get("0001"));
 
         ColumnMetadata expected = ColumnMetadata.Builder.column().id(1).name("0001").type(Type.STRING).build();

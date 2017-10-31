@@ -15,6 +15,7 @@ package org.talend.dataprep.transformation.actions.conversions;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.talend.daikon.number.BigDecimalParser;
 import org.talend.dataprep.api.action.Action;
+import org.talend.dataprep.api.type.Type;
 import org.talend.dataprep.i18n.ActionsBundle;
 import org.talend.dataprep.parameters.Parameter;
 import org.talend.dataprep.parameters.SelectParameter;
@@ -107,7 +108,12 @@ public class TemperaturesConverter extends AbstractMathNoParameterAction {
         Map<String, String> parameters = context.getParameters();
         String name = parameters.get(TO_UNIT_PARAMETER);
         TemperatureUnit temperatureUnit = TemperatureUnit.valueOf(name);
-        return "in " + temperatureUnit.toString();
+        return context.getColumnName() + "_in_" + temperatureUnit.toString();
+    }
+
+    @Override
+    public Type getColumnType(ActionContext context){
+        return Type.DOUBLE;
     }
 
     /**
