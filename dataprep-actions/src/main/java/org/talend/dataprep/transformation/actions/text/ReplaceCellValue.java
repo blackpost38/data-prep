@@ -69,10 +69,10 @@ public class ReplaceCellValue extends AbstractActionMetadata implements CellActi
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
         parameters.add(
-                new Parameter.ParameterBuilder().setName(ORIGINAL_VALUE_PARAMETER).setType(STRING).setDefaultValue(EMPTY).createParameter(
+                Parameter.parameter().setName(ORIGINAL_VALUE_PARAMETER).setType(STRING).setDefaultValue(EMPTY).createParameter(
                         this, locale));
         parameters.add(
-                new Parameter.ParameterBuilder().setName(NEW_VALUE_PARAMETER).setType(STRING).setDefaultValue(EMPTY).createParameter(
+                Parameter.parameter().setName(NEW_VALUE_PARAMETER).setType(STRING).setDefaultValue(EMPTY).createParameter(
                         this, locale));
         return parameters;
     }

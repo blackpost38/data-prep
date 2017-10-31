@@ -34,7 +34,7 @@ public class ParameterTest extends ParameterBaseTest {
     @Test
     public void shouldSerializeToJsonWithoutEmptyConfiguration() throws IOException {
         // given
-        Parameter expected = new Parameter.ParameterBuilder().setName("column_id")
+        Parameter expected = Parameter.parameter().setName("column_id")
                 .setType(ParameterType.STRING)
                 .setDefaultValue("0001")
                 .setImplicit(true)

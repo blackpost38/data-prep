@@ -100,24 +100,24 @@ public class ComputeTimeSince extends AbstractDate implements ColumnAction {
                 .item(ChronoUnit.DAYS.name(), "days") //
                 .item(ChronoUnit.HOURS.name(), "hours") //
                 .defaultValue(ChronoUnit.HOURS.name()) //
-                .build(this));
+                .build(this, locale));
 
         parameters.add(SelectParameter.Builder.builder() //
                 .name(SINCE_WHEN_PARAMETER) //
                 .canBeBlank(false) //
                 .item(NOW_SERVER_SIDE_MODE, NOW_SERVER_SIDE_MODE) //
-                .item(SPECIFIC_DATE_MODE, SPECIFIC_DATE_MODE, new Parameter.ParameterBuilder().setName(SPECIFIC_DATE_PARAMETER)
+                .item(SPECIFIC_DATE_MODE, SPECIFIC_DATE_MODE, Parameter.parameter().setName(SPECIFIC_DATE_PARAMETER)
                         .setType(ParameterType.DATE)
                         .setDefaultValue(StringUtils.EMPTY)
                         .setCanBeBlank(false)
                         .createParameter(this, locale)) //
-                .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, new Parameter.ParameterBuilder().setName(SELECTED_COLUMN_PARAMETER)
+                .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, Parameter.parameter().setName(SELECTED_COLUMN_PARAMETER)
                         .setType(ParameterType.COLUMN)
                         .setDefaultValue(StringUtils.EMPTY)
                         .setCanBeBlank(false)
                         .createParameter(this, locale)) //
                 .defaultValue(NOW_SERVER_SIDE_MODE) //
-                .build(this));
+                .build(this, locale));
 
         return parameters;
     }

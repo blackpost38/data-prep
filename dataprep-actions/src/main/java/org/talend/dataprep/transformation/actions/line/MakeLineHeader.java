@@ -75,7 +75,7 @@ public class MakeLineHeader extends AbstractActionMetadata implements RowAction 
 
     @Override
     public List<Parameter> getParameters(Locale locale) {
-        return Collections.singletonList(new Parameter.ParameterBuilder().setName(SKIP_UNTIL)
+        return Collections.singletonList(Parameter.parameter().setName(SKIP_UNTIL)
                 .setType(BOOLEAN)
                 .setDefaultValue(Boolean.TRUE.toString())
                 .createParameter(this, locale));

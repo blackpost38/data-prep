@@ -103,6 +103,10 @@ public class Parameter implements Serializable {
         this.description = description;
     }
 
+    public static ParameterBuilder parameter() {
+        return new ParameterBuilder();
+    }
+
     void addConfiguration(String name, Object configuration) {
         this.configuration.put(name, configuration);
     }
@@ -212,6 +216,9 @@ public class Parameter implements Serializable {
         private String label;
 
         private String description;
+
+        private ParameterBuilder() {
+        }
 
         public ParameterBuilder setName(String name) {
             this.name = name;

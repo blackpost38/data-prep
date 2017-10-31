@@ -44,7 +44,7 @@ public class LocalStoreLocation implements DataSetLocation {
 
     @Override
     public List<Parameter> getParameters() {
-        return Collections.singletonList(new Parameter.ParameterBuilder().setName("datasetFile")
+        return Collections.singletonList(Parameter.parameter().setName("datasetFile")
                 .setType(ParameterType.FILE)
                 .setDefaultValue("")
                 .setCanBeBlank(false)

@@ -44,15 +44,15 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
     public List<Parameter> getParameters(Locale locale) {
         final List<Parameter> parameters = super.getParameters(locale);
 
-        parameters.add(getCompareModeSelectParameter());
+        parameters.add(getCompareModeSelectParameter(locale));
 
         //@formatter:off
         parameters.add(SelectParameter.Builder.builder() //
                         .name(MODE_PARAMETER) //
                         .item(CONSTANT_MODE, CONSTANT_MODE, getDefaultConstantValue()) //
-                        .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, new Parameter.ParameterBuilder().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale)) //
+                        .item(OTHER_COLUMN_MODE, OTHER_COLUMN_MODE, Parameter.parameter().setName(SELECTED_COLUMN_PARAMETER).setType(ParameterType.COLUMN).setDefaultValue(StringUtils.EMPTY).setCanBeBlank(false).createParameter(this, locale)) //
                         .defaultValue(CONSTANT_MODE)
-                        .build(this)
+                        .build(this, locale)
         );
         //@formatter:on
 
@@ -64,7 +64,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
      *
      * @return {@link SelectParameter}
      */
-    protected SelectParameter getCompareModeSelectParameter() {
+    protected SelectParameter getCompareModeSelectParameter(Locale locale) {
 
         //@formatter:off
         return SelectParameter.Builder.builder() //
@@ -76,7 +76,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
                            .item(LT, LT) //
                            .item(LE, LE) //
                            .defaultValue(EQ) //
-                           .build(this);
+                           .build(this, locale);
         //@formatter:on
 
     }
@@ -87,7 +87,7 @@ public abstract class AbstractCompareAction extends AbstractActionMetadata
      */
     protected Parameter getDefaultConstantValue() {
         // olamy no idea why this 2 but was here before so just keep backward compat :-)
-        return new Parameter.ParameterBuilder().setName(CONSTANT_VALUE)
+        return Parameter.parameter().setName(CONSTANT_VALUE)
                 .setType(ParameterType.STRING)
                 .setDefaultValue("2")
                 .createParameter(this, Locale.ENGLISH);

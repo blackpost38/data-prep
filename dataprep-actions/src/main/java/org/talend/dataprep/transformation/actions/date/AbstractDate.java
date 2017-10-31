@@ -50,7 +50,7 @@ public abstract class AbstractDate extends AbstractActionMetadata {
     /**
      * The parameter object for the custom new pattern.
      */
-    Parameter CUSTOM_PATTERN_PARAMETER = new Parameter.ParameterBuilder().setName(CUSTOM_PATTERN)
+    Parameter CUSTOM_PATTERN_PARAMETER = Parameter.parameter().setName(CUSTOM_PATTERN)
             .setType(ParameterType.STRING)
             .setDefaultValue(EMPTY)
             .setCanBeBlank(false)
@@ -93,7 +93,7 @@ public abstract class AbstractDate extends AbstractActionMetadata {
                 .items(items) //
                 .item("custom", CUSTOM_PATTERN_PARAMETER) //
                 .defaultValue(defaultItem.getValue()) //
-                .build(this));
+                .build(this, locale));
 
         return parameters;
     }

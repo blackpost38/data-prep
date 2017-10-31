@@ -77,14 +77,14 @@ public class CompareDates extends AbstractCompareAction implements ColumnAction,
     @Override
     protected Parameter getDefaultConstantValue() {
         // olamy the javascript will tranform to now if empty
-        return new Parameter.ParameterBuilder().setName(CONSTANT_VALUE)
+        return Parameter.parameter().setName(CONSTANT_VALUE)
                 .setType(ParameterType.DATE)
                 .setDefaultValue(StringUtils.EMPTY)
                 .createParameter(this, Locale.ENGLISH);
     }
 
     @Override
-    protected SelectParameter getCompareModeSelectParameter() {
+    protected SelectParameter getCompareModeSelectParameter(Locale locale) {
 
         //@formatter:off
         return SelectParameter.Builder.builder() //
@@ -96,7 +96,7 @@ public class CompareDates extends AbstractCompareAction implements ColumnAction,
             .item(LT, LT) //
             .item(LE, LE) //
             .defaultValue(EQ) //
-            .build(this);
+            .build(this, locale);
         //@formatter:on
 
     }

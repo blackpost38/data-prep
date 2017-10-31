@@ -257,13 +257,14 @@ public class SelectParameter extends Parameter {
          *
          * @return the built column metadata.
          * @param action
+         * @param locale
          */
-        public SelectParameter build(Object action) {
+        public SelectParameter build(Object action, Locale locale) {
             if (label == null) {
-                label = parameterLabel(action, Locale.ENGLISH, name);
+                label = parameterLabel(action, locale, name);
             }
             if (description == null) {
-                description = parameterDescription(action, Locale.ENGLISH, name);
+                description = parameterDescription(action, locale, name);
             }
             return new SelectParameter(name, defaultValue, implicit, canBeBlank, items, multiple, isRadio, label, description);
         }

@@ -77,9 +77,9 @@ public class ChangeDatePattern extends AbstractDate implements ColumnAction {
         parameters.add(SelectParameter.Builder.builder()
                 .name(FROM_MODE)
                 .item(FROM_MODE_BEST_GUESS, FROM_MODE_BEST_GUESS)
-                .item(FROM_MODE_CUSTOM, FROM_MODE_CUSTOM, new Parameter.ParameterBuilder().setName(FROM_CUSTOM_PATTERN).setType(ParameterType.STRING).setDefaultValue(EMPTY).setCanBeBlank(false).createParameter(this, locale))
+                .item(FROM_MODE_CUSTOM, FROM_MODE_CUSTOM, Parameter.parameter().setName(FROM_CUSTOM_PATTERN).setType(ParameterType.STRING).setDefaultValue(EMPTY).setCanBeBlank(false).createParameter(this, locale))
                 .defaultValue(FROM_MODE_BEST_GUESS)
-                .build(this));
+                .build(this, locale));
         // @formatter:on
 
         parameters.addAll(getParametersForDatePattern(locale));

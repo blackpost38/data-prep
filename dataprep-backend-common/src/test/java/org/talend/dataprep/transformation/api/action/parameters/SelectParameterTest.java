@@ -14,13 +14,13 @@
 package org.talend.dataprep.transformation.api.action.parameters;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Locale.ENGLISH;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -45,12 +45,12 @@ public class SelectParameterTest extends ParameterBaseTest {
                 .canBeBlank(false) //
                 .item("first value") //
                 .item("2") //
-                .item("your choice", new Parameter.ParameterBuilder().setName("limit")
+                .item("your choice", Parameter.parameter().setName("limit")
                         .setType(ParameterType.INTEGER)
                         .setDefaultValue(StringUtils.EMPTY)
                         .setCanBeBlank(false)
-                        .createParameter(this, Locale.ENGLISH)) //
-                .build(this);
+                        .createParameter(this, ENGLISH)) //
+                .build(this, ENGLISH);
 
         // when
         StringWriter out = new StringWriter();
@@ -64,7 +64,7 @@ public class SelectParameterTest extends ParameterBaseTest {
     @Test
     public void shouldCreateLocalizedItem() {
         // when
-        final SelectParameter params = SelectParameter.Builder.builder().item("key", "key").build(this);
+        final SelectParameter params = SelectParameter.Builder.builder().item("key", "key").build(this, ENGLISH);
 
         // then
         assertThat(params.getItems().get(0), IsInstanceOf.instanceOf(LocalizedItem.class));
@@ -76,8 +76,8 @@ public class SelectParameterTest extends ParameterBaseTest {
         final SelectParameter params = SelectParameter
                 .Builder
                 .builder()
-                .item("key", "key", new Parameter.ParameterBuilder().createParameter(this, Locale.ENGLISH))
-                .build(this);
+                .item("key", "key", Parameter.parameter().createParameter(this, ENGLISH))
+                .build(this, ENGLISH);
 
         // then
         assertThat(params.getItems().get(0), IsInstanceOf.instanceOf(LocalizedItem.class));
@@ -90,7 +90,7 @@ public class SelectParameterTest extends ParameterBaseTest {
                 .Builder
                 .builder()
                 .constant("key", "a constant key")
-                .build(this);
+                .build(this, ENGLISH);
 
         // then
         assertThat(params.getItems().get(0), IsInstanceOf.instanceOf(TextItem.class));

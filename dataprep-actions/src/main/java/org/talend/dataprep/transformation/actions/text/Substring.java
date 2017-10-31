@@ -72,19 +72,19 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
 
     @Override
     public List<Parameter> getParameters(Locale locale) {
-        final Parameter fromIndexParameters = new Parameter.ParameterBuilder().setName(FROM_INDEX_PARAMETER)
+        final Parameter fromIndexParameters = Parameter.parameter().setName(FROM_INDEX_PARAMETER)
                 .setType(ParameterType.INTEGER)
                 .setDefaultValue("0")
                 .createParameter(this, locale);
-        final Parameter fromNBeforeEndParameters = new Parameter.ParameterBuilder().setName(FROM_N_BEFORE_END_PARAMETER)
+        final Parameter fromNBeforeEndParameters = Parameter.parameter().setName(FROM_N_BEFORE_END_PARAMETER)
                 .setType(ParameterType.INTEGER)
                 .setDefaultValue("5")
                 .createParameter(this, locale);
-        final Parameter toIndexParameters = new Parameter.ParameterBuilder().setName(TO_INDEX_PARAMETER)
+        final Parameter toIndexParameters = Parameter.parameter().setName(TO_INDEX_PARAMETER)
                 .setType(ParameterType.INTEGER)
                 .setDefaultValue("5")
                 .createParameter(this, locale);
-        final Parameter toNBeforeEndParameters = new Parameter.ParameterBuilder().setName(TO_N_BEFORE_END_PARAMETER)
+        final Parameter toNBeforeEndParameters = Parameter.parameter().setName(TO_N_BEFORE_END_PARAMETER)
                 .setType(ParameterType.INTEGER)
                 .setDefaultValue("1")
                 .createParameter(this, locale);
@@ -96,7 +96,7 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                 .item(TO_INDEX_PARAMETER, TO_INDEX_PARAMETER, toIndexParameters) //
                 .item(TO_N_BEFORE_END_PARAMETER, TO_N_BEFORE_END_PARAMETER, toNBeforeEndParameters) //
                 .defaultValue(TO_INDEX_PARAMETER) //
-                .build(this);
+                .build(this, locale);
 
         // "to" parameter with possible values for "From N Before End" selection
         // the "to index" option should not be available
@@ -105,7 +105,7 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                 .item(TO_END, TO_END) //
                 .item(TO_N_BEFORE_END_PARAMETER, TO_N_BEFORE_END_PARAMETER, toNBeforeEndParameters) //
                 .defaultValue(TO_END) //
-                .build(this);
+                .build(this, locale);
 
         // "from" parameter
         final Parameter fromParameters = SelectParameter.Builder.builder() //
@@ -117,7 +117,7 @@ public class Substring extends AbstractActionMetadata implements ColumnAction {
                                                                                                                 // "To
                                                                                                                 // index"
                 .defaultValue(FROM_BEGINNING) //
-                .build(this);
+                .build(this, locale);
 
         final List<Parameter> parameters = ImplicitParameters.getParameters(locale);
         parameters.add(fromParameters);
