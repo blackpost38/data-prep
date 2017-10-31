@@ -17,6 +17,7 @@ import static java.util.Locale.ENGLISH;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -48,25 +49,42 @@ public interface ActionDefinition extends Serializable {
     /**
      * @return The label of the action, translated in the user locale.
      * @param locale
+     * @deprecated Locale dependent methods that build the action UI representation ({@link #getLabel(Locale)}
+     * {@link #getDescription(Locale)} {@link #getDocUrl(Locale)} and {@link #getParameters(Locale)}) are replaced by
+     * {@link #getActionForm(Locale)} that build the whole representation.
      */
+    @Deprecated
     String getLabel(Locale locale);
 
     /**
      * @return The description of the action, translated in the user locale.
      * @param locale
+     * @deprecated Locale dependent methods that build the action UI representation ({@link #getLabel(Locale)}
+     * {@link #getDescription(Locale)} {@link #getDocUrl(Locale)} and {@link #getParameters(Locale)}) are replaced by
+     * {@link #getActionForm(Locale)} that build the whole representation.
      */
+    @Deprecated
     String getDescription(Locale locale);
 
     /**
      * @return The action documentation url.
      * @param locale
+     * @deprecated Locale dependent methods that build the action UI representation ({@link #getLabel(Locale)}
+     * {@link #getDescription(Locale)} {@link #getDocUrl(Locale)} and {@link #getParameters(Locale)}) are replaced by
+     * {@link #getActionForm(Locale)} that build the whole representation.
      */
+    @Deprecated
     String getDocUrl(Locale locale);
 
     /**
      * @return The list of parameters required for this Action to be executed.
      *
-     * @param locale*/
+     * @param locale
+     * @deprecated Locale dependent methods that build the action UI representation ({@link #getLabel(Locale)}
+     * {@link #getDescription(Locale)} {@link #getDocUrl(Locale)} and {@link #getParameters(Locale)}) are replaced by
+     * {@link #getActionForm(Locale)} that build the whole representation.
+     */
+    @Deprecated
     List<Parameter> getParameters(Locale locale);
 
     /**
@@ -213,17 +231,36 @@ public interface ActionDefinition extends Serializable {
         FORBID_DISTRIBUTED
     }
 
+    /**
+     * Create a representation of this action for user interfaces using supplied locale.
+     *
+     * @param locale The form main locale for representation, {@link Locale#ENGLISH ENGLISH} will be used as alternate locale.
+     * @return the action representation for the UI
+     */
     default ActionForm getActionForm(Locale locale) {
+        return getActionForm(locale, ENGLISH);
+    }
+
+    /**
+     * Create a representation of this action for user interfaces.
+     *
+     * @param locale The form main locale for representation
+     * @param alternateLocale the secondary locale for search purposes
+     * @return the action representation for the UI
+     */
+    default ActionForm getActionForm(Locale locale, Locale alternateLocale) {
         ActionForm form = new ActionForm();
         form.setName(getName());
         form.setCategory(getCategory());
 
         form.setDescription(getDescription(locale));
-        form.setAlternateDescription(getDescription(ENGLISH));
         form.setLabel(getLabel(locale));
-        form.setAlternateLabel(getLabel(ENGLISH));
         form.setDocUrl(getDocUrl(locale));
         form.setParameters(getParameters(locale));
+        if (!Objects.equals(locale, alternateLocale)) {
+            form.setAlternateDescription(getDescription(alternateLocale));
+            form.setAlternateLabel(getLabel(alternateLocale));
+        }
         return form;
     }
 
